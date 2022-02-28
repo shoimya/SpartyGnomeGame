@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-project(SpartyGnome)  ///the rep has to be named SpartyGnome
+project(SpartyGnome) # the rep has to be named SpartyGnome
 set(APPLICATION_LIBRARY GameLib)
 
 set(CMAKE_CXX_STANDARD 17)
