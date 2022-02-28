@@ -7,7 +7,7 @@ find_package(wxWidgets COMPONENTS core base xrc html xml REQUIRED)
 
 include(${wxWidgets_USE_FILE})
 
-set(SOURCE_FILES MainFrame.cpp MainFrame.h pch.h StadiumView.cpp StadiumView.h)
+set(SOURCE_FILES MainFrame.cpp MainFrame.h pch.h StadiumView.cpp StadiumView.h GameView.cpp GameView.h)
 
 add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})
 
