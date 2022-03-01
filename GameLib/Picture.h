@@ -8,6 +8,7 @@
 #ifndef SPARTYGNOME_PICTURE_H
 #define SPARTYGNOME_PICTURE_H
 
+#include <memory>
 #include "Stadium.h"
 
 class Picture {
@@ -16,7 +17,7 @@ private:
 
     std::wstring mFile;
 
-    std::unique_ptr<wxImage> mImage;
+    std::shared_ptr<wxImage> mImage;
 
 public:
     Picture(Stadium* stadium);
@@ -28,11 +29,29 @@ public:
      */
     wxGraphicsBitmap AsBitmap(std::shared_ptr<wxGraphicsContext>& graphics){ return graphics->CreateBitmapFromImage(*mImage);}
 
+    /**
+     * Set image for mImage
+     * @param file The file string
+     */
     void SetImage(const std::wstring& file);
 
+    /**
+     * Get width of image
+     * @return Width of image
+     */
     int GetWidth(){return mImage->GetWidth();}
 
+    /**
+     * Get height of image
+     * @return Height of image
+     */
     int GetHeight(){return mImage->GetHeight();}
+
+    /**
+     * Get image
+     * @return The image
+     */
+    std::shared_ptr<wxImage> GetImage(){return mImage;}
 };
 
 #endif //SPARTYGNOME_PICTURE_H

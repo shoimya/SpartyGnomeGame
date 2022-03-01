@@ -9,7 +9,6 @@
 
 using namespace std;
 
-const int InsideTolerance = 64;
 /**
  * Constructor
  * @param stadium  The stadium this item is member of
@@ -27,12 +26,6 @@ Item::~Item()
 
 }
 
-bool Item::HitTest(int x, int y)
-{
-
-    return (abs(x - mPos.X()) + abs(y - mPos.Y()) * 2) <= InsideTolerance;
-
-}
 
 void Item::Update(double elapsed)
 {
@@ -40,6 +33,4 @@ void Item::Update(double elapsed)
   Vector newP = GetPos() + mV*elapsed;
   SetLocation(newP);
 }
-
-
 

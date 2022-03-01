@@ -58,6 +58,18 @@ public:
 
     virtual Vector GetPos() const { return mPos;}
 
+    /**
+     * Get width of picture
+     * @return The width of picture
+     */
+    virtual int GetWidth() const {return mPicture->GetWidth();}
+
+    /**
+     * Get height of picture
+     * @return The height of picture
+     */
+    virtual int GetHeight() const {return mPicture->GetHeight();}
+
     virtual Picture* GetPicture() {return mPicture;}
 
     /**  Set the item location
@@ -71,12 +83,6 @@ public:
 
     virtual void Draw(std::shared_ptr<wxGraphicsContext> graphics) = 0;
 
-    /**  Test this item to see if it has been clicked on
-    * @param x X location on the city to test
-    * @param y Y location on the city to test
-    * @return true if clicked on */
-    virtual bool HitTest(int x, int y);
-
 //    virtual wxXmlNode *XmlSave(wxXmlNode *node){return nullptr;}
 //    virtual void XmlLoad(wxXmlNode *node){}
 
@@ -88,7 +94,7 @@ public:
     /// @return Stadium pointer
     virtual Stadium *GetStadium() { return mStadium; }
 
-//    virtual bool CollisionTest(Player *player){ return false;}
+    virtual bool CollisionTest(Item *item) {return false;}
 
     /**
      * Accept a visitor
