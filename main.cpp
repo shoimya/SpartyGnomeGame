@@ -1,8 +1,3 @@
-#include <iostream>
+#include "SpartyGnomeApp.h"
 
-int main()
-{
-    std::cout << "Hello, World!" << std::endl;
-    // test push (sarah)
-    return 0;
-}
+wxIMPLEMENT_APP(SpartyGnomeApp);
