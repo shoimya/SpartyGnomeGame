@@ -30,4 +30,43 @@ void MainFrame::Initialize()
 
     // Layout (place) the child windows.
     Layout();
+    
+    auto menuBar = new wxMenuBar( );
+    auto fileMenu = new wxMenu();
+    auto helpMenu = new wxMenu();
+    auto levelMenu = new wxMenu();
+
+    menuBar->Append(fileMenu, L"&File" );
+    menuBar->Append(levelMenu, L"&Levels");
+    menuBar->Append(helpMenu, L"&Help");
+
+    fileMenu->Append(wxID_EXIT, "E&xit\tAlt-X", "Quit this program");
+    helpMenu->Append(wxID_ABOUT, "&About\tF1", "Show about dialog");
+
+    //    the bindings
+    Bind(wxEVT_COMMAND_MENU_SELECTED, &MainFrame::OnExit, this, wxID_EXIT);
+    Bind(wxEVT_COMMAND_MENU_SELECTED, &MainFrame::OnAbout, this, wxID_ABOUT);
+    SetMenuBar( menuBar );
+    CreateStatusBar( 1, wxSTB_SIZEGRIP, wxID_ANY );
+}
+
+/**
+ * Exit menu option handlers
+ * @param event
+ */
+void MainFrame::OnExit(wxCommandEvent& event)
+{
+    Close(true);
+}
+
+/**
+ * About menu option handlers
+ * @param event
+ */
+void MainFrame::OnAbout(wxCommandEvent& event)
+{
+    wxMessageBox(L"Sparty Gnome Game By Wario!",
+            L"About Game",
+            wxOK,
+            this);
 }
