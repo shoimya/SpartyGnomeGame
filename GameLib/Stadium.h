@@ -15,7 +15,8 @@ private:
     /// Directory containing the system images
     std::wstring mImagesDirectory;
 
-
+    /// Game area height in virtual pixels
+    const static int Height = 1024;
 
 public:
     Stadium();
