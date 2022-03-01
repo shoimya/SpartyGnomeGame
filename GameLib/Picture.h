@@ -26,8 +26,7 @@ public:
      * Get graphics bitmap
      * @return wxGraphicsBitmap the bitmap of this Picture
      */
-    wxGraphicsBitmap AsBitmap(std::shared_ptr<wxGraphicsContext>& graphics){
-        return graphics->CreateBitmapFromImage(*mImage);}
+    wxGraphicsBitmap AsBitmap(std::shared_ptr<wxGraphicsContext>& graphics){ return graphics->CreateBitmapFromImage(*mImage);}
 
     void SetImage(const std::wstring& file);
 

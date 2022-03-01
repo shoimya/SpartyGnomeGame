@@ -33,7 +33,7 @@ file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/data/images/
 
 if(APPLE)
     # When building for MacOS, also copy files into the bundle resources
-    set(RESOURCE_DIR ${CMAKE_CURRENT_BINARY_DIR}/City.app/Contents/Resources)
+    set(RESOURCE_DIR ${CMAKE_CURRENT_BINARY_DIR}/SpartyGnomeApp.app/Contents/Resources)
     file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/data/images/ DESTINATION ${RESOURCE_DIR}/images/)
 endif()
 

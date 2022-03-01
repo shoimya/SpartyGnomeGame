@@ -39,7 +39,7 @@ TEST(ItemTest, SetLocation)
 {
 
     Stadium stadium;
-    Picture pics;
+    Picture pics(&stadium);
     ItemMock item(&stadium,&pics);
     ASSERT_EQ(0,item.GetX());
     ASSERT_EQ(0,item.GetY());
