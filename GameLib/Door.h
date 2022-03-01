@@ -12,13 +12,14 @@
 
 class Door : public Item {
 private:
-    Picture *mPicture;
+    Picture* mPicture;
 
 public:
     Door(Stadium *stadium, Picture *picture);
-    bool CollisionTest(Item *item);
+    bool CollisionTest(Item *item) override;
 
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
+    ~Door();
 
 };
 

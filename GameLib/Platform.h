@@ -8,16 +8,15 @@
 #ifndef SPARTYGNOME_PLATFORM_H
 #define SPARTYGNOME_PLATFORM_H
 
-#include "Item.h"
+#include "Level.h"
 #include "Picture.h"
 
-class Platform : public Item{
+class Platform : public Level{
 private:
     Picture *mPicture;
 
 public:
     Platform(Stadium *stadium, Picture *picture);
-    bool CollisionTest(Item *item);
 
     void Draw(std::shared_ptr<wxGraphicsContext> graphics);
 

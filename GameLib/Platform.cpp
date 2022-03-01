@@ -6,22 +6,27 @@
 #include "pch.h"
 #include "Platform.h"
 
+using namespace std;
+
+const wstring filename1 = L"platformIndustrial_057.png";
+
+const wstring filename2 = L"platformIndustrial_059.png";
+const wstring filename3 = L"platformIndustrial_060.png";
+const wstring filename4 = L"platformIndustrial_061.png";
+
 Platform::Platform(Stadium* stadium, Picture* picture)
-        :Item(stadium, picture)
+        :Level(stadium, picture)
 {
 
 }
 
-bool Platform::CollisionTest(Item* item)
-{
-
-    // Border for the item
-    return false;
-
-}
 
 void Platform::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
+    if(mPicture->GetImage() == nullptr)
+    {
+        mPicture->SetImage(filename1);
+    }
     int wid = mPicture->GetWidth();
     int hit = mPicture->GetHeight();
     graphics->DrawBitmap(mPicture->AsBitmap(graphics),
