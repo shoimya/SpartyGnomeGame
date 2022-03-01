@@ -5,6 +5,7 @@
 #include "pch.h"
 #include "MainFrame.h"
 #include "StadiumView.h"
+#include "ids.h"
 
 /**
  * Initialize the MainFrame window.
