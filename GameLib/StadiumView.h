@@ -22,6 +22,8 @@ private:
 
 public:
     void Initialize(wxFrame* parent);
+
+    void OnKeyUp(wxKeyEvent& event);
 };
 
 #endif //SPARTYGNOME_STADIUMVIEW_H

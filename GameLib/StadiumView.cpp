@@ -15,3 +15,14 @@ void StadiumView::Initialize(wxFrame* parent)
     SetBackgroundColour(*wxWHITE);
 
 }
+
+void StadiumView::OnKeyUp(wxKeyEvent& event)
+{
+    switch (event.GetKeyCode())
+    {
+    case WXK_SPACE:
+        return;
+    }
+}
+
+
