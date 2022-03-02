@@ -27,6 +27,9 @@ public:
 
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) {}
 
+    void Accept(Visitor* visitor) override {}
+
+
 };
 
 TEST(ItemTest, constructor)

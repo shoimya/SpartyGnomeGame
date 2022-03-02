@@ -5,6 +5,7 @@
 
 #include "pch.h"
 #include "Picture.h"
+#include "Stadium.h"
 
 using namespace std;
 

@@ -20,8 +20,13 @@ Platform::Platform(Stadium* stadium, Picture* picture)
 
 }
 
+Platform::~Platform()
+{
 
-void Platform::Draw(std::shared_ptr<wxGraphicsContext> graphics)
+}
+
+
+/** void Platform::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     if(mPicture->GetImage() == nullptr)
     {
@@ -44,3 +49,4 @@ void Platform::Draw(std::shared_ptr<wxGraphicsContext> graphics, int scrollx)
             wid + 1, hit);
 
 }
+*/

@@ -5,24 +5,22 @@
 
 #include "pch.h"
 #include "Gnome.h"
-#include "string"
 using namespace std;
 
-const wstring GnomeImageName = L"data/images/gnome.png";
+const wstring GnomeImageName = L"/images/gnome.png";
 
-
-Gnome::Gnome(Stadium* stadium) : mStadium(stadium)
+Gnome::Gnome(Stadium* stadium, Picture* picture)
+        :Item(stadium, picture)
 {
-    mGnomeImage = make_unique<wxImage>(GnomeImageName, wxBITMAP_TYPE_ANY);
-    mGnomeBitmap = make_unique<wxBitmap>(*mGnomeImage);
+
 }
 
-
-void Gnome::Draw(wxDC* dc)
+void Gnome::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
-    double wid = mGnomeBitmap->GetWidth();
-    double hit = mGnomeBitmap->GetHeight();
-    dc->DrawBitmap(*mGnomeBitmap,
-            int(mX - wid / 2),
-            int(mY - hit / 2));
+
+}
+
+Gnome::~Gnome()
+{
+
 }

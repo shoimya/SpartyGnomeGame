@@ -9,7 +9,6 @@
 #define SPARTYGNOME_PLATFORM_H
 
 #include "Level.h"
-#include "Picture.h"
 
 class Platform : public Level{
 private:
@@ -17,10 +16,8 @@ private:
 
 public:
     Platform(Stadium *stadium, Picture *picture);
+    ~Platform();
 
-    void Draw(std::shared_ptr<wxGraphicsContext> graphics);
-
-    void Draw(std::shared_ptr<wxGraphicsContext> graphics, int scrollx);
 };
 
 #endif //SPARTYGNOME_PLATFORM_H

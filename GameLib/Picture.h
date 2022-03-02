@@ -8,8 +8,8 @@
 #ifndef SPARTYGNOME_PICTURE_H
 #define SPARTYGNOME_PICTURE_H
 
-#include <memory>
-#include "Stadium.h"
+
+class Stadium;
 
 class Picture {
 private:

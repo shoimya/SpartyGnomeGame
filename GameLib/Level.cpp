@@ -6,6 +6,9 @@
 #include "pch.h"
 #include "Level.h"
 
+using namespace std;
+const wstring filename = L"";
+
 
 bool Level::CollisionTest(Item* item)
 {
@@ -42,5 +45,29 @@ Level::Level(Stadium* stadium, Picture* picture)
 
 Level::~Level()
 {
+
+}
+
+void Level::Draw(std::shared_ptr<wxGraphicsContext> graphics)
+{
+    if(mPicture->GetImage() == nullptr)
+    {
+        mPicture->SetImage(filename);
+    }
+    int wid = mPicture->GetWidth();
+    int hit = mPicture->GetHeight();
+    graphics->DrawBitmap(mPicture->AsBitmap(graphics),
+            (int)GetX() - wid / 2, (int)GetY() - hit / 2,
+            wid + 1, hit);
+
+}
+
+void Level::Draw(std::shared_ptr<wxGraphicsContext> graphics, int scrollx)
+{
+    int wid = mPicture->GetWidth();
+    int hit = mPicture->GetHeight();
+    graphics->DrawBitmap(mPicture->AsBitmap(graphics),
+            (int)GetX() - wid / 2 + scrollx, (int)GetY() - hit / 2,
+            wid + 1, hit);
 
 }

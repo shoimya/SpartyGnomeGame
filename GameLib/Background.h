@@ -9,13 +9,17 @@
 #define SPARTYGNOME_BACKGROUND_H
 
 #include "Item.h"
+#include "Visitor.h"
+
 class Background : public Item{
 private:
 
 public:
     Background(Stadium* stadium, Picture* picture);
     ~Background();
+
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
+    void Accept(Visitor* visitor) override {visitor->VisitBackground(this);}
 
 };
 

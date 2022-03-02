@@ -16,8 +16,9 @@
 
 #include "Vector.h"
 #include "Picture.h"
-#include "Stadium.h"
 
+class Stadium;
+class Visitor;
 
 class Item {
 private:
@@ -100,7 +101,7 @@ public:
      * Accept a visitor
      * @param visitor The visitor we accept
      */
-//    virtual void Accept(ItemVisitor* visitor) = 0;
+    virtual void Accept(Visitor* visitor) = 0;
 
 
 };
