@@ -8,6 +8,8 @@
 #ifndef SPARTYGNOME_STADIUM_H
 #define SPARTYGNOME_STADIUM_H
 
+#include "Gnome.h"
+
 class Stadium {
 private:
     void XmlTile(wxXmlNode *node);
@@ -17,6 +19,8 @@ private:
 
     /// Game area height in virtual pixels
     const static int Height = 1024;
+
+    std::shared_ptr<Gnome> mGnome;
 
 public:
     Stadium();
