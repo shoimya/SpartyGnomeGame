@@ -32,11 +32,11 @@ public:
     /// Assignment operator
     void operator=(const Gnome &) = delete;
 
-    void Draw(std::shared_ptr<wxGraphicsContext> graphics);
+    void Draw(std::shared_ptr<wxGraphicsContext> graphics) override ;
 
     void Accept(Visitor* visitor) override{ visitor->VisitGnome(this);}
 
-    void Update(double elapsed);
+    void Update(double elapsed) override;
 
     void SetyVelocity() {mV.SetY(JumpSpeed) ;}
 };
