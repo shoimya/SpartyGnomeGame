@@ -6,7 +6,7 @@
 
 #include "pch.h"
 #include "Stadium.h"
-
+#include <wx/graphics.h>
 
 using namespace std;
 const std::wstring ImagesDirectory = L"/data/images";
