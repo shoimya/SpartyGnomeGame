@@ -45,7 +45,7 @@ void Gnome::Update(double elapsed)
     Vector p = GetPos();
 
     // Compute a new velocity with gravity added in.
-    Vector newV(mV.X(),mV.Y() + Gravity * elapsed)
+    Vector newV(mV.X(),mV.Y() + Gravity * elapsed);
 
     // Update position
     Vector newP = p + newV * elapsed;
@@ -54,7 +54,7 @@ void Gnome::Update(double elapsed)
 
     mV = newV;
 
-    auto collided = GetStadium()->CollisionTest(this);
+/*    auto collided = GetStadium()->CollisionTest(this);
 
     if (collided !=nullptr)
     {
@@ -76,5 +76,6 @@ void Gnome::Update(double elapsed)
             newV.SetY(0);
         }
     }
+*/
 
 }

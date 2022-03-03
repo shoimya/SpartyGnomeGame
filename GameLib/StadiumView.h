@@ -9,6 +9,8 @@
 #define SPARTYGNOME_STADIUMVIEW_H
 
 
+#include "Stadium.h"
+
 /**
  * View class for our Game
  */
@@ -18,13 +20,21 @@ private:
     wxTimer mTimer;
     wxStopWatch mStopWatch;
 
+    Stadium mStadium;
+
 
     long mTime = 0;
+
+    void OnPaint(wxPaintEvent& event);
+
+    void OnKeyUp(wxKeyEvent& event);
+
+    void OnTimer(wxTimerEvent& event);
 
 public:
     void Initialize(wxFrame* parent);
 
-    void OnKeyUp(wxKeyEvent& event);
+
 };
 
 #endif //SPARTYGNOME_STADIUMVIEW_H

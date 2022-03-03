@@ -19,8 +19,8 @@ Stadium::Stadium()
     double x = 100;
     double y = 100;
 
-    mGnome = make_shared<Gnome>(this);
-    mGnome->SetLocation(x,y);
+//    mGnome = make_shared<Gnome>(this);
+//    mGnome->SetLocation(x,y);
 }
 
 void Stadium::SetImageDirectory(const std::wstring &dir)
@@ -29,25 +29,26 @@ void Stadium::SetImageDirectory(const std::wstring &dir)
 }
 
 
-void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, wxDC *dc)
+void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
 {
    ////     Automatic Scaling
 
-    mScale = double(height) / double(Height);
-    graphics->Scale(mScale, mScale);
+//    mScale = double(height) / double(Height);
+//    graphics->Scale(mScale, mScale);
 
-    auto virtualWidth = (double)width/mScale;
-    graphics->PushState();
+//    auto virtualWidth = (double)width/mScale;
+//    graphics->PushState();
 
 
 ///     Draw in virtual pixels on the graphics context
 
-     for (auto obj : mItems)
+/*     for (auto obj : mItems)
      {
          obj->Draw(graphics);
      }
 
     graphics->PopState();
+*/
 }
 
 void Stadium::Update(double elapsed)
