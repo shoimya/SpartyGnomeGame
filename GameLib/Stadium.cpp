@@ -1,6 +1,6 @@
 /**
  * @file Stadium.cpp
- * @author Haoxiang Zhang
+ * @author SHOIMYA CHOWDHURY Haoxiang Zhang
  */
 
 
