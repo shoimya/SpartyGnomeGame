@@ -1,6 +1,6 @@
 /**
  * @file StadiumView.h
- * @author User, Shaojie Zhang
+ * @author SHOIMYA CHOWDHURY Shaojie Zhang
  *
  *
  */
