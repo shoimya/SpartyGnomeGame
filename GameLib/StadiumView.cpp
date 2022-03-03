@@ -4,6 +4,9 @@
  */
 #include "pch.h"
 #include "StadiumView.h"
+#include <wx/dcbuffer.h>
+#include <wx/graphics.h>
+using namespace std;
 
 /**
  * Initialize the aquarium view class.
@@ -40,6 +43,20 @@ void StadiumView::OnKeyUp(wxKeyEvent& event)
     }
 }
 
+/**
+ * Paint event, draws the window.
+ * @param event Paint event object
+ */
+void StadiumView::OnPaint(wxPaintEvent& event)
+{
+    wxAutoBufferedPaintDC dc(this);
+    wxBrush background(*wxWHITE);
+    dc.SetBackground(background);
+    dc.Clear();
+    auto size = GetClientSize();
+    auto graphics = std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create(dc));
+    mStadium.OnDraw(graphics, size.GetWidth(), size.GetHeight());
+}
 
 
 
