@@ -1,6 +1,6 @@
 /**
  * @file MainFrame.h
- * @author User
+ * @author SHOIMYA CHOWDHURY
  *
  *
  */
