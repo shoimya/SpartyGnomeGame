@@ -5,6 +5,7 @@
 
 #include "pch.h"
 #include "Gnome.h"
+#include "Stadium.h"
 using namespace std;
 
 /// Gravity in virtual pixels per second per second
@@ -13,7 +14,7 @@ const double Gravity = 1000.0;
 /// Horizontal character speed in pixels per second
 const double HorizontalSpeed = 500.00;
 
-const double JumpSpeed = -800;
+
 
 /// Small value to ensure we do not stay in collision
 const double Epsilon = 0.01;
@@ -45,7 +46,7 @@ void Gnome::Update(double elapsed)
     Vector p = GetPos();
 
     // Compute a new velocity with gravity added in.
-    Vector newV(mV.X(),mV.Y() + Gravity * elapsed)
+    Vector newV(mV.X(),mV.Y() + Gravity * elapsed);
 
     // Update position
     Vector newP = p + newV * elapsed;
@@ -54,9 +55,9 @@ void Gnome::Update(double elapsed)
 
     mV = newV;
 
-    auto collided = GetStadium()->CollisionTest(this);
+    auto collided = GetStadium() -> CollisionTest(this);
 
-    if (collided !=nullptr)
+    if (collided != nullptr)
     {
         if (newV.Y() > 0)
         {
@@ -71,10 +72,8 @@ void Gnome::Update(double elapsed)
 
         // If we collide, we cancel any velocity
         // in the Y direction
-        if (collided):
-        {
-            newV.SetY(0);
-        }
+        newV.SetY(0);
+
     }
 
 }

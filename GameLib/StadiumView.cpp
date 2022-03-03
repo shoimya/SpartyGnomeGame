@@ -53,7 +53,7 @@ void StadiumView::OnPaint(wxPaintEvent& event)
     dc.Clear();
     auto size = GetClientSize();
     auto graphics = std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create(dc));
-    mStadium.OnDraw(graphics, size.GetWidth(), size.GetHeight());
+//    mStadium.OnDraw(graphics, size.GetWidth(), size.GetHeight());
 }
 
 

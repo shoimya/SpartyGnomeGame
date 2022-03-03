@@ -39,6 +39,8 @@ public:
     void OnDraw(std::shared_ptr<wxGraphicsContext> graphics);
 
     void Update(double elapsed);
+
+    Item* CollisionTest(Item* item);
 };
 
 #endif //SPARTYGNOME_STADIUM_H

@@ -11,6 +11,7 @@
 #include "Item.h"
 #include "Visitor.h"
 
+const double JumpSpeed = -800;
 
 class Gnome : public Item{
 private:
@@ -37,7 +38,7 @@ public:
 
     void Update(double elapsed);
 
-    void SetyVelocity() {mV.Y() = JumpSpeed ;}
+    void SetyVelocity() {mV.SetY(JumpSpeed) ;}
 };
 
 #endif //SPARTYGNOME_GNOME_H
