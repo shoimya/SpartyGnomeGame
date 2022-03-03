@@ -1,6 +1,6 @@
 /**
  * @file StadiumView.cpp
- * @author User, Shaojie Zhang
+ * @author SHOIMYA CHOWDHURY Shaojie Zhang
  */
 #include "pch.h"
 #include "StadiumView.h"
