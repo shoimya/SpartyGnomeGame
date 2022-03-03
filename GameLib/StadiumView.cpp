@@ -1,6 +1,6 @@
 /**
  * @file StadiumView.cpp
- * @author User
+ * @author User, Shaojie Zhang
  */
 #include "pch.h"
 #include "StadiumView.h"
@@ -14,15 +14,34 @@ void StadiumView::Initialize(wxFrame* parent)
     Create(parent, wxID_ANY);
     SetBackgroundColour(*wxWHITE);
 
+    Bind(wxEVT_PAINT, &StadiumView::OnPaint, this);
+
 }
+
+void StadiumView::OnPaint(wxPaintEvent& event)
+{
+    // Compute the time that has elapsed
+    // since the last call to OnPaint.
+    auto newTime = mStopWatch.Time();
+    auto elapsed = (double)(newTime - mTime) * 0.001;
+    mTime = newTime;
+
+    mStadium.Update(elapsed);
+}
+
 
 void StadiumView::OnKeyUp(wxKeyEvent& event)
 {
     switch (event.GetKeyCode())
     {
     case WXK_SPACE:
-        return;
+        //gnome -> SetyVelocity;
+        break;
     }
 }
+
+
+
+
 
 

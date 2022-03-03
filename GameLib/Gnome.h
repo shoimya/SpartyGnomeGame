@@ -1,6 +1,6 @@
 /**
  * @file Gnome.h
- * @author Haoxiang Zhang
+ * @author Haoxiang Zhang, Shaojie Zhang
  *
  *
  */
@@ -15,6 +15,7 @@
 class Gnome : public Item{
 private:
 
+    Vector mV;
 
 public:
     Gnome(Stadium *stadium, Picture *picture);
@@ -34,7 +35,9 @@ public:
 
     void Accept(Visitor* visitor) override{ visitor->VisitGnome(this);}
 
+    void Update(double elapsed);
 
+    void SetyVelocity() {mV.Y() = JumpSpeed ;}
 };
 
 #endif //SPARTYGNOME_GNOME_H

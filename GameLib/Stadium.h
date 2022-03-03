@@ -37,6 +37,8 @@ public:
     void SetImageDirectory(const std::wstring& dir);
 
     void OnDraw(std::shared_ptr<wxGraphicsContext> graphics);
+
+    void Update(double elapsed);
 };
 
 #endif //SPARTYGNOME_STADIUM_H
