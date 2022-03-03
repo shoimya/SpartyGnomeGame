@@ -4,6 +4,9 @@
  */
 #include "pch.h"
 #include "StadiumView.h"
+#include <wx/dcbuffer.h>
+#include <wx/graphics.h>
+using namespace std;
 
 /**
  * Initialize the aquarium view class.
