@@ -1,6 +1,6 @@
 /**
  * @file StadiumView.h
- * @author User
+ * @author User, Shaojie Zhang
  *
  *
  */
@@ -17,6 +17,7 @@ private:
 
     wxTimer mTimer;
     wxStopWatch mStopWatch;
+
 
     long mTime = 0;
 

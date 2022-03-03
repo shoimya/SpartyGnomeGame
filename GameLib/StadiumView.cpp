@@ -21,17 +21,6 @@ void StadiumView::Initialize(wxFrame* parent)
 
 }
 
-void StadiumView::OnPaint(wxPaintEvent& event)
-{
-    // Compute the time that has elapsed
-    // since the last call to OnPaint.
-    auto newTime = mStopWatch.Time();
-    auto elapsed = (double)(newTime - mTime) * 0.001;
-    mTime = newTime;
-
-    mStadium.Update(elapsed);
-}
-
 
 void StadiumView::OnKeyUp(wxKeyEvent& event)
 {
@@ -49,6 +38,15 @@ void StadiumView::OnKeyUp(wxKeyEvent& event)
  */
 void StadiumView::OnPaint(wxPaintEvent& event)
 {
+    // Compute the time that has elapsed
+    // since the last call to OnPaint.
+    auto newTime = mStopWatch.Time();
+    auto elapsed = (double)(newTime - mTime) * 0.001;
+    mTime = newTime;
+
+    mStadium.Update(elapsed);
+
+
     wxAutoBufferedPaintDC dc(this);
     wxBrush background(*wxWHITE);
     dc.SetBackground(background);
