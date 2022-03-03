@@ -14,9 +14,15 @@
  */
 class StadiumView: public wxWindow  {
 private:
-
+    /// the game
+    Stadium mStadium;
+    /// The timer that allows for animation
     wxTimer mTimer;
+    /// Stopwatch used to measure elapsed time
     wxStopWatch mStopWatch;
+
+    void OnPaint(wxPaintEvent& event);
+
 
     long mTime = 0;
 
