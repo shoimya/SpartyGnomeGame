@@ -31,23 +31,23 @@ void Stadium::SetImageDirectory(const std::wstring &dir)
 
 void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, wxDC *dc)
 {
-    //
-    // Automatic Scaling
-    //
+   ////     Automatic Scaling
+
     mScale = double(height) / double(Height);
     graphics->Scale(mScale, mScale);
 
     auto virtualWidth = (double)width/mScale;
-    graphics->PushState()
+    graphics->PushState();
 
-    //
-    // Draw in virtual pixels on the graphics context
-    //
-    // INSERT DRAWING CODE HERE
+
+///     Draw in virtual pixels on the graphics context
+
+     for (auto obj : mItems)
+     {
+         obj->Draw(graphics);
+     }
 
     graphics->PopState();
-
-    mGnome ->Draw(dc);
 }
 
 void Stadium::Update(double elapsed)
