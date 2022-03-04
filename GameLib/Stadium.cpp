@@ -1,6 +1,6 @@
 /**
  * @file Stadium.cpp
- * @author SHOIMYA CHOWDHURY Haoxiang Zhang
+ * @author SHOIMYA CHOWDHURY Haoxiang Zhang Shaojie Zhang
  */
 
 
@@ -58,15 +58,16 @@ void Stadium::Update(double elapsed)
     }
 }
 
-Item* Stadium::CollisionTest(Item *item)
+std::shared_ptr<Item> Stadium::CollisionTest(Item *item)
 {
     for (auto i = mItems.begin(); i != mItems.end(); i++)
     {
         if ((*i)->CollisionTest(item))
         {
-            return nullptr;
+            return *i;
         }
     }
-    return item;
 }
+
+
 

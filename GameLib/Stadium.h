@@ -40,7 +40,7 @@ public:
 
     void Update(double elapsed);
 
-    Item* CollisionTest(Item* item);
+    std::shared_ptr<Item> CollisionTest(Item* item);
 };
 
 #endif //SPARTYGNOME_STADIUM_H
