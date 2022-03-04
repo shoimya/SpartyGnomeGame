@@ -1,5 +1,5 @@
 /**
- * @file ShoimyaChowdhuryApp.cpp
+ * @file  SpartyGnomeApp.cpp
  * @author Shoimya Chowdhury
  */
 #include "pch.h"
