@@ -8,6 +8,7 @@
 #ifndef SPARTYGNOME_PICTURE_H
 #define SPARTYGNOME_PICTURE_H
 
+#include <wx/graphics.h>
 
 class Stadium;
 
