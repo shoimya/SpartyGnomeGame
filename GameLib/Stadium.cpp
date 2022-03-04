@@ -31,15 +31,15 @@ void Stadium::SetImageDirectory(const std::wstring &dir)
 }
 
 
-void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
+void Stadium::OnDraw(shared_ptr<wxGraphicsContext> graphics, int width, int height)
 {
    ////     Automatic Scaling
 
-//    mScale = double(height) / double(Height);
-//    graphics->Scale(mScale, mScale);
-//
-//    auto virtualWidth = (double)width/mScale;
-//    graphics->PushState();
+    mScale = double(height) / double(mHeight);
+    graphics->Scale(mScale, mScale);
+
+    auto virtualWidth = (double)width/mScale;
+    graphics->PushState();
 
 
 ///     Draw in virtual pixels on the graphics context

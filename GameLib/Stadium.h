@@ -22,7 +22,10 @@ private:
     std::wstring mImagesDirectory;
 
     /// Game area height in virtual pixels
-    const static int Height = 1024;
+    const static int mHeight = 1024;
+
+    /// Game area height in virtual pixels
+    double mScale = 0;
 
     std::shared_ptr<Gnome> mGnome = nullptr;
 
@@ -42,7 +45,7 @@ public:
 
     void SetImageDirectory(const std::wstring& dir);
 
-    void OnDraw(std::shared_ptr<wxGraphicsContext> graphics);
+    void OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int height);
 
     void Update(double elapsed);
 
