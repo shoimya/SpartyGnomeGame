@@ -35,6 +35,11 @@ public:
     void OnFileOpen(wxCommandEvent& event);
 
     void Timer(wxTimerEvent& event);
+    
+    void Level0(wxCommandEvent& event);
+    void Level1(wxCommandEvent& event);
+    void Level2(wxCommandEvent& event);
+    void Level3(wxCommandEvent& event);
 };
 
 #endif //SPARTYGNOME_STADIUMVIEW_H
