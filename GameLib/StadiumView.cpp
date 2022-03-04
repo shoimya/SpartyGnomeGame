@@ -29,7 +29,12 @@ void StadiumView::Initialize(wxFrame* parent)
     Bind(wxEVT_PAINT, &StadiumView::OnPaint, this);
 
     parent->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::OnFileSaveas,this,wxID_SAVEAS);
-
+    // for the levels
+    parent->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::Level1,this, IDM_ADDLEVEL1);
+    parent->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::Level2,this, IDM_ADDLEVEL2);
+    parent->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::Level3,this, IDM_ADDLEVEL3);
+    parent->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::Level0,this, IDM_ADDLEVEL0);
+    
     mTimer.SetOwner(this);
     mStopWatch.Start();
 
@@ -126,7 +131,25 @@ void StadiumView::Timer(wxTimerEvent& event)
     Refresh();
 }
 
+void StadiumView::Level0(wxCommandEvent& event)
+{
 
+}
+
+void StadiumView::Level1(wxCommandEvent& event)
+{
+
+}
+
+void StadiumView::Level2(wxCommandEvent& event)
+{
+
+}
+
+void StadiumView::Level3(wxCommandEvent& event)
+{
+
+}
 
 
 
