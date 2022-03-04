@@ -18,6 +18,8 @@ private:
 
     Vector mV;
 
+    Picture *mPicture;
+
 public:
     Gnome(Stadium *stadium, Picture *picture);
 

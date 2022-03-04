@@ -30,6 +30,14 @@ Gnome::Gnome(Stadium* stadium, Picture* picture)
 
 void Gnome::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
+    if(! GetPicture()->Empty())
+    {
+        int wid = GetPicture()->GetWidth();
+        int hit = GetPicture()->GetHeight();
+        graphics->DrawBitmap(GetPicture()->AsBitmap(graphics),
+                (int) GetX()-wid/2, (int) GetY()-hit/2,
+                wid+1, hit);
+    }
 
 }
 
@@ -77,8 +85,6 @@ void Gnome::Update(double elapsed)
     }
 
     SetLocation(p.X(), newP.Y());
-
-    mV = newV;
 }
 
 

@@ -41,3 +41,17 @@ Level::~Level()
 {
 
 }
+
+Vector Level::XmlLoad(wxXmlNode* node)
+{
+    double width, height;
+    node->GetAttribute(L"width",L"0").ToDouble(&width);
+    node->GetAttribute(L"height", L"0").ToDouble(&height);
+
+    double x,y = 0;
+    node->GetAttribute(L"start-y",L"0").ToDouble(&y);
+    node->GetAttribute(L"start-x", L"0").ToDouble(&x);
+
+    Vector gnomePos = Vector(x,y);
+    return gnomePos;
+}

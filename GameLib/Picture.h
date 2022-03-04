@@ -8,6 +8,7 @@
 #ifndef SPARTYGNOME_PICTURE_H
 #define SPARTYGNOME_PICTURE_H
 
+#include <memory>
 #include <wx/graphics.h>
 
 class Stadium;
@@ -16,7 +17,7 @@ class Picture {
 private:
     Stadium *mStadium;
 
-    std::wstring mFile;
+    bool mEmpty = true;
 
     std::shared_ptr<wxImage> mImage;
 
@@ -49,10 +50,10 @@ public:
     int GetHeight(){return mImage->GetHeight();}
 
     /**
-     * Get image
+     * Get filename
      * @return The image
      */
-    std::shared_ptr<wxImage> GetImage(){return mImage;}
+     bool Empty(){return mEmpty;}
 };
 
 #endif //SPARTYGNOME_PICTURE_H

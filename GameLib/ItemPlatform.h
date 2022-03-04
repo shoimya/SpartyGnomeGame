@@ -25,7 +25,6 @@ public:
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
 
     void Draw(std::shared_ptr<wxGraphicsContext> graphics, int scrollx);
-
 };
 
 #endif //SPARTYGNOME_ITEMPLATFORM_H

@@ -47,9 +47,18 @@ wxXmlNode* Item::XmlSave(wxXmlNode* node)
 
 void Item::XmlLoad(wxXmlNode* node)
 {
-    long x, y;
-    node->GetAttribute(L"x", L"0").ToLong(&x);
-    node->GetAttribute(L"y", L"0").ToLong(&y);
-    mPos.Set(x,y);
+    long x, y = 0;
+    wstring filename;
+    if(mPicture == nullptr)
+    {
+        filename = node->GetAttribute(L"image" ).ToStdWstring();
+        mPicture->SetImage(filename);
+    }
+    else
+    {
+        node->GetAttribute(L"x", L"0").ToLong(&x);
+        node->GetAttribute(L"y", L"0").ToLong(&y);
+        mPos.Set(x,y);
+    }
 }
 

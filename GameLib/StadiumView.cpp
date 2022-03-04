@@ -6,8 +6,8 @@
 #include "StadiumView.h"
 #include <wx/dcbuffer.h>
 #include <wx/stdpaths.h>
-// #include <wx/graphics.h>
 #include "ids.h"
+// #include <wx/graphics.h>
 using namespace std;
 
 /**
@@ -20,19 +20,23 @@ void StadiumView::Initialize(wxFrame* parent)
 
     // Determine where images are stored
 
-    wxStandardPaths& standardPaths = wxStandardPaths::Get();
-    std::wstring resourcesDir = standardPaths.GetResourcesDir().ToStdWstring();
-    mStadium.SetImagesDirectory(resourcesDir);
+//    wxStandardPaths& standardPaths = wxStandardPaths::Get();
+//    std::wstring resourcesDir = standardPaths.GetResourcesDir().ToStdWstring();
+//    mStadium.SetImagesDirectory(resourcesDir);
 
     SetBackgroundStyle(wxBG_STYLE_PAINT);
 
     Bind(wxEVT_PAINT, &StadiumView::OnPaint, this);
+    Bind(wxEVT_TIMER,&StadiumView::Timer,this);
 
     parent->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::OnFileSaveas,this,wxID_SAVEAS);
+    parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &StadiumView::OnFileOpen, this, wxID_OPEN);
+
 
     mTimer.SetOwner(this);
     mStopWatch.Start();
 
+    mStadium.Load("GameLib/data/levels/level1.xml");
 }
 
 
@@ -65,16 +69,23 @@ void StadiumView::OnPaint(wxPaintEvent& event)
     auto elapsed = (double)(newTime - mTime) * 0.001;
     mTime = newTime;
 
+
     mStadium.Update(elapsed);
 
 
     auto size = GetClientSize();
+
     auto graphics = std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create(dc));
+
+    graphics->PushState();
+    mStadium.OnDraw(graphics,size.GetWidth(),size.GetHeight());
+
 //    mGame.OnDraw(graphics, size.GetWidth(), size.GetHeight());
 //    auto size = GetClientSize();
 //    auto graphics = std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create(dc));
 //    mStadium.OnDraw(graphics, size.GetWidth(), size.GetHeight());
 
+    graphics->PopState();
 
 }
 

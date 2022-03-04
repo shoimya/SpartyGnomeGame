@@ -51,15 +51,13 @@ ItemPlatform::~ItemPlatform()
 
 void ItemPlatform::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
-    if(mPicture->GetImage() == nullptr)
-    {
-        mPicture->SetImage(filename);
+    if(! GetPicture()->Empty()) {
+        int wid = GetPicture()->GetWidth();
+        int hit = GetPicture()->GetHeight();
+        graphics->DrawBitmap(GetPicture()->AsBitmap(graphics),
+                (int) GetX()-wid/2, (int) GetY()-hit/2,
+                wid+1, hit);
     }
-    int wid = mPicture->GetWidth();
-    int hit = mPicture->GetHeight();
-    graphics->DrawBitmap(mPicture->AsBitmap(graphics),
-            (int)GetX() - wid / 2, (int)GetY() - hit / 2,
-            wid + 1, hit);
 
 }
 
