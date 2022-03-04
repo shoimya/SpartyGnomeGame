@@ -76,4 +76,9 @@ void Gnome::Update(double elapsed)
 
     }
 
+    SetLocation(p.X(), newP.Y());
+
+    mV = newV;
 }
+
+
