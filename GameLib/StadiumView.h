@@ -29,6 +29,12 @@ public:
     void Initialize(wxFrame* parent);
 
     void OnKeyUp(wxKeyEvent& event);
+
+    void OnFileSaveas(wxCommandEvent& event);
+
+    void OnFileOpen(wxCommandEvent& event);
+
+    void Timer(wxTimerEvent& event);
 };
 
 #endif //SPARTYGNOME_STADIUMVIEW_H

@@ -5,7 +5,9 @@
 #include "pch.h"
 #include "StadiumView.h"
 #include <wx/dcbuffer.h>
-#include <wx/graphics.h>
+#include <wx/stdpaths.h>
+// #include <wx/graphics.h>
+#include "ids.h"
 using namespace std;
 
 /**
@@ -15,9 +17,21 @@ using namespace std;
 void StadiumView::Initialize(wxFrame* parent)
 {
     Create(parent, wxID_ANY);
-    SetBackgroundColour(*wxWHITE);
+
+    // Determine where images are stored
+
+    wxStandardPaths& standardPaths = wxStandardPaths::Get();
+    std::wstring resourcesDir = standardPaths.GetResourcesDir().ToStdWstring();
+    mStadium.SetImagesDirectory(resourcesDir);
+
+    SetBackgroundStyle(wxBG_STYLE_PAINT);
 
     Bind(wxEVT_PAINT, &StadiumView::OnPaint, this);
+
+    parent->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::OnFileSaveas,this,wxID_SAVEAS);
+
+    mTimer.SetOwner(this);
+    mStopWatch.Start();
 
 }
 
@@ -40,6 +54,13 @@ void StadiumView::OnPaint(wxPaintEvent& event)
 {
     // Compute the time that has elapsed
     // since the last call to OnPaint.
+
+
+    wxAutoBufferedPaintDC dc(this);
+
+    wxBrush background(*wxWHITE);
+    dc.SetBackground(background);
+    dc.Clear();
     auto newTime = mStopWatch.Time();
     auto elapsed = (double)(newTime - mTime) * 0.001;
     mTime = newTime;
@@ -47,14 +68,64 @@ void StadiumView::OnPaint(wxPaintEvent& event)
     mStadium.Update(elapsed);
 
 
-    wxAutoBufferedPaintDC dc(this);
-    wxBrush background(*wxWHITE);
-    dc.SetBackground(background);
-    dc.Clear();
     auto size = GetClientSize();
     auto graphics = std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create(dc));
+//    mGame.OnDraw(graphics, size.GetWidth(), size.GetHeight());
+//    auto size = GetClientSize();
+//    auto graphics = std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create(dc));
 //    mStadium.OnDraw(graphics, size.GetWidth(), size.GetHeight());
+
+
 }
+
+/**
+ * Menu handler for File SaveAs
+ * @param event Mouse event
+ */
+void StadiumView::OnFileSaveas(wxCommandEvent& event)
+{
+    wxFileDialog saveFileDialog(this, _("Save Stadium file"), "", "",
+            "Stadium Files (*.xml)|*.xml", wxFD_SAVE|wxFD_OVERWRITE_PROMPT);
+    if (saveFileDialog.ShowModal() == wxID_CANCEL)
+    {
+        return;
+    }
+
+    auto filename = saveFileDialog.GetPath();
+    mStadium.Save(filename);
+}
+
+
+/**
+* File>Open menu handler
+* @param event Menu event
+*/
+void StadiumView::OnFileOpen(wxCommandEvent& event)
+{
+    wxFileDialog loadFileDialog(this, _("Load Stadium file"), "", "",
+            "Stadium Files (*.xml)|*.xml", wxFD_OPEN);
+    if (loadFileDialog.ShowModal() == wxID_CANCEL)
+    {
+        return;
+    }
+
+    auto filename = loadFileDialog.GetPath();
+
+    mStadium.Load(filename);
+    Refresh();
+}
+
+
+
+/**
+* Timer event handler
+* @param event Menu event
+*/
+void StadiumView::Timer(wxTimerEvent& event)
+{
+    Refresh();
+}
+
 
 
 

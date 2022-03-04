@@ -9,13 +9,12 @@
 using namespace std;
 
 const wstring filename1 = L"platformIndustrial_057.png";
-
 const wstring filename2 = L"platformIndustrial_059.png";
 const wstring filename3 = L"platformIndustrial_060.png";
 const wstring filename4 = L"platformIndustrial_061.png";
 
 Platform::Platform(Stadium* stadium, Picture* picture)
-        :Level(stadium, picture)
+        :ItemPlatform(stadium, picture)
 {
 
 }

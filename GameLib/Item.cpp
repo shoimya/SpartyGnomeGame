@@ -34,3 +34,22 @@ void Item::Update(double elapsed)
   SetLocation(newP);
 }
 
+wxXmlNode* Item::XmlSave(wxXmlNode* node)
+{
+    auto itemNode = new wxXmlNode(wxXML_ELEMENT_NODE, L"id");
+    node->AddChild(itemNode);
+
+    itemNode->AddAttribute(L"x", wxString::Format(L"%i", mPos.X()));
+    itemNode->AddAttribute(L"y", wxString::Format(L"%i", mPos.Y()));
+
+    return itemNode;
+}
+
+void Item::XmlLoad(wxXmlNode* node)
+{
+    long x, y;
+    node->GetAttribute(L"x", L"0").ToLong(&x);
+    node->GetAttribute(L"y", L"0").ToLong(&y);
+    mPos.Set(x,y);
+}
+

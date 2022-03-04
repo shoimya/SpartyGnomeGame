@@ -23,13 +23,13 @@ class Visitor;
 class Item {
 private:
     /// The stadium this item is contained in
-    Stadium *mStadium;
+    Stadium *mStadium = nullptr;
 
     /// Item location in the stadium
     Vector mPos;
 
     /// Picture of this item
-    Picture *mPicture;
+    Picture *mPicture = nullptr;
 
 protected:
     Item(Stadium *stadium, Picture *picture);
@@ -104,6 +104,8 @@ public:
     virtual void Accept(Visitor* visitor) = 0;
 
 
+    virtual wxXmlNode *XmlSave(wxXmlNode *node);
+    virtual void XmlLoad(wxXmlNode *node);
 };
 
 #endif //SPARTYGNOME_ITEM_H

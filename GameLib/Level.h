@@ -8,23 +8,21 @@
 #ifndef SPARTYGNOME_LEVEL_H
 #define SPARTYGNOME_LEVEL_H
 
-#include "Item.h"
-#include "Visitor.h"
+class Stadium;
 
-class Level : public Item{
+class Level {
 private:
-    Picture* mPicture;
+    std::wstring mFile;
+    Stadium *mStadium;
 
 public:
-    Level(Stadium* stadium, Picture* picture);
+    Level(Stadium* stadium);
+    std::wstring Level0();
+    std::wstring Level1();
+    std::wstring Level2();
+    std::wstring Level3();
     ~Level();
-    bool CollisionTest(Item *item) override;
 
-    void Accept(Visitor* visitor) override {visitor->VisitLevel(this);}
-
-    void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
-
-    void Draw(std::shared_ptr<wxGraphicsContext> graphics, int scrollx);
 
 };
 

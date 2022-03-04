@@ -8,7 +8,7 @@
 #ifndef SPARTYGNOME_VISITOR_H
 #define SPARTYGNOME_VISITOR_H
 
-class Level;
+class ItemPlatform;
 class Gnome;
 class Background;
 class Door;
@@ -21,7 +21,7 @@ public:
     * Visit platform object
     * @param platform Platform we are visiting
     */
-    virtual void VisitLevel(Level* level) {}
+    virtual void VisitItemPlatform(ItemPlatform* itemplatform) {}
 
 
     /**

@@ -8,9 +8,9 @@
 #ifndef SPARTYGNOME_PLATFORM_H
 #define SPARTYGNOME_PLATFORM_H
 
-#include "Level.h"
+#include "ItemPlatform.h"
 
-class Platform : public Level{
+class Platform : public ItemPlatform{
 private:
     Picture *mPicture;
 
