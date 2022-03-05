@@ -21,7 +21,8 @@ private:
     void XmlItem(wxXmlNode *node);
 
     /// Directory containing the system images
-    std::wstring mImagesDirectory;
+    const std::wstring mImagesDirectory = L"data/images";
+    const std::wstring mLevelDirectory = L"data/levels";
 
     /// Game area height in virtual pixels
     const static int Height = 1024;

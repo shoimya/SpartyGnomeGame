@@ -17,7 +17,8 @@
 #include "Grass.h"
 
 using namespace std;
-const std::wstring ImagesDirectory = L"GameLib/data/images";
+const std::wstring ImagesDirectory = L"data/images";
+const std::wstring LevelDirectory = L"data/levels";
 
 /**
  * Generator
@@ -27,7 +28,6 @@ Stadium::Stadium()
     double x = 100;
     double y = 100;
 
-    mImagesDirectory = ImagesDirectory;
 
 //    mGnome = make_shared<Gnome>(this);
 //    mGnome->SetLocation(x,y);
@@ -44,12 +44,12 @@ void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, 
     graphics->Scale(mScale,mScale);
     auto virtualWidth = (double) width/mScale;
 
-    auto xOffset = (double)mGnome->GetX() + virtualWidth / 2.0f;
+//    auto xOffset = (double)mGnome->GetX() + virtualWidth / 2.0f;
     graphics->PushState();
 
 
     // Compute the amount to scroll in the X dimension
-    graphics->Translate(xOffset,0);
+//    graphics->Translate(xOffset,0);
     graphics->Scale(mScale,mScale);
 
      for (auto obj : mItems)
@@ -115,16 +115,17 @@ void Stadium::Load(const wxString& filename)
     auto vec = mLevel->XmlLoad(root);
 
     // set picture for gnome
-    auto picture = Picture(this);
-    picture.SetImage(L"gnome.png");
-    mMapPictures[0] = &picture;
-    AddPicture(&picture);
+//    auto picture = Picture(this);
+//    if(mMapPictures[0] ==)
+//    picture.SetImage(L"gnome.png");
+//    mMapPictures[0] = &picture;
+//    AddPicture(&picture);
 //    AddItem(mGnome);
 
 
     // create mGnome
-    mGnome = make_shared<Gnome>(this,&picture);
-    mGnome->SetLocation(vec);
+//    mGnome = make_shared<Gnome>(this,&picture);
+//    mGnome->SetLocation(vec);
 
     bool mImageLoad = false;
 
@@ -345,7 +346,7 @@ void Stadium::AddPicture(Picture* picture)
 
 void Stadium::SetImagesDirectory(const wstring& dir)
 {
-    mImagesDirectory = dir + ImagesDirectory;
+//    mImagesDirectory = dir + ImagesDirectory;
 }
 void Stadium::Load(int level)
 {

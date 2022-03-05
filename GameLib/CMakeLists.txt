@@ -5,9 +5,6 @@ set(SOURCE_FILES MainFrame.cpp MainFrame.h pch.h StadiumView.cpp StadiumView.h I
 set(wxBUILD_PRECOMP OFF)
 find_package(wxWidgets COMPONENTS core base xrc html xml REQUIRED)
 
-
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/data/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/data/)
-
 include(${wxWidgets_USE_FILE})
 
 add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})
