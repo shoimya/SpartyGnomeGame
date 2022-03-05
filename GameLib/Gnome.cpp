@@ -30,7 +30,7 @@ Gnome::Gnome(Stadium* stadium, Picture* picture)
 
 void Gnome::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
-    if(! GetPicture()->Empty())
+    if(!GetPicture()->Empty())
     {
         int wid = GetPicture()->GetWidth();
         int hit = GetPicture()->GetHeight();

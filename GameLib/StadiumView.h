@@ -35,6 +35,18 @@ public:
     void OnFileOpen(wxCommandEvent& event);
 
     void Timer(wxTimerEvent& event);
+
+    void Level0(wxCommandEvent& event);
+
+    void Level1(wxCommandEvent& event);
+
+    void Level2(wxCommandEvent& event);
+
+    void Level3(wxCommandEvent& event);
+
+    void AddMenus(wxFrame* mainFrame, wxMenuBar* menu, wxMenu* levelMenu);
+
+    void AddLevelMenuOption(wxFrame* mainFrame, wxMenu* menu, int id, std::wstring text, std::wstring help);
 };
 
 #endif //SPARTYGNOME_STADIUMVIEW_H

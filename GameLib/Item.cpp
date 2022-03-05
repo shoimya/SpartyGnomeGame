@@ -49,7 +49,7 @@ void Item::XmlLoad(wxXmlNode* node)
 {
     long x, y = 0;
     wstring filename;
-    if(mPicture == nullptr)
+    if(mPicture->Empty())
     {
         filename = node->GetAttribute(L"image" ).ToStdWstring();
         mPicture->SetImage(filename);

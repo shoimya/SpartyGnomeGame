@@ -51,7 +51,7 @@ ItemPlatform::~ItemPlatform()
 
 void ItemPlatform::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
-    if(! GetPicture()->Empty()) {
+    if(!GetPicture()->Empty()) {
         int wid = GetPicture()->GetWidth();
         int hit = GetPicture()->GetHeight();
         graphics->DrawBitmap(GetPicture()->AsBitmap(graphics),
@@ -61,13 +61,23 @@ void ItemPlatform::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 
 }
 
-void ItemPlatform::Draw(std::shared_ptr<wxGraphicsContext> graphics, int scrollx)
+void ItemPlatform::Draw(std::shared_ptr<wxGraphicsContext> graphics, int scrollx,int scrolly)
 {
-    int wid = mPicture->GetWidth();
-    int hit = mPicture->GetHeight();
-    graphics->DrawBitmap(mPicture->AsBitmap(graphics),
+    int wid = GetPicture()->GetWidth();
+    int hit = GetPicture()->GetHeight();
+    graphics->DrawBitmap(GetPicture()->AsBitmap(graphics),
             (int)GetX() - wid / 2 + scrollx, (int)GetY() - hit / 2,
             wid + 1, hit);
 
+}
+
+void ItemPlatform::XmlLoad(wxXmlNode* node)
+{
+    long x, y = 0;
+    double wid,hit = 0;
+    node->GetAttribute(L"x", L"0").ToLong(&x);
+    node->GetAttribute(L"y", L"0").ToLong(&y);
+    node->GetAttribute(L"height").ToDouble(&wid);
+    node->GetAttribute(L"width").ToDouble(&hit);
 }
 

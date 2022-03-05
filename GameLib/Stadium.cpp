@@ -43,12 +43,14 @@ void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, 
     mScale = double(height) / double(Height);
     graphics->Scale(mScale,mScale);
     auto virtualWidth = (double) width/mScale;
+
+    auto xOffset = (double)mGnome->GetX() + virtualWidth / 2.0f;
     graphics->PushState();
 
 
     // Compute the amount to scroll in the X dimension
-//    auto xOffset = (double)mGnome->GetX() + virtualWidth / 2.0f;
-
+    graphics->Translate(xOffset,0);
+    graphics->Scale(mScale,mScale);
 
      for (auto obj : mItems)
      {
@@ -116,8 +118,9 @@ void Stadium::Load(const wxString& filename)
     auto picture = Picture(this);
     picture.SetImage(L"gnome.png");
     mMapPictures[0] = &picture;
-
     AddPicture(&picture);
+//    AddItem(mGnome);
+
 
     // create mGnome
     mGnome = make_shared<Gnome>(this,&picture);
@@ -170,7 +173,7 @@ void Stadium::XmlItem(wxXmlNode* node)
         item->XmlLoad(node);
         AddItem(item);
     }
-    else if (id == L"1003")
+    else if (id == L"i003")
     {
         item = make_shared<Grass>(this,&picture);
 
@@ -330,9 +333,6 @@ void Stadium::XmlPicture(wxXmlNode* node)
      */
 }
 
-
-
-
 void Stadium::AddItem(const std::shared_ptr<Item>& item)
 {
     mItems.push_back(item);
@@ -346,4 +346,27 @@ void Stadium::AddPicture(Picture* picture)
 void Stadium::SetImagesDirectory(const wstring& dir)
 {
     mImagesDirectory = dir + ImagesDirectory;
+}
+void Stadium::Load(int level)
+{
+    Clear();
+//    mTime = 0;
+    wstring path;
+    switch (level){
+        case 0:
+            path = L"GameLib/data/levels/level0.xml";
+            break;
+        case 1:
+            path = L"GameLib/data/levels/level1.xml";
+            break;
+        case 2:
+            path = L"GameLib/data/levels/level2.xml";
+            break;
+        case 3:
+            path = L"GameLib/data/levels/level3.xml";
+            break;
+    default:
+        break;
+    }
+    Load(path);
 }

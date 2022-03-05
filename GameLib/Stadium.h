@@ -66,6 +66,8 @@ public:
     void Clear();
 
     void XmlPicture(wxXmlNode* node);
+
+    void Load(int level);
 };
 
 #endif //SPARTYGNOME_STADIUM_H

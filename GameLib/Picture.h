@@ -21,6 +21,7 @@ private:
 
     std::shared_ptr<wxImage> mImage;
 
+    std::wstring mFile;
 public:
     Picture(Stadium* stadium);
     ~Picture();
