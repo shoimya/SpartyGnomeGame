@@ -99,6 +99,8 @@ void Stadium::Load(const wxString& filename)
     // Get the XML document root node
     auto root = xmlDoc.GetRoot();
 
+    auto picture = Picture(this);
+
     auto child = root->GetChildren();
     for( ; child; child=child->GetNext())
     {

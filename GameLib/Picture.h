@@ -18,7 +18,9 @@ private:
 
     std::wstring mFile;
 
-    std::shared_ptr<wxImage> mImage;
+    std::shared_ptr<wxImage> mImage = nullptr;
+
+    bool mEmpty = true;
 
 public:
     Picture(Stadium* stadium);
@@ -53,6 +55,8 @@ public:
      * @return The image
      */
     std::shared_ptr<wxImage> GetImage(){return mImage;}
+
+    bool Empty(){return mEmpty;}
 };
 
 #endif //SPARTYGNOME_PICTURE_H
