@@ -13,7 +13,7 @@
 
 class Background : public Item{
 private:
-
+    Picture* mPicture;
 public:
     Background(Stadium* stadium, Picture* picture);
     ~Background();

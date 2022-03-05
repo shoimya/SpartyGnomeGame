@@ -33,13 +33,17 @@ void Stadium::SetImageDirectory(const std::wstring &dir)
 
 void Stadium::OnDraw(shared_ptr<wxGraphicsContext> graphics, int width, int height)
 {
-   ////     Automatic Scaling
+    ////     Automatic Scaling
 
     mScale = double(height) / double(mHeight);
     graphics->Scale(mScale, mScale);
 
     auto virtualWidth = (double)width/mScale;
+    // Compute the amount to scroll in the X dimension
+    auto xOffset = (double)-mGnome->GetX() + virtualWidth / 2.0f;
+
     graphics->PushState();
+    graphics->Translate(xOffset, 0);
 
 
 ///     Draw in virtual pixels on the graphics context
