@@ -8,18 +8,17 @@
 #ifndef SPARTYGNOME_GRASS_H
 #define SPARTYGNOME_GRASS_H
 
-#include "Item.h"
+#include "ItemPlatform.h"
 #include "Visitor.h"
 
-class Grass : public Item{
+class Grass : public ItemPlatform{
 private:
-  Picture* mPicture;
 
 public:
-  Grass(Stadium *Stadium, Picture *Picture);
+  Grass(Stadium *Stadium, std::shared_ptr<Picture> Picture);
 
-  void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
 
+//  void XmlLoad(wxXmlNode *node, int xPos);
   void Accept(Visitor *visitor) override {}
   ~Grass();
 

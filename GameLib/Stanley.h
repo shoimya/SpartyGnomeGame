@@ -15,7 +15,7 @@ private:
     Picture *picture;
 
 public:
-    Stanley(Stadium* stadium, Picture *picture);
+    Stanley(Stadium* stadium, std::shared_ptr<Picture> picture);
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
     void Accept(Visitor* visitor) override {}
     ~Stanley();

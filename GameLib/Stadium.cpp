@@ -31,8 +31,17 @@ Stadium::Stadium()
 
 //    mGnome = make_shared<Gnome>(this);
 //    mGnome->SetLocation(x,y);
+    auto initialPicture = make_shared<Picture>(this);
+    mMapPictures = {{L"i000",initialPicture}};
+
 }
 
+/**
+ * Draw the game
+ * @param graphics The graphics context to draw on
+ * @param width The width
+ * @param height The height
+ */
 void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, double height)
 {
    ////     Automatic Scaling
@@ -42,27 +51,33 @@ void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, 
 
     mScale = double(height) / double(Height);
     graphics->Scale(mScale,mScale);
-    auto virtualWidth = (double) width/mScale;
 
-//    auto xOffset = (double)mGnome->GetX() + virtualWidth / 2.0f;
+    auto virtualWidth = (double) width/mScale;
     graphics->PushState();
+
+    auto xOffset = (double)-mGnome->GetX() + virtualWidth / 2.0f;
 
 
     // Compute the amount to scroll in the X dimension
-//    graphics->Translate(xOffset,0);
-    graphics->Scale(mScale,mScale);
-
-     for (auto obj : mItems)
-     {
-         if (!obj->GetPicture()->Empty())
-         {
-             obj->Draw(graphics);
-         }
-     }
-
+    graphics->Translate(xOffset,0);
+//    graphics->Scale(mScale,mScale);
+    if (!mItems.empty())
+    {
+        for (auto obj : mItems)
+        {
+            if (!obj->GetPicture()->Empty())
+            {
+                    obj->Draw(graphics);
+            }
+        }
+    }
      graphics->PopState();
 }
 
+/**
+ * Update item in game
+ * @param elapsed The time to update
+ */
 void Stadium::Update(double elapsed)
 {
     for (auto item : mItems)
@@ -71,6 +86,11 @@ void Stadium::Update(double elapsed)
     }
 }
 
+/**
+ * The collision test for item
+ * @param item
+ * @return
+ */
 std::shared_ptr<Item> Stadium::CollisionTest(Item *item)
 {
     for(auto i : mItems)
@@ -79,7 +99,6 @@ std::shared_ptr<Item> Stadium::CollisionTest(Item *item)
         {
             return i;
         }
-
     }
     return nullptr;
 }
@@ -105,9 +124,7 @@ void Stadium::Load(const wxString& filename)
         wxMessageBox(L"Unable to load xml file");
         return;
     }
-
     Clear();
-
     // Get the XML document root node
     auto root = xmlDoc.GetRoot();
 
@@ -115,41 +132,40 @@ void Stadium::Load(const wxString& filename)
     auto vec = mLevel->XmlLoad(root);
 
     // set picture for gnome
-//    auto picture = Picture(this);
-//    if(mMapPictures[0] ==)
-//    picture.SetImage(L"gnome.png");
-//    mMapPictures[0] = &picture;
-//    AddPicture(&picture);
-//    AddItem(mGnome);
+    if(mMapPictures[L"i000"]->Empty())
+    {
+        mMapPictures[L"i000"]->SetImage(L"gnome.png");
+    }
 
 
     // create mGnome
-//    mGnome = make_shared<Gnome>(this,&picture);
-//    mGnome->SetLocation(vec);
+    mGnome = make_shared<Gnome>(this,mMapPictures[L"i000"]);
+    mGnome->SetLocation(vec);
 
-    bool mImageLoad = false;
+
+//    bool mImageLoad = false;
 
     auto child = root->GetChildren();
     for( ; child; child=child->GetNext())
     {
-        auto name = child->GetName();
-        if(name == L"background" or name == L"platform")
-        {
-            if(!mImageLoad)
-            {
-                XmlPicture(child);
-            }
-            else
-            {
-                XmlItem(child);
-            }
-        }
-        else if( name == L"items")
-        {
-            mImageLoad = true;
-        }
-
-
+       auto name = child->GetName();
+       if(name == L"declarations")
+       {
+           auto subChild = child->GetChildren();
+           for(;subChild;subChild=subChild->GetNext())
+           {
+               XmlPicture(subChild);
+           }
+       }
+       else if(name == L"items")
+       {
+           auto subChild = child->GetChildren();
+           for(;subChild;subChild=subChild->GetNext())
+           {
+               XmlItem(subChild);
+           }
+       }
+        mItems.push_back(mGnome);
     }
 
 }
@@ -161,53 +177,99 @@ void Stadium::Clear()
 
 void Stadium::XmlItem(wxXmlNode* node)
 {
-    shared_ptr<Item> item;
 
-    auto id= node->GetAttribute(L"id");
-    auto picture = Picture(this);
+    auto id= node->GetAttribute(L"id").ToStdWstring();
 
     // select type
     if (id == L"i001" || id == L"i002" )
     {
+        auto picture = mMapPictures[id];
         // backgroundForest
-        item = make_shared<Background>(this, &picture);
+        auto item = make_shared<Background>(this, picture);
         item->XmlLoad(node);
         AddItem(item);
     }
     else if (id == L"i003")
     {
-        item = make_shared<Grass>(this,&picture);
+
+        auto picture1 = mMapPictures[L"i0031"];
+        auto picture2 = mMapPictures[L"i0032"];
+        auto picture3 = mMapPictures[L"i0033"];
+        auto item = make_shared<ItemPlatform>(this,picture1);
+        auto item1 = make_shared<ItemPlatform>(this,picture2);
+        auto item2 = make_shared<ItemPlatform>(this,picture3);
+//        item = make_shared<Grass>(this,picture);
+        double pos = 0;
+        node->GetAttribute(L"width").ToDouble(&pos);
+        pos = pos / 32 - 2;
+        pos = pos / 2;
+        item->XmlLoad(node,-pos);
+        AddItem(item);
+        for(int i = -pos + 1;i<pos;i++)
+        {
+            auto item1 = make_shared<ItemPlatform>(this,picture2);
+            item1->XmlLoad(node,i);
+            AddItem(item1);
+        }
+        item2->XmlLoad(node,pos);
+        AddItem(item2);
+
 
     }
     else if (id == L"i004")
     {
 
-        item = make_shared<Snow>(this,&picture);
+//        item = make_shared<Snow>(this,&picture);
     }
-    else if (id == L"i005")
+    else if (id == L"i005" || id == L"i003")
     {
         // platform
-        item = make_shared<Platform>(this,&picture);
-        item->XmlLoad(node);
+        auto picture1 = mMapPictures[L"i0051"];
+        auto picture2 = mMapPictures[L"i0052"];
+        auto picture3 = mMapPictures[L"i0053"];
+        if(id == L"i003")
+        {
+
+            picture1 = mMapPictures[L"i0031"];
+            picture2 = mMapPictures[L"i0032"];
+            picture3 = mMapPictures[L"i0033"];
+
+        }
+
+        auto item = make_shared<ItemPlatform>(this,picture1);
+        auto item2 =  make_shared<ItemPlatform>(this,picture3);
+        double pos = 0;
+        node->GetAttribute(L"width").ToDouble(&pos);
+        pos = pos / 32 - 2;
+        pos = pos / 2;
+        item->XmlLoad(node,-pos);
         AddItem(item);
+        for(int i = -pos + 1;i<pos;i++)
+        {
+            auto item1 = make_shared<ItemPlatform>(this,picture2);
+            item1->XmlLoad(node,i);
+            AddItem(item1);
+        }
+        item2->XmlLoad(node,pos);
+        AddItem(item2);
     }
     else if (id == L"i006" || id == L"1007")
     {
         // wall1
-        item = make_shared<Wall>(this,&picture);
+//        item = make_shared<Wall>(this,&picture);
 
     }
         // wall2
     else if (id == L"i008")
     {
         // money100
-        item = make_shared<Money>(this,&picture);
+ //       item = make_shared<Money>(this,&picture);
 
     }
     else if (id == L"i009")
     {
         // money 1000
-        item = make_shared<Money>(this,&picture);
+//        item = make_shared<Money>(this,&picture);
 
     }
     else if (id == L"i010")
@@ -215,13 +277,13 @@ void Stadium::XmlItem(wxXmlNode* node)
         // stanley
 //        item = make_shared<Stanley>(this,&picture);
 
-        item = make_shared<Stanley>(this,&picture);
+//        item = make_shared<Stanley>(this,&picture);
 
     }
     else if (id == L"i011")
     {
         // door
-        item = make_shared<Door>(this,&picture);
+//        item = make_shared<Door>(this,&picture);
 
     }
     else if (id == L"i012")
@@ -246,39 +308,60 @@ void Stadium::XmlItem(wxXmlNode* node)
 
 void Stadium::XmlPicture(wxXmlNode* node)
 {
-    Picture picture(this);
-    auto p = &picture;
-    auto id = node->GetAttribute(L"id");
-    std::wstring leftImage = L"";
-    std::wstring midImage = L"";
+    auto picture = make_shared<Picture>(this);
+    auto id = node->GetAttribute(L"id").ToStdWstring();
 
-    std::wstring rightImage = L"";
     // select type
-    if (id == L"i001")
+    if (id == L"i001" || id == L"i002")
     {
         auto imageName = node->GetAttribute(L"image").ToStdWstring();
         // backgroundForest
-        p->SetImage(imageName);
-        mMapPictures[1] = &picture;
-
+        picture->SetImage(imageName);
+        mMapPictures[id] = picture;
     }
-    else if(id == L"i002")
+    else if (id == L"i003" || id == L"i005")
     {
-        auto imageName = node->GetAttribute(L"image").ToStdWstring();
-        p->SetImage(imageName);
-        mMapPictures[2] = &picture;
 
-    }
-/*    else if (id == L"1003")
-    {
+        auto leftImage = node->GetAttribute(L"left-image").ToStdWstring();
+        auto midImage =  node->GetAttribute(L"mid-image").ToStdWstring();
+        auto rightImage =  node->GetAttribute(L"right-image").ToStdWstring();
+
+        auto picture1 = make_shared<Picture>(this);
+        auto picture2 = make_shared<Picture>(this);
+        if(id == L"i003")
+        {
+            picture->SetImage(leftImage);
+            mMapPictures[L"i0031"] = picture;
+
+            picture1->SetImage(midImage);
+            mMapPictures[L"i0032"] = picture1;
+
+            picture2->SetImage(rightImage);
+            mMapPictures[L"i0033"] = picture2;
+        }
+        else
+        {
+            picture->SetImage(leftImage);
+            mMapPictures[L"i0051"] = picture;
+
+            picture1->SetImage(midImage);
+            mMapPictures[L"i0052"] = picture1;
+
+            picture2->SetImage(rightImage);
+            mMapPictures[L"i0053"] = picture2;
+        }
+        picture->SetImagePos(L"left");
+        picture1->SetImagePos(L"mid");
+        picture2->SetImagePos(L"right");
+
+
     }
     else if (id == L"i004")
     {
     }
-*/
-    else if (id == L"i005")
-    {
-        Picture p1(this);
+//    else if (id == L"i005")
+//    {
+/*        Picture p1(this);
         Picture p2(this);
         Picture p3(this);
         leftImage = node->GetAttribute(L"left-image").ToStdWstring();
@@ -287,11 +370,12 @@ void Stadium::XmlPicture(wxXmlNode* node)
         p1.SetImage(leftImage);
         p2.SetImage(midImage);
         p3.SetImage(rightImage);
-        mMapPictures[3] = &p1;
-        mMapPictures[4] = &p2;
-        mMapPictures[5] = &p3;
+        */
+//        mMapPictures[3] = &p1;
+//        mMapPictures[4] = &p2;
+//        mMapPictures[5] = &p3;
         // platform
-    }
+//    }
     /*
     else if (id == L"i006" || id == L"1007")
     {
@@ -339,15 +423,6 @@ void Stadium::AddItem(const std::shared_ptr<Item>& item)
     mItems.push_back(item);
 }
 
-void Stadium::AddPicture(Picture* picture)
-{
-    mPictures.push_back(picture);
-}
-
-void Stadium::SetImagesDirectory(const wstring& dir)
-{
-//    mImagesDirectory = dir + ImagesDirectory;
-}
 void Stadium::Load(int level)
 {
     Clear();

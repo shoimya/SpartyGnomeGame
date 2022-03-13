@@ -6,7 +6,7 @@
 #include "pch.h"
 #include "Stanley.h"
 
-Stanley::Stanley(Stadium* stadium, Picture* picture)
+Stanley::Stanley(Stadium* stadium, std::shared_ptr<Picture> picture)
         :Item(stadium, picture)
 {
 

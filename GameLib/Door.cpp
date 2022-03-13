@@ -9,7 +9,7 @@
 using namespace std;
 const double CollisionDistance = 20;
 
-Door::Door(Stadium* stadium, Picture* picture)
+Door::Door(Stadium* stadium, shared_ptr<Picture> picture)
         :Item(stadium, picture)
 {
 

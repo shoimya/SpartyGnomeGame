@@ -6,7 +6,7 @@
 #include "pch.h"
 #include "Money.h"
 
-Money::Money(Stadium* stadium, Picture* picture)
+Money::Money(Stadium* stadium, std::shared_ptr<Picture> picture)
         :Item(stadium, picture)
 {
 

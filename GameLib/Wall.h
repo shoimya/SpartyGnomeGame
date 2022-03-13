@@ -17,7 +17,7 @@ private:
   Picture *mPicture;
 
 public:
-  Wall(Stadium *Stadium, Picture *picture);
+  Wall(Stadium *Stadium, std::shared_ptr<Picture> picture);
   void Accept(Visitor *visitor) override{};
   ~Wall();
 

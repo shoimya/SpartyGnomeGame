@@ -33,22 +33,24 @@ private:
 
     std::vector<std::shared_ptr<Item>> mItems;
 
-    std::vector<Picture*> mPictures;
-
-    std::map<int ,Picture*> mMapPictures;
+    std::map<std::wstring,std::shared_ptr<Picture>> mMapPictures;
 
     double mScale;
 
 public:
     enum GameMode {begin = 0, end = 1, progress = 2, loss = 3, win = 4};
 
+    /**
+     * Constructor
+     */
     Stadium();
     virtual ~Stadium() = default;
 
-    void SetImagesDirectory(const std::wstring &dir);
-
+    /**
+     * Get image directory
+     * @return mImagesDirectory The image Directory
+     */
     const std::wstring &GetImagesDirectory() {return mImagesDirectory;}
-
 
     void OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, double height);
 
@@ -62,13 +64,13 @@ public:
 
     void AddItem(const std::shared_ptr<Item>& item);
 
-    void AddPicture(Picture* picture);
-
     void Clear();
 
     void XmlPicture(wxXmlNode* node);
 
     void Load(int level);
+
+    std::shared_ptr<Gnome> GetGnome() {return mGnome;}
 };
 
 #endif //SPARTYGNOME_STADIUM_H

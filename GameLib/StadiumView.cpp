@@ -38,7 +38,7 @@ void StadiumView::Initialize(wxFrame* parent)
     mTimer.SetOwner(this);
     mStopWatch.Start();
 
-    mStadium.Load("GameLib/data/levels/level1.xml");
+    mStadium.Load("GameLib/data/levels/level2.xml");
 }
 
 
@@ -71,7 +71,6 @@ void StadiumView::OnPaint(wxPaintEvent& event)
     auto elapsed = (double)(newTime - mTime) * 0.001;
     mTime = newTime;
 
-
     mStadium.Update(elapsed);
 
 
@@ -79,7 +78,7 @@ void StadiumView::OnPaint(wxPaintEvent& event)
 
     auto graphics = std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create(dc));
 
-    graphics->PushState();
+//    graphics->PushState();
     mStadium.OnDraw(graphics,size.GetWidth(),size.GetHeight());
 
 //    mGame.OnDraw(graphics, size.GetWidth(), size.GetHeight());
@@ -87,7 +86,7 @@ void StadiumView::OnPaint(wxPaintEvent& event)
 //    auto graphics = std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create(dc));
 //    mStadium.OnDraw(graphics, size.GetWidth(), size.GetHeight());
 
-    graphics->PopState();
+//    graphics->PopState();
 
 }
 
@@ -171,6 +170,7 @@ void StadiumView::Timer(wxTimerEvent& event)
 {
     Refresh();
 }
+
 
 
 

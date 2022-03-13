@@ -21,7 +21,9 @@ private:
 
     std::shared_ptr<wxImage> mImage;
 
-    std::wstring mFile;
+    std::wstring mFile = L"";
+
+    std::wstring mImagePos = L"";
 public:
     Picture(Stadium* stadium);
     ~Picture();
@@ -55,6 +57,18 @@ public:
      * @return The image
      */
      bool Empty(){return mEmpty;}
+
+     /**
+      * Set image position
+      * @param pos The image position
+      */
+     void SetImagePos(std::wstring pos){mImagePos = pos;}
+
+     /**
+      * Get image position
+      * @return Get the image position
+      */
+     std::wstring GetImagePos(){return mImagePos;}
 };
 
 #endif //SPARTYGNOME_PICTURE_H

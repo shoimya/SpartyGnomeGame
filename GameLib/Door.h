@@ -16,7 +16,7 @@ private:
     Picture* mPicture;
 
 public:
-    Door(Stadium *stadium, Picture *picture);
+    Door(Stadium *stadium, std::shared_ptr<Picture> picture);
     bool CollisionTest(Item *item) override;
 
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;

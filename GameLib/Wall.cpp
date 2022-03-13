@@ -7,7 +7,7 @@
 #include "Wall.h"
 
 
-Wall::Wall(Stadium *Stadium, Picture *Picture) : ItemPlatform(Stadium, Picture)
+Wall::Wall(Stadium *Stadium, std::shared_ptr<Picture> Picture) : ItemPlatform(Stadium, Picture)
 {
 
 }

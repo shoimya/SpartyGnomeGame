@@ -8,16 +8,14 @@
 #ifndef SPARTYGNOME_SNOW_H
 #define SPARTYGNOME_SNOW_H
 
-#include "Item.h"
+#include "ItemPlatform.h"
 #include "Visitor.h"
-class Snow : public Item{
+class Snow : public ItemPlatform{
 private:
-    Picture *picture;
 
 public:
-    Snow(Stadium *stadium, Picture *picture);
+    Snow(Stadium *stadium, std::shared_ptr<Picture> picture);
 
-    void Draw(std::shared_ptr<wxGraphicsContext> graphics);
     void Accept(Visitor* visitor);
 
     ~Snow();

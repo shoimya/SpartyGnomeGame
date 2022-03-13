@@ -21,8 +21,8 @@ void Picture::SetImage(const wstring &file)
         wstring filename = mStadium->GetImagesDirectory() + L"/" + file;
         mImage = make_shared<wxImage>(filename,wxBITMAP_TYPE_ANY);
         mEmpty = false;
+        mFile = filename;
     }
-    mFile = file;
 }
 
 Picture::~Picture()

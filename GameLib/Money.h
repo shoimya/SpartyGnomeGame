@@ -16,7 +16,7 @@ private:
     Picture* mPicture;
 
 public:
-    Money(Stadium* stadium, Picture *picture);
+    Money(Stadium* stadium, std::shared_ptr<Picture> picture);
 
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
     void Accept(Visitor* visitor) override {}

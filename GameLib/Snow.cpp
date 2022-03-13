@@ -6,13 +6,8 @@
 #include "pch.h"
 #include "Snow.h"
 
-Snow::Snow(Stadium* stadium, Picture* picture)
-        :Item(stadium, picture)
-{
-
-}
-
-void Snow::Draw(std::shared_ptr<wxGraphicsContext> graphics)
+Snow::Snow(Stadium* stadium, std::shared_ptr<Picture> picture)
+        :ItemPlatform(stadium, picture)
 {
 
 }
