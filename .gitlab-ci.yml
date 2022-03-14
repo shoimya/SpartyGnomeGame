@@ -1,4 +1,4 @@
-image : cmake
+image : gcc:9.2
 
 stages : 
   - build
