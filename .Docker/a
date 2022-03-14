@@ -1,8 +1,0 @@
-sudo gitlab-runner register -n \
-  --url https://git.cse.msu.edu/ \
-  --registration-token Jw7wv4bzRsgAmxvFXaqu\
-  --executor docker \
-  --description "My Ubuntu Runner" \
-  --docker-image "ubuntu:latest" \
-  --docker-privileged \
-  --docker-volumes "/certs/client"
