@@ -1,4 +1,4 @@
-image: gcc
+image : cmake
 
 stages : 
   - build
@@ -6,7 +6,8 @@ stages :
 build-project:
   stage : build
   script :
-     - which cmake
-     - cmake --version
+      - mkdir cmake-build-debug
+      - cd cmake-build-debug
+      - cmake .. && cmake --build . && make
 
 
