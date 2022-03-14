@@ -38,7 +38,7 @@ void StadiumView::Initialize(wxFrame* parent)
     mTimer.SetOwner(this);
     mStopWatch.Start();
 
-    mStadium.Load("GameLib/data/levels/level1.xml");
+    mStadium.Load("data/levels/level2.xml");
 }
 
 
