@@ -1,11 +1,12 @@
+image: gcc
+
 stages : 
   - build
 
 build-project:
   stage : build
   script :
-      - mkdir cmake-build-debug
-      - cd cmake-build-debug
-      - cmake .. && cmake --build . && make
+     - which cmake
+     - cmake --version
 
 
