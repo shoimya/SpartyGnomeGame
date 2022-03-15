@@ -20,7 +20,6 @@ private:
     Picture *picture;
 
 
-
 public:
     Gnome(Stadium *stadium, std::shared_ptr<Picture> picture);
 
@@ -43,11 +42,15 @@ public:
 
     void SetyVelocity(double speed);
 
+    void SetxVelocity(double speed);
+
     void MovingRight();
 
     void MovingLeft();
 
     void MovingUp();
+
+    void ResetX() {mV.SetX(0);}
 };
 
 #endif //SPARTYGNOME_GNOME_H

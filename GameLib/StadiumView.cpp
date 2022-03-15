@@ -11,7 +11,7 @@
 // #include <wx/graphics.h>
 using namespace std;
 
-const double Frame = 30.0;
+const double Frame = 30;
 /**
  * Initialize the stadium view class.
  * @param parent The parent window for this class
@@ -31,13 +31,14 @@ void StadiumView::Initialize(wxFrame* parent)
     Bind(wxEVT_PAINT, &StadiumView::OnPaint, this);
     Bind(wxEVT_TIMER,&StadiumView::Timer,this);
     Bind(wxEVT_KEY_DOWN,&StadiumView::OnKeyDown,this);
+    Bind(wxEVT_KEY_UP, &StadiumView::OnKeyUp, this);
 
     parent->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::OnFileSaveas,this,wxID_SAVEAS);
     parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &StadiumView::OnFileOpen, this, wxID_OPEN);
 
     mTimer.SetOwner(this);
     mStadium.Load("data/levels/level2.xml");
-    mTimer.Start(30);
+    mTimer.Start(Frame);
     mStopWatch.Start();
 
 }
@@ -50,6 +51,30 @@ void StadiumView::OnKeyDown(wxKeyEvent& event)
     {
     case WXK_SPACE:
         gnome->MovingUp();
+        break;
+
+    case WXK_LEFT:
+        gnome->MovingLeft();
+        break;
+
+    case WXK_RIGHT:
+        gnome->MovingRight();
+        break;
+    }
+}
+
+
+void StadiumView::OnKeyUp(wxKeyEvent& event)
+{
+    auto gnome = mStadium.GetGnome();
+    switch (event.GetKeyCode())
+    {
+    case WXK_LEFT:
+        gnome->ResetX();
+        break;
+
+    case WXK_RIGHT:
+        gnome->ResetX();
         break;
     }
 }

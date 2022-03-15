@@ -116,6 +116,21 @@ void Gnome::SetyVelocity(double speed)
 {
     if(mV.Y() == 0)
     {
-        mV.SetY(mV.Y()+speed);
+        mV.SetY(speed);
     }
+}
+
+void Gnome::SetxVelocity(double speed)
+{
+    mV.SetX(speed);
+}
+
+void Gnome::MovingRight()
+{
+    SetxVelocity(HorizontalSpeed);
+}
+
+void Gnome::MovingLeft()
+{
+    SetxVelocity(-HorizontalSpeed);
 }
