@@ -1,6 +1,6 @@
 /**
  * @file Item.h
- * @author Haoxiang Zhang
+ * @author Haoxiang Zhang, Shaojie Zhang
  *
  *
  */
@@ -104,6 +104,8 @@ public:
 
     virtual wxXmlNode *XmlSave(wxXmlNode *node);
     virtual void XmlLoad(wxXmlNode *node);
+
+    void SetPicture(const std::wstring &file);
 };
 
 #endif //SPARTYGNOME_ITEM_H

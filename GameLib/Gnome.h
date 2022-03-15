@@ -19,6 +19,7 @@ private:
 
     Picture *picture;
 
+    int mWalkMode = 1;
 
 public:
     Gnome(Stadium *stadium, std::shared_ptr<Picture> picture);

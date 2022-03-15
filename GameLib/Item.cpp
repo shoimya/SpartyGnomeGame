@@ -1,6 +1,6 @@
 /**
  * @file Item.cpp
- * @author Haoxiang Zhang
+ * @author Haoxiang Zhang, Shaojie Zhang
  */
 
 #include "pch.h"
@@ -61,6 +61,11 @@ void Item::Draw(std::shared_ptr<wxGraphicsContext> graphics, int scrollx)
     graphics->DrawBitmap(GetPicture()->AsBitmap(graphics),
             (int)GetX() - wid / 2 + scrollx, (int)GetY() - hit / 2,
             wid + 1, hit);
+}
+
+void Item::SetPicture(const wstring& file)
+{
+    mPicture->SetImage(file);
 }
 
 

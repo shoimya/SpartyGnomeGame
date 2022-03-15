@@ -105,6 +105,52 @@ void Gnome::Update(double elapsed)
     // Update the velocity and position
     mV = newV;
     SetLocation(newP.X(), newP.Y());
+
+
+    if (mV.X() < 0 && mV.Y() == 0)
+    {
+        if (mWalkMode == 1)
+        {
+            SetPicture(L"gnome-walk-left-1.png");
+            mWalkMode = 2;
+        }
+        else
+        {
+            SetPicture(L"gnome-walk-left-2.png");
+            mWalkMode = 1;
+        }
+    }
+    else if (mV.X() > 0 && mV.Y() == 0)
+    {
+        if (mWalkMode == 1)
+        {
+            SetPicture(L"gnome-walk-right-1.png");
+            mWalkMode = 2;
+        }
+        else
+        {
+            SetPicture(L"gnome-walk-right-2.png");
+            mWalkMode = 1;
+        }
+    }
+    else if (mV.X() != 0 && mV.Y() != 0)
+    {
+        if (mV.X() < 0)
+        {
+            SetPicture(L"gnome-walk-left-1.png");
+            mWalkMode = 1;
+        }
+        else
+        {
+            SetPicture(L"gnome-walk-right-1.png");
+            mWalkMode = 1;
+        }
+    }
+    else if (mV.X() == 0)
+    {
+        SetPicture(L"gnome.png");
+        mWalkMode = 1;
+    }
 }
 
 void Gnome::MovingUp()
