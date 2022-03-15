@@ -36,18 +36,20 @@ void StadiumView::Initialize(wxFrame* parent)
     parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &StadiumView::OnFileOpen, this, wxID_OPEN);
 
     mTimer.SetOwner(this);
+    mStadium.Load("data/levels/level2.xml");
+    mTimer.Start(30);
     mStopWatch.Start();
 
-    mStadium.Load("data/levels/level2.xml");
 }
 
 
 void StadiumView::OnKeyDown(wxKeyEvent& event)
 {
+    auto gnome = mStadium.GetGnome();
     switch (event.GetKeyCode())
     {
     case WXK_SPACE:
-        mStadium.GetGnome()->MovingUp();
+        gnome->MovingUp();
         break;
     }
 }

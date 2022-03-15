@@ -14,6 +14,8 @@ const double Gravity = 1000.0;
 /// Horizontal character speed in pixels per second
 const double HorizontalSpeed = 500.00;
 
+const double JumpSpeed = -800;
+
 /// Small value to ensure we do not stay in collision
 const double Epsilon = 0.01;
 
@@ -107,9 +109,13 @@ void Gnome::Update(double elapsed)
 
 void Gnome::MovingUp()
 {
-    auto collided = GetStadium() -> CollisionTest(this);
-    if(collided != nullptr)
+    SetyVelocity(JumpSpeed);
+}
+
+void Gnome::SetyVelocity(double speed)
+{
+    if(mV.Y() == 0)
     {
-        this->SetyVelocity();
+        mV.SetY(mV.Y()+speed);
     }
 }

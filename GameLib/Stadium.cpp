@@ -85,7 +85,7 @@ void Stadium::Update(double elapsed)
     {
         item->Update(elapsed);
     }
-    mGnome->Update(elapsed);
+//    mGnome->Update(elapsed);
 }
 
 /**
