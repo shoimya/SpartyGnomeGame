@@ -15,7 +15,7 @@ class Background : public Item{
 private:
     Picture* mPicture;
 public:
-    Background(Stadium* stadium, Picture* picture);
+    Background(Stadium* stadium, std::shared_ptr<Picture> picture);
     ~Background();
 
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;

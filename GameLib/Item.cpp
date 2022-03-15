@@ -13,7 +13,7 @@ using namespace std;
  * Constructor
  * @param stadium  The stadium this item is member of
  */
-Item::Item(Stadium *stadium, Picture *picture) : mStadium(stadium), mPicture(picture)
+Item::Item(Stadium *stadium, std::shared_ptr<Picture> picture) : mStadium(stadium), mPicture(picture)
 {
 
 }
@@ -29,9 +29,9 @@ Item::~Item()
 
 void Item::Update(double elapsed)
 {
-  Vector mV;
-  Vector newP = GetPos() + mV*elapsed;
-  SetLocation(newP);
+//  Vector mV;
+//  Vector newP = GetPos() + mV*elapsed;
+//  SetLocation(newP);
 }
 
 wxXmlNode* Item::XmlSave(wxXmlNode* node)
@@ -47,9 +47,20 @@ wxXmlNode* Item::XmlSave(wxXmlNode* node)
 
 void Item::XmlLoad(wxXmlNode* node)
 {
-    long x, y;
+    long x, y = 0;
+    wstring filename;
     node->GetAttribute(L"x", L"0").ToLong(&x);
     node->GetAttribute(L"y", L"0").ToLong(&y);
     mPos.Set(x,y);
 }
+
+void Item::Draw(std::shared_ptr<wxGraphicsContext> graphics, int scrollx)
+{
+    int wid = GetPicture()->GetWidth();
+    int hit = GetPicture()->GetHeight();
+    graphics->DrawBitmap(GetPicture()->AsBitmap(graphics),
+            (int)GetX() - wid / 2 + scrollx, (int)GetY() - hit / 2,
+            wid + 1, hit);
+}
+
 

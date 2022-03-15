@@ -3,6 +3,7 @@
 
 .idea
 cmake-build-*
+.github
 *.bak_*
 .DS_Store
 html

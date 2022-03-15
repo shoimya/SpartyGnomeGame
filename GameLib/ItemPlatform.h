@@ -15,8 +15,12 @@ class ItemPlatform : public Item{
 private:
     Picture* mPicture;
 
+    double mWidth = 0.0;
+    double mHeight = 0.0;
+
+
 public:
-    ItemPlatform(Stadium* stadium, Picture* picture);
+    ItemPlatform(Stadium* stadium, std::shared_ptr<Picture> picture);
     ~ItemPlatform();
     bool CollisionTest(Item *item) override;
 
@@ -24,8 +28,18 @@ public:
 
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
 
-    void Draw(std::shared_ptr<wxGraphicsContext> graphics, int scrollx);
+    void Draw(std::shared_ptr<wxGraphicsContext> graphics, double XOffSet, double yOffSet);
 
+    void XmlLoad(wxXmlNode *node, int xPos);
+
+    double GetImageHeight() const {return mHeight;}
+
+    double GetImageWidth() const {return mWidth;}
+
+
+    void SetHeight(double hei) {mHeight = hei;}
+
+    void SetWidth(double wid) {mWidth = wid;}
 };
 
 #endif //SPARTYGNOME_ITEMPLATFORM_H

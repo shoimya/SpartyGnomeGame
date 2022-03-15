@@ -18,8 +18,12 @@ private:
 
     Vector mV;
 
+    Picture *picture;
+
+
+
 public:
-    Gnome(Stadium *stadium, Picture *picture);
+    Gnome(Stadium *stadium, std::shared_ptr<Picture> picture);
 
     ~Gnome();
 
@@ -39,6 +43,12 @@ public:
     void Update(double elapsed) override;
 
     void SetyVelocity() {mV.SetY(JumpSpeed) ;}
+
+    void MovingRight();
+
+    void MovingLeft();
+
+    void MovingUp();
 };
 
 #endif //SPARTYGNOME_GNOME_H

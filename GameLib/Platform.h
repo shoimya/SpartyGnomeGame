@@ -12,10 +12,12 @@
 
 class Platform : public ItemPlatform{
 private:
-    Picture *mPicture;
 
 public:
-    Platform(Stadium *stadium, Picture *picture);
+    Platform(Stadium *stadium, std::shared_ptr<Picture> picture);
+    void XmlLoad(wxXmlNode* node) override;
+    void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
+
     ~Platform();
 
 };

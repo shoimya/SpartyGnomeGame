@@ -9,11 +9,14 @@
 #define SPARTYGNOME_MAINFRAME_H
 
 #include <wx/wx.h>
+
+class StadiumView;
 /**
  * The top-level (main) frame of the application
  */
 class MainFrame : public wxFrame {
 private:
+    StadiumView*  mStadiumView;
 
 public:
     void Initialize();

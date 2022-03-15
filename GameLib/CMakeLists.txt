@@ -1,13 +1,11 @@
 project(GameLib)
 
-set(SOURCE_FILES)
+set(SOURCE_FILES MainFrame.cpp MainFrame.h pch.h StadiumView.cpp StadiumView.h Item.cpp Item.h Stadium.cpp Stadium.h ids.h Vector.cpp Vector.h Picture.cpp Picture.h Platform.cpp Platform.h Door.cpp Door.h ScoreBoard.cpp ScoreBoard.h Level.cpp Level.h Background.cpp Background.h Gnome.cpp Gnome.h Visitor.cpp Visitor.h ItemPlatform.cpp ItemPlatform.h ItemPlatform.cpp ItemPlatform.h Money.cpp Money.h Stanley.cpp Stanley.h Wall.cpp Wall.h Grass.cpp Grass.h Snow.cpp Snow.h VisitorPlatform.cpp VisitorPlatform.h VisitorBackground.cpp VisitorBackground.h)
 
 set(wxBUILD_PRECOMP OFF)
 find_package(wxWidgets COMPONENTS core base xrc html xml REQUIRED)
 
 include(${wxWidgets_USE_FILE})
-
-set(SOURCE_FILES MainFrame.cpp MainFrame.h pch.h StadiumView.cpp StadiumView.h Item.cpp Item.h Stadium.cpp Stadium.h ids.h Vector.cpp Vector.h Picture.cpp Picture.h Platform.cpp Platform.h Door.cpp Door.h ScoreBoard.cpp ScoreBoard.h Level.cpp Level.h Background.cpp Background.h Gnome.cpp Gnome.h Visitor.cpp Visitor.h ItemPlatform.cpp ItemPlatform.h ItemPlatform.cpp ItemPlatform.h)
 
 add_library(${PROJECT_NAME} STATIC ${SOURCE_FILES})
 

@@ -3,13 +3,15 @@
  * @author SHOIMYA CHOWDHURY Shaojie Zhang
  */
 #include "pch.h"
-#include "StadiumView.h"
 #include <wx/dcbuffer.h>
 #include <wx/stdpaths.h>
-// #include <wx/graphics.h>
+
+#include "StadiumView.h"
 #include "ids.h"
+// #include <wx/graphics.h>
 using namespace std;
 
+const double Frame = 30.0;
 /**
  * Initialize the aquarium view class.
  * @param parent The parent window for this class
@@ -20,24 +22,23 @@ void StadiumView::Initialize(wxFrame* parent)
 
     // Determine where images are stored
 
-    wxStandardPaths& standardPaths = wxStandardPaths::Get();
-    std::wstring resourcesDir = standardPaths.GetResourcesDir().ToStdWstring();
-    mStadium.SetImagesDirectory(resourcesDir);
+//    wxStandardPaths& standardPaths = wxStandardPaths::Get();
+//    std::wstring resourcesDir = standardPaths.GetResourcesDir().ToStdWstring();
+//    mStadium.SetImagesDirectory(resourcesDir);
 
     SetBackgroundStyle(wxBG_STYLE_PAINT);
 
     Bind(wxEVT_PAINT, &StadiumView::OnPaint, this);
+    Bind(wxEVT_TIMER,&StadiumView::Timer,this);
 
     parent->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::OnFileSaveas,this,wxID_SAVEAS);
-    // for the levels
-    parent->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::Level1,this, IDM_ADDLEVEL1);
-    parent->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::Level2,this, IDM_ADDLEVEL2);
-    parent->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::Level3,this, IDM_ADDLEVEL3);
-    parent->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::Level0,this, IDM_ADDLEVEL0);
-    
+    parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &StadiumView::OnFileOpen, this, wxID_OPEN);
+
+
     mTimer.SetOwner(this);
     mStopWatch.Start();
 
+    mStadium.Load("data/levels/level2.xml");
 }
 
 
@@ -74,12 +75,18 @@ void StadiumView::OnPaint(wxPaintEvent& event)
 
 
     auto size = GetClientSize();
+
     auto graphics = std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create(dc));
+
+    graphics->PushState();
+    mStadium.OnDraw(graphics,size.GetWidth(),size.GetHeight());
+
 //    mGame.OnDraw(graphics, size.GetWidth(), size.GetHeight());
 //    auto size = GetClientSize();
 //    auto graphics = std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create(dc));
 //    mStadium.OnDraw(graphics, size.GetWidth(), size.GetHeight());
 
+    graphics->PopState();
 
 }
 
@@ -120,6 +127,39 @@ void StadiumView::OnFileOpen(wxCommandEvent& event)
     Refresh();
 }
 
+void StadiumView::AddMenus(wxFrame *mainFrame,wxMenuBar *menu, wxMenu* levelMenu)
+{
+    levelMenu->Append(IDM_ADDLEVEL0,L"Level0",L"load level0",wxITEM_CHECK);
+    levelMenu->Append(IDM_ADDLEVEL1,L"Level1",L"load level1",wxITEM_CHECK);
+    levelMenu->Append(IDM_ADDLEVEL2,L"Level2",L"load level2",wxITEM_CHECK);
+    levelMenu->Append(IDM_ADDLEVEL3,L"Level3",L"load level3",wxITEM_CHECK);
+    mainFrame->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::Level0,this,IDM_ADDLEVEL0);
+    mainFrame->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::Level1,this,IDM_ADDLEVEL1);
+    mainFrame->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::Level2,this,IDM_ADDLEVEL2);
+    mainFrame->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::Level3,this,IDM_ADDLEVEL3);
+
+}
+
+void StadiumView::AddLevelMenuOption(wxFrame* mainFrame, wxMenu* menu, int id,std::wstring text, std::wstring help)
+{
+}
+
+void StadiumView::Level0(wxCommandEvent& event)
+{
+    mStadium.Load(0);
+}
+void StadiumView::Level1(wxCommandEvent& event)
+{
+    mStadium.Load(1);
+}
+void StadiumView::Level2(wxCommandEvent& event)
+{
+    mStadium.Load(2);
+}
+void StadiumView::Level3(wxCommandEvent& event)
+{
+    mStadium.Load(3);
+}
 
 
 /**
@@ -150,6 +190,7 @@ void StadiumView::Level3(wxCommandEvent& event)
 {
 
 }
+
 
 
 

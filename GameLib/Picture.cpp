@@ -16,14 +16,13 @@ Picture::Picture(Stadium* stadium)
 }
 void Picture::SetImage(const wstring &file)
 {
-    if (!file.empty())
+    if(!file.empty())
     {
         wstring filename = mStadium->GetImagesDirectory() + L"/" + file;
-        mImage = make_shared<wxImage>(file,wxBITMAP_TYPE_ANY);
+        mImage = make_shared<wxImage>(filename,wxBITMAP_TYPE_ANY);
         mEmpty = false;
+        mFile = filename;
     }
-
-    mFile = file;
 }
 
 Picture::~Picture()

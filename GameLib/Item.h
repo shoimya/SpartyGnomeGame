@@ -10,7 +10,6 @@
 #ifndef SPARTYGNOME_ITEM_H
 #define SPARTYGNOME_ITEM_H
 
-
 #include <string>
 #include <memory>
 
@@ -29,10 +28,10 @@ private:
     Vector mPos;
 
     /// Picture of this item
-    Picture *mPicture = nullptr;
+    std::shared_ptr<Picture> mPicture;
 
 protected:
-    Item(Stadium *stadium, Picture *picture);
+    Item(Stadium *stadium, std::shared_ptr<Picture> picture);
 
 public:
     /// How much we offset drawing the tile to the left of the center
@@ -40,9 +39,6 @@ public:
 
     /// How much we offset drawing the tile above the center
     const static int OffsetDown = 32;
-
-    ///  Default constructor (disabled)
-    Item() = delete;
 
     ///  Copy constructor (disabled)
     Item(const Item &) = delete;
@@ -71,7 +67,7 @@ public:
      */
     virtual int GetHeight() const {return mPicture->GetHeight();}
 
-    virtual Picture* GetPicture() {return mPicture;}
+    virtual std::shared_ptr<Picture> GetPicture() {return mPicture;}
 
     /**  Set the item location
     * @param x X location
@@ -83,6 +79,8 @@ public:
     virtual void SetLocation(const Vector &v) { mPos.Set(v); }
 
     virtual void Draw(std::shared_ptr<wxGraphicsContext> graphics) = 0;
+
+    virtual void Draw(std::shared_ptr<wxGraphicsContext> graphics, int scrollx);
 
 //    virtual wxXmlNode *XmlSave(wxXmlNode *node){return nullptr;}
 //    virtual void XmlLoad(wxXmlNode *node){}
