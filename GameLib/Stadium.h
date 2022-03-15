@@ -25,7 +25,7 @@ private:
     const std::wstring mLevelDirectory = L"data/levels";
 
     /// Game area height in virtual pixels
-    const static int mHeight = 1024;
+    const static int Height = 1024;
 
     /// Game area height in virtual pixels
     double mScale = 0;
@@ -37,8 +37,6 @@ private:
     std::vector<std::shared_ptr<Item>> mItems;
 
     std::map<std::wstring,std::shared_ptr<Picture>> mMapPictures;
-
-    double mScale;
 
 public:
     enum GameMode {begin = 0, end = 1, progress = 2, loss = 3, win = 4};

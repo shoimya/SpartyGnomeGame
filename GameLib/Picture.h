@@ -21,8 +21,6 @@ private:
 
     std::shared_ptr<wxImage> mImage = nullptr;
 
-    bool mEmpty = true;
-
     std::wstring mFile = L"";
 
     std::wstring mImagePos = L"";
