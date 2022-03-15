@@ -71,7 +71,8 @@ void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, 
             }
         }
     }
-     graphics->PopState();
+    mGnome->Draw(graphics);
+    graphics->PopState();
 }
 
 /**
@@ -84,6 +85,7 @@ void Stadium::Update(double elapsed)
     {
         item->Update(elapsed);
     }
+    mGnome->Update(elapsed);
 }
 
 /**

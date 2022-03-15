@@ -28,8 +28,6 @@ private:
 public:
     void Initialize(wxFrame* parent);
 
-    void OnKeyUp(wxKeyEvent& event);
-
     void OnFileSaveas(wxCommandEvent& event);
 
     void OnFileOpen(wxCommandEvent& event);
@@ -47,6 +45,8 @@ public:
     void AddMenus(wxFrame* mainFrame, wxMenuBar* menu, wxMenu* levelMenu);
 
     void AddLevelMenuOption(wxFrame* mainFrame, wxMenu* menu, int id, std::wstring text, std::wstring help);
+
+    void OnKeyDown(wxKeyEvent& event);
 };
 
 #endif //SPARTYGNOME_STADIUMVIEW_H

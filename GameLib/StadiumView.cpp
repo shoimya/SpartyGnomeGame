@@ -13,7 +13,7 @@ using namespace std;
 
 const double Frame = 30.0;
 /**
- * Initialize the aquarium view class.
+ * Initialize the stadium view class.
  * @param parent The parent window for this class
  */
 void StadiumView::Initialize(wxFrame* parent)
@@ -30,10 +30,10 @@ void StadiumView::Initialize(wxFrame* parent)
 
     Bind(wxEVT_PAINT, &StadiumView::OnPaint, this);
     Bind(wxEVT_TIMER,&StadiumView::Timer,this);
+    Bind(wxEVT_KEY_DOWN,&StadiumView::OnKeyDown,this);
 
     parent->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::OnFileSaveas,this,wxID_SAVEAS);
     parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &StadiumView::OnFileOpen, this, wxID_OPEN);
-
 
     mTimer.SetOwner(this);
     mStopWatch.Start();
@@ -42,12 +42,12 @@ void StadiumView::Initialize(wxFrame* parent)
 }
 
 
-void StadiumView::OnKeyUp(wxKeyEvent& event)
+void StadiumView::OnKeyDown(wxKeyEvent& event)
 {
     switch (event.GetKeyCode())
     {
     case WXK_SPACE:
-        //gnome -> SetyVelocity;
+        mStadium.GetGnome()->MovingUp();
         break;
     }
 }
@@ -72,7 +72,6 @@ void StadiumView::OnPaint(wxPaintEvent& event)
     mTime = newTime;
 
     mStadium.Update(elapsed);
-
 
     auto size = GetClientSize();
 

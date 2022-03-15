@@ -15,7 +15,6 @@
 #include "Picture.h"
 #include "Level.h"
 
-
 class Stadium {
 private:
     void XmlItem(wxXmlNode *node);

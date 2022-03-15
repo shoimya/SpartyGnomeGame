@@ -105,6 +105,11 @@ void Gnome::Update(double elapsed)
     SetLocation(newP.X(), newP.Y());
 }
 
-
-
-
+void Gnome::MovingUp()
+{
+    auto collided = GetStadium() -> CollisionTest(this);
+    if(collided != nullptr)
+    {
+        this->SetyVelocity();
+    }
+}
