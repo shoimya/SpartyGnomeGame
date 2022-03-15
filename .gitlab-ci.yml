@@ -1,4 +1,6 @@
-image : gcc:9.2
+build:
+    image: ubuntu
+    script: sudo apt-get install -y cmake gcc g++ libwxgtk3.0-gtk3-dev
 
 stages : 
   - build
