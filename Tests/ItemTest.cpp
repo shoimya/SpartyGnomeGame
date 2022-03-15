@@ -16,7 +16,7 @@ using namespace std;
 class ItemMock : public Item
 {
 public:
-    ItemMock(Stadium *stadium, Picture *picture) : Item(stadium, picture)
+    ItemMock(Stadium *stadium, std::shared_ptr<Picture> picture) : Item(stadium, picture)
     {
 
     }
@@ -35,15 +35,14 @@ public:
 TEST(ItemTest, constructor)
 {
     Stadium *stadium;
-    Picture *pics;
-    ItemMock(stadium,pics);
+    auto pic = make_shared<Picture>(stadium);
+    ItemMock(stadium,pic);
 }
 TEST(ItemTest, SetLocation)
 {
-
-    Stadium stadium;
-    Picture pics(&stadium);
-    ItemMock item(&stadium,&pics);
+    Stadium *stadium;
+    auto pic = make_shared<Picture>(stadium);
+    ItemMock item(stadium,pic);
     ASSERT_EQ(0,item.GetX());
     ASSERT_EQ(0,item.GetY());
 

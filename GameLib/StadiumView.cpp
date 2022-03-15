@@ -155,10 +155,10 @@ void StadiumView::OnFileOpen(wxCommandEvent& event)
 
 void StadiumView::AddMenus(wxFrame *mainFrame,wxMenuBar *menu, wxMenu* levelMenu)
 {
-    levelMenu->Append(IDM_ADDLEVEL0,L"Level0",L"load level0",wxITEM_CHECK);
-    levelMenu->Append(IDM_ADDLEVEL1,L"Level1",L"load level1",wxITEM_CHECK);
-    levelMenu->Append(IDM_ADDLEVEL2,L"Level2",L"load level2",wxITEM_CHECK);
-    levelMenu->Append(IDM_ADDLEVEL3,L"Level3",L"load level3",wxITEM_CHECK);
+    levelMenu->Append(IDM_ADDLEVEL0,L"Level0",L"load level0");
+    levelMenu->Append(IDM_ADDLEVEL1,L"Level1",L"load level1");
+    levelMenu->Append(IDM_ADDLEVEL2,L"Level2",L"load level2");
+    levelMenu->Append(IDM_ADDLEVEL3,L"Level3",L"load level3");
     mainFrame->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::Level0,this,IDM_ADDLEVEL0);
     mainFrame->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::Level1,this,IDM_ADDLEVEL1);
     mainFrame->Bind(wxEVT_COMMAND_MENU_SELECTED,&StadiumView::Level2,this,IDM_ADDLEVEL2);
