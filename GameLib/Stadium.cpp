@@ -34,6 +34,7 @@ Stadium::Stadium()
     auto initialPicture = make_shared<Picture>(this);
     mMapPictures = {{L"i000",initialPicture}};
 
+
 }
 
 /**
@@ -137,12 +138,13 @@ void Stadium::Load(const wxString& filename)
     if(mMapPictures[L"i000"]->Empty())
     {
         mMapPictures[L"i000"]->SetImage(L"gnome.png");
+        // create mGnome
+        mGnome = make_shared<Gnome>(this,mMapPictures[L"i000"]);
     }
-
-
-    // create mGnome
-    mGnome = make_shared<Gnome>(this,mMapPictures[L"i000"]);
     mGnome->SetLocation(vec);
+    mItems.push_back(mGnome);
+
+
 
 
 //    bool mImageLoad = false;
@@ -167,7 +169,6 @@ void Stadium::Load(const wxString& filename)
                XmlItem(subChild);
            }
        }
-        mItems.push_back(mGnome);
     }
 
 }
@@ -231,7 +232,6 @@ void Stadium::XmlItem(wxXmlNode* node)
         auto picture3 = mMapPictures[L"i0053"];
         if(id == L"i003")
         {
-
             picture1 = mMapPictures[L"i0031"];
             picture2 = mMapPictures[L"i0032"];
             picture3 = mMapPictures[L"i0033"];
@@ -432,16 +432,16 @@ void Stadium::Load(int level)
     wstring path;
     switch (level){
         case 0:
-            path = L"GameLib/data/levels/level0.xml";
+            path = L"data/levels/level0.xml";
             break;
         case 1:
-            path = L"GameLib/data/levels/level1.xml";
+            path = L"data/levels/level1.xml";
             break;
         case 2:
-            path = L"GameLib/data/levels/level2.xml";
+            path = L"data/levels/level2.xml";
             break;
         case 3:
-            path = L"GameLib/data/levels/level3.xml";
+            path = L"data/levels/level3.xml";
             break;
     default:
         break;
