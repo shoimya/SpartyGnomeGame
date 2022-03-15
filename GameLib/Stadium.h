@@ -25,7 +25,10 @@ private:
     const std::wstring mLevelDirectory = L"data/levels";
 
     /// Game area height in virtual pixels
-    const static int Height = 1024;
+    const static int mHeight = 1024;
+
+    /// Game area height in virtual pixels
+    double mScale = 0;
 
     std::shared_ptr<Gnome> mGnome;
 

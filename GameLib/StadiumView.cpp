@@ -171,7 +171,25 @@ void StadiumView::Timer(wxTimerEvent& event)
     Refresh();
 }
 
+void StadiumView::Level0(wxCommandEvent& event)
+{
 
+}
+
+void StadiumView::Level1(wxCommandEvent& event)
+{
+
+}
+
+void StadiumView::Level2(wxCommandEvent& event)
+{
+
+}
+
+void StadiumView::Level3(wxCommandEvent& event)
+{
+
+}
 
 
 

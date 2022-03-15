@@ -19,7 +19,9 @@ private:
 
     bool mEmpty = true;
 
-    std::shared_ptr<wxImage> mImage;
+    std::shared_ptr<wxImage> mImage = nullptr;
+
+    bool mEmpty = true;
 
     std::wstring mFile = L"";
 

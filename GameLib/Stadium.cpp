@@ -44,7 +44,7 @@ Stadium::Stadium()
  */
 void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, double height)
 {
-   ////     Automatic Scaling
+    ////     Automatic Scaling
 
 
 ///     Draw in virtual pixels on the graphics context

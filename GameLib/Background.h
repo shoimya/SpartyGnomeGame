@@ -13,7 +13,7 @@
 
 class Background : public Item{
 private:
-
+    Picture* mPicture;
 public:
     Background(Stadium* stadium, std::shared_ptr<Picture> picture);
     ~Background();
