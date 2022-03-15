@@ -1,15 +1,17 @@
-build:
-    image: ubuntu
-    script: sudo apt-get install -y cmake gcc g++ libwxgtk3.0-gtk3-dev
-
-stages : 
+stages :
+  - pre-build
   - build
 
-build-project:
+
+init:
+  stage: pre-build
+  image: ubuntu
+  script: sudo apt-get install -y cmake gcc g++ libwxgtk3.0-gtk3-dev
+
+
+project:
   stage : build
   script :
-      - mkdir cmake-build-debug
-      - cd cmake-build-debug
-      - cmake .. && cmake --build . && make
-
-
+    - mkdir cmake-build-debug
+    - cd cmake-build-debug
+    - cmake .. && cmake --build . && make
