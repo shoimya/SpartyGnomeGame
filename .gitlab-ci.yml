@@ -2,12 +2,10 @@ stages :
   - pre-build
   - build
 
-
 init:
   stage: pre-build
-  image: ubuntu
-  script: apt update && apt-get install -y cmake gcc g++ libwxgtk3.0-gtk3-dev
-
+  image: ubuntu-latest
+  script: apt update && apt-get install -y cmake libwxgtk3.0-gtk3-dev
 
 project:
   stage : build
