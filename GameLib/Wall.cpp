@@ -1,10 +1,15 @@
 /**
  * @file Wall.cpp
- * @author Haoxiang Zhang
+ * @author Haoxiang Zhang shoimya chowdhury
  */
 
 #include "pch.h"
 #include "Wall.h"
+using namespace std;
+
+
+const wstring filename1 = L"wall1.png";
+const wstring filename2 = L"wall2.png";
 
 
 Wall::Wall(Stadium *Stadium, std::shared_ptr<Picture> Picture) : ItemPlatform(Stadium, Picture)
@@ -21,12 +26,9 @@ void Wall::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     ItemPlatform::Draw(graphics);
 }
 
-void Wall::Draw(std::shared_ptr<wxGraphicsContext> graphics, double XOffSet, double yOffSet)
-{
-    ItemPlatform::Draw(graphics, XOffSet, yOffSet);
-}
 
-void Wall::XmlLoad(wxXmlNode* node, int xPos)
+
+void Wall::XmlLoad(wxXmlNode* node)
 {
     long x, y = 0;
     double hit, wid = 0.0;
