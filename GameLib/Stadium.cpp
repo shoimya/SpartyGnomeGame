@@ -261,11 +261,15 @@ void Stadium::XmlItem(wxXmlNode* node)
         {
             auto picture = mMapPictures[L"i007"];
         }
-        auto item = make_shared<Wall>(this,picture);
-        double pos = 0;
-        node->GetAttribute(L"width").ToDouble(&pos);
-        item->XmlLoad(node);
-        AddItem(item);
+        double pos = 0;//now for height
+        node->GetAttribute(L"height").ToDouble(&pos);
+        double pos_ = pos/32; //no. times to loop
+        for(int i = 0;i<= pos_; i++)
+        {
+            auto item = make_shared<ItemPlatform>(this,picture);
+            item->XmlLoady(node,i);
+            AddItem(item);
+        }
 
     }
         // wall2
