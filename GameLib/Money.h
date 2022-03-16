@@ -1,6 +1,6 @@
 /**
  * @file Money.h
- * @author Haoxiang Zhang
+ * @author Haoxiang Zhang SHOIMYA CHOWDHURY
  *
  *
  */
@@ -15,13 +15,19 @@ class Money : public Item {
 private:
     Picture* mPicture;
 
+    double mWidth = 0.0;
+    double mHeight = 0.0;
 public:
     Money(Stadium* stadium, std::shared_ptr<Picture> picture);
 
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
+    void XmlLoad(wxXmlNode *node) override;
     void Accept(Visitor* visitor) override {}
     ~Money();
 
+    void SetHeight(double hei) {mHeight = hei;}
+
+    void SetWidth(double wid) {mWidth = wid;}
 
 };
 
