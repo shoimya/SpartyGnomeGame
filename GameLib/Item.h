@@ -72,7 +72,7 @@ public:
     /**  Set the item location
     * @param x X location
     * @param y Y location */
-    virtual void SetLocation(int x, int y) { mPos.Set(x,y); }
+    virtual void SetLocation(double x, double y) { mPos.Set(x,y); }
 
     /**  Set the item location
     * @param vector Vector */

@@ -71,17 +71,17 @@ void ItemPlatform::Draw(std::shared_ptr<wxGraphicsContext> graphics, double XOff
 
 }
 
-void ItemPlatform::XmlLoad(wxXmlNode* node, int xPos)
+void ItemPlatform::XmlLoad(wxXmlNode* node, double xPos)
 {
-    long x, y = 0;
+    double x, y = 0;
     double hit, wid = 0.0;
-    node->GetAttribute(L"x", L"0").ToLong(&x);
-    node->GetAttribute(L"y", L"0").ToLong(&y);
+    node->GetAttribute(L"x", L"0").ToDouble(&x);
+    node->GetAttribute(L"y", L"0").ToDouble(&y);
     node->GetAttribute(L"width").ToDouble(&wid);
     node->GetAttribute(L"height").ToDouble(&hit);
     SetWidth(wid);
     SetHeight(hit);
 
-    SetLocation(x + xPos*32,y);
+    SetLocation(x + 32*xPos,y);
 }
 

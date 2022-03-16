@@ -194,27 +194,28 @@ void Stadium::XmlItem(wxXmlNode* node)
     }
     else if (id == L"i003")
     {
-
         auto picture1 = mMapPictures[L"i0031"];
         auto picture2 = mMapPictures[L"i0032"];
         auto picture3 = mMapPictures[L"i0033"];
-        auto item = make_shared<ItemPlatform>(this,picture1);
-        auto item1 = make_shared<ItemPlatform>(this,picture2);
-        auto item2 = make_shared<ItemPlatform>(this,picture3);
-//        item = make_shared<Grass>(this,picture);
+        auto item = make_shared<Grass>(this,picture1);
+        auto item2 =  make_shared<Grass>(this,picture3);
         double pos = 0;
         node->GetAttribute(L"width").ToDouble(&pos);
         pos = pos / 32 - 2;
         pos = pos / 2;
-        item->XmlLoad(node,-pos);
+        // [0] [1] [2] [3] [4] [5]
+        // 1.5
+        item->XmlLoad(node, -pos-0.5);
         AddItem(item);
-        for(int i = -pos + 1;i<pos;i++)
-        {
-            auto item1 = make_shared<ItemPlatform>(this,picture2);
-            item1->XmlLoad(node,i);
+
+        double i = -pos+0.5;
+        while (i < pos+0.5) {
+            auto item1 = make_shared<Grass>(this, picture2);
+            item1->XmlLoad(node, i);
             AddItem(item1);
+            i++;
         }
-        item2->XmlLoad(node,pos);
+        item2->XmlLoad(node, pos+0.5);
         AddItem(item2);
 
 
@@ -224,35 +225,32 @@ void Stadium::XmlItem(wxXmlNode* node)
 
 //        item = make_shared<Snow>(this,&picture);
     }
-    else if (id == L"i005" || id == L"i003")
+    else if (id == L"i005")
     {
         // platform
         auto picture1 = mMapPictures[L"i0051"];
         auto picture2 = mMapPictures[L"i0052"];
         auto picture3 = mMapPictures[L"i0053"];
-        if(id == L"i003")
-        {
-            picture1 = mMapPictures[L"i0031"];
-            picture2 = mMapPictures[L"i0032"];
-            picture3 = mMapPictures[L"i0033"];
-
-        }
-
         auto item = make_shared<ItemPlatform>(this,picture1);
         auto item2 =  make_shared<ItemPlatform>(this,picture3);
         double pos = 0;
         node->GetAttribute(L"width").ToDouble(&pos);
         pos = pos / 32 - 2;
         pos = pos / 2;
-        item->XmlLoad(node,-pos);
+
+            // [0] [1] [2] [3] [4] [5]
+            // 1.5
+        item->XmlLoad(node, -pos-0.5);
         AddItem(item);
-        for(int i = -pos + 1;i<pos;i++)
-        {
-            auto item1 = make_shared<ItemPlatform>(this,picture2);
-            item1->XmlLoad(node,i);
-            AddItem(item1);
+
+        double i = -pos+0.5;
+        while (i < pos+0.5) {
+                auto item1 = make_shared<ItemPlatform>(this, picture2);
+                item1->XmlLoad(node, i);
+                AddItem(item1);
+                i++;
         }
-        item2->XmlLoad(node,pos);
+        item2->XmlLoad(node, pos+0.5);
         AddItem(item2);
     }
     else if (id == L"i006" || id == L"1007")
