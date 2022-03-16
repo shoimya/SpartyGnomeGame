@@ -253,10 +253,19 @@ void Stadium::XmlItem(wxXmlNode* node)
         item2->XmlLoad(node, pos+0.5);
         AddItem(item2);
     }
-    else if (id == L"i006" || id == L"1007")
+    else if (id == L"i006" || id == L"i007")
     {
         // wall1
-//        item = make_shared<Wall>(this,&picture);
+        auto picture = mMapPictures[L"i006"];
+        if (id == L"i007")
+        {
+            auto picture = mMapPictures[L"i007"];
+        }
+        auto item = make_shared<Wall>(this,picture);
+        double pos = 0;
+        node->GetAttribute(L"width").ToDouble(&pos);
+        item->XmlLoad(node);
+        AddItem(item);
 
     }
         // wall2
@@ -376,13 +385,17 @@ void Stadium::XmlPicture(wxXmlNode* node)
 //        mMapPictures[5] = &p3;
         // platform
 //    }
-    /*
+   
     else if (id == L"i006" || id == L"1007")
     {
         // wall1
+        auto imageName = node->GetAttribute(L"image").ToStdWstring();
+        picture->SetImage(imageName);
+        mMapPictures[id] = picture;
 
     }
         // wall2
+         /*
     else if (id == L"i008")
     {
         // money100
