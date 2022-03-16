@@ -31,6 +31,7 @@ public:
     void Draw(std::shared_ptr<wxGraphicsContext> graphics, double XOffSet, double yOffSet);
 
     void XmlLoad(wxXmlNode *node, double xPos);
+    void XmlLoady(wxXmlNode *node, double yPos);
 
     double GetImageHeight() const {return mHeight;}
 
