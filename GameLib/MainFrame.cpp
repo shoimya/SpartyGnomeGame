@@ -63,7 +63,8 @@ void MainFrame::Initialize()
  */
 void MainFrame::OnExit(wxCommandEvent& event)
 {
-    Close(true);
+    mStadiumView->Stop();
+    Destroy();
 }
 
 /**

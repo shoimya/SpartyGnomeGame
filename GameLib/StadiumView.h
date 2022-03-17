@@ -49,6 +49,8 @@ public:
     void OnKeyDown(wxKeyEvent& event);
 
     void OnKeyUp(wxKeyEvent& event);
+
+    void Stop() {mTimer.Stop();}
 };
 
 #endif //SPARTYGNOME_STADIUMVIEW_H
