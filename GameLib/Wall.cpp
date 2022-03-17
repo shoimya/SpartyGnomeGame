@@ -23,12 +23,19 @@ Wall::~Wall(){
 
 void Wall::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
-    ItemPlatform::Draw(graphics);
+    if(!GetPicture()->Empty()) {
+        int wid = GetPicture()->GetWidth();
+        int hit = GetPicture()->GetHeight();
+        graphics->DrawBitmap(GetPicture()->AsBitmap(graphics),
+                (int) GetX()-wid , (int) GetY()-hit,
+                wid+1, hit );
+    }
+
 }
 
 
 
-void Wall::XmlLoad(wxXmlNode* node)
+void Wall::XmlLoady(wxXmlNode* node, double yPos)
 {
     long x, y = 0;
     double hit, wid = 0.0;
@@ -38,5 +45,5 @@ void Wall::XmlLoad(wxXmlNode* node)
     node->GetAttribute(L"height").ToDouble(&hit);
     SetWidth(wid);
     SetHeight(hit);
-    SetLocation(x,y);
+    SetLocation(x,y+32*yPos);
 }
