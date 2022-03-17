@@ -11,7 +11,7 @@
 // #include <wx/graphics.h>
 using namespace std;
 
-const double Frame = 1;
+const double Frame = 10;
 /**
  * Initialize the stadium view class.
  * @param parent The parent window for this class
@@ -37,7 +37,8 @@ void StadiumView::Initialize(wxFrame* parent)
     parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &StadiumView::OnFileOpen, this, wxID_OPEN);
 
     mTimer.SetOwner(this);
-    mStadium.Load("data/levels/level2.xml");
+    mStadium.Load("data/levels/level1.xml");
+    mStadium.SetLevelNum(1);
     mTimer.Start(Frame);
     mStopWatch.Start();
 

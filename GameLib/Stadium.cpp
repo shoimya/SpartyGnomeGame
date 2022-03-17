@@ -268,18 +268,20 @@ void Stadium::XmlItem(wxXmlNode* node)
         auto picture = mMapPictures[L"i006"];
         if (id == L"i007")
         {
-            auto picture = mMapPictures[L"i007"];
+            picture = mMapPictures[L"i007"];
         }
         double pos = 0;//now for height
         node->GetAttribute(L"height").ToDouble(&pos);
-        double pos_ = pos/32; //no. times to loop
-        for(int i = 0;i<= pos_; i++)
+        pos = pos / 32;
+        pos = pos / 2;
+        double i = -pos+0.5;
+        while (i<=pos-0.5)
         {
             auto item = make_shared<ItemPlatform>(this,picture);
             item->XmlLoady(node,i);
             AddItem(item);
+            i++;
         }
-
     }
         // wall2
     else if (id == L"i008")
@@ -420,7 +422,7 @@ void Stadium::XmlPicture(wxXmlNode* node)
         // platform
 //    }
    
-    else if (id == L"i006" || id == L"1007")
+    else if (id == L"i006" || id == L"i007")
     {
         // wall1
         auto imageName = node->GetAttribute(L"image").ToStdWstring();

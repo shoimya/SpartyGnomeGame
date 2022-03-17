@@ -22,7 +22,9 @@ void VisitorDoor::VisitDoor(Door* door)
 {
     auto stadium =  door->GetStadium();
     int level = stadium->GetLevelNum();
-    stadium->Load(level+1);
+    level++;
+    stadium->SetLevelNum(level);
+    stadium->Load(level);
 }
 
 
