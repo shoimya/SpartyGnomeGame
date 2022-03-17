@@ -39,17 +39,3 @@ void Money::XmlLoad(wxXmlNode* node)
     node->GetAttribute(L"y", L"0").ToLong(&y);
     SetLocation(x,y);
 }
-
-bool Money::CollisionTest(Item* item)
-{
-    double dx = item->GetX() - GetX();
-    double dy = item->GetY() - GetY();
-    double D = sqrt(GetX()*GetX() + GetY()*GetY());
-    double distance = sqrt(dx * dx + dy * dy);
-    if (distance <= D)
-    {
-        return true;
-    }
-
-    return false;
-}

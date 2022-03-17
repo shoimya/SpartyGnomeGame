@@ -7,10 +7,10 @@
 #include "Level.h"
 
 using namespace std;
-const wstring filename0 = L"level0.xml";
-const wstring filename1 = L"level1.xml";
-const wstring filename2 = L"level2.xml";
-const wstring filename3 = L"level3.xml";
+const wstring filename0 = L"data/levels/level0.xml";
+const wstring filename1 = L"data/levels/level1.xml";
+const wstring filename2 = L"data/levels/level2.xml";
+const wstring filename3 = L"data/levels/level3.xml";
 
 Level::Level(Stadium* stadium)
 {

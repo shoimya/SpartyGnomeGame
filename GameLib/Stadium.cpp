@@ -17,6 +17,7 @@
 #include "Grass.h"
 #include "VisitorDoor.h"
 #include "VisitorMoney.h"
+#include "Villain.h"
 
 using namespace std;
 const std::wstring ImagesDirectory = L"data/images";
@@ -241,11 +242,9 @@ void Stadium::XmlItem(wxXmlNode* node)
         auto picture3 = mMapPictures[L"i0053"];
         if (id == L"i004")
         {
-
             picture1 = mMapPictures[L"i0041"];
             picture2 = mMapPictures[L"i0042"];
             picture3 = mMapPictures[L"i0043"];
-
         }
         auto item = make_shared<ItemPlatform>(this,picture1);
         auto item2 =  make_shared<ItemPlatform>(this,picture3);
@@ -277,7 +276,7 @@ void Stadium::XmlItem(wxXmlNode* node)
         {
             picture = mMapPictures[L"i007"];
         }
-        double pos = 0;//now for height
+        double pos = 0;
         node->GetAttribute(L"height").ToDouble(&pos);
         pos = pos / 32;
         pos = pos / 2;
@@ -295,7 +294,7 @@ void Stadium::XmlItem(wxXmlNode* node)
     {
         // money100
         auto picture = mMapPictures[L"i008"];
-        auto item = make_shared<Money>(this,picture,100);
+        auto item = make_shared<Money>(this, picture,100);
         item->XmlLoad(node);
         AddItem(item);
     }
@@ -303,7 +302,7 @@ void Stadium::XmlItem(wxXmlNode* node)
     {
         // money 1000
         auto picture = mMapPictures[L"i009"];
-        auto item = make_shared<Money>(this,picture,1000);
+        auto item = make_shared<Money>(this, picture,1000);
         item->XmlLoad(node);
         AddItem(item);
     }
@@ -327,12 +326,20 @@ void Stadium::XmlItem(wxXmlNode* node)
     else if (id == L"i012")
     {
         // UofM
+        auto picture = mMapPictures[L"i012"];
+        auto item = make_shared<Villain>(this,picture);
+        item->XmlLoad(node);
+        AddItem(item);
+
 
     }
     else if (id == L"i013")
     {
         // wisc
-
+        auto picture = mMapPictures[L"i013"];
+        auto item = make_shared<Villain>(this,picture);
+        item->XmlLoad(node);
+        AddItem(item);
     }
 
 /*    if(item != nullptr)
@@ -464,18 +471,23 @@ void Stadium::XmlPicture(wxXmlNode* node)
         mMapPictures[id] = picture;
 
     }
-    /*
+
     else if (id == L"i012")
     {
         // UofM
+
+      auto imageName = node->GetAttribute(L"image").ToStdWstring();
+        picture->SetImage(imageName);
+        mMapPictures[id] = picture;
 
     }
     else if (id == L"i013")
     {
         // wisc
-
+        auto imageName = node->GetAttribute(L"image").ToStdWstring();
+        picture->SetImage(imageName);
+        mMapPictures[id] = picture;
     }
-     */
 }
 
 void Stadium::AddItem(const std::shared_ptr<Item>& item)

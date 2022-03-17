@@ -30,7 +30,7 @@ public:
 
     void XmlLoad(wxXmlNode *node) override;
 
-    void Update(double elapsed);
+    void Update(double elapsed) override;
 
     void SetInitialLocation(double x, double y) { mPosInit.Set(x,y); }
 };
