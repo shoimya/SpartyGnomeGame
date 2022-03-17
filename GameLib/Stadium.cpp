@@ -16,6 +16,7 @@
 #include "Stanley.h"
 #include "Grass.h"
 #include "VisitorDoor.h"
+#include "Villain.h"
 
 using namespace std;
 const std::wstring ImagesDirectory = L"data/images";
@@ -325,12 +326,18 @@ void Stadium::XmlItem(wxXmlNode* node)
     else if (id == L"i012")
     {
         // UofM
-
+        auto picture = mMapPictures[L"i012"];
+        auto item = make_shared<Villain>(this,picture);
+        item->XmlLoad(node);
+        AddItem(item);
     }
     else if (id == L"i013")
     {
         // wisc
-
+        auto picture = mMapPictures[L"i013"];
+        auto item = make_shared<Villain>(this,picture);
+        item->XmlLoad(node);
+        AddItem(item);
     }
 
 /*    if(item != nullptr)
@@ -466,18 +473,20 @@ void Stadium::XmlPicture(wxXmlNode* node)
         mMapPictures[id] = picture;
 
     }
-    /*
     else if (id == L"i012")
     {
         // UofM
-
+        auto imageName = node->GetAttribute(L"image").ToStdWstring();
+        picture->SetImage(imageName);
+        mMapPictures[id] = picture;
     }
     else if (id == L"i013")
     {
         // wisc
-
+        auto imageName = node->GetAttribute(L"image").ToStdWstring();
+        picture->SetImage(imageName);
+        mMapPictures[id] = picture;
     }
-     */
 }
 
 void Stadium::AddItem(const std::shared_ptr<Item>& item)
