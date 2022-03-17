@@ -3,7 +3,7 @@ project(Tests)
 set(TEST_FILES
         gtest_main.cpp
         ItemTest.cpp
-        )
+        GnomeTest.cpp GnomeTest.h)
 
 # Get Google Tests
 include(FetchContent)
