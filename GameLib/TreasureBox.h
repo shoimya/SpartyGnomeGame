@@ -16,6 +16,10 @@ private:
 
 public:
 
+    TreasureBox(Stadium* stadium, std::shared_ptr<Picture> picture);
+    ~TreasureBox();
+
+    void Draw(std::shared_ptr<wxGraphicsContext> graphics);
 };
 
 #endif //SPARTYGNOME_TREASUREBOX_H
