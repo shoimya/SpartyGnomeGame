@@ -33,8 +33,6 @@ public:
     void Update(double elapsed);
 
     void SetInitialLocation(double x, double y) { mPosInit.Set(x,y); }
-
-//    void SetLocation(double x, double y) { mPos.Set(x,y); }
 };
 
 #endif //SPARTYGNOME_VILLAIN_H

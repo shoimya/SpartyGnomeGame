@@ -50,15 +50,15 @@ void Villain::XmlLoad(wxXmlNode* node)
  */
 void Villain::Update(double elapsed)
 {
-    auto collided = GetStadium() -> CollisionTest(this);
-    if(collided != GetStadium()->GetGnome())
-    {
-        auto next = GetY()+(mSpeedY*elapsed);
-        if (next<=mPosInit.Y() && next>=mPosInit.Y()-300) {
-            SetLocation(mPosInit.X(), next);
-        }
-        else {
-            mSpeedY = -mSpeedY;
-        }
+//    auto collided = GetStadium() -> CollisionTest(this);
+//    if(collided != GetStadium()->GetGnome())
+//    {
+    auto next = GetY()+(mSpeedY*elapsed);
+    if (next<=mPosInit.Y() && next>=mPosInit.Y()-300) {
+        SetLocation(mPosInit.X(), next);
     }
+    else {
+        mSpeedY = -mSpeedY;
+    }
+//    }
 }
