@@ -37,6 +37,8 @@ private:
 
     std::map<std::wstring,std::shared_ptr<Picture>> mMapPictures;
 
+    int mLevelNum = 0;
+
 public:
     enum GameMode {begin = 0, end = 1, progress = 2, loss = 3, win = 4};
 
@@ -71,6 +73,10 @@ public:
     void Load(int level);
 
     std::shared_ptr<Gnome> GetGnome() {return mGnome;}
+
+    void SetLevelNum(int num){mLevelNum = num;}
+
+    int GetLevelNum(){return mLevelNum;}
 };
 
 #endif //SPARTYGNOME_STADIUM_H
