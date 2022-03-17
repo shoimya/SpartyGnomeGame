@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level width="8192" height="1024" start-y="796" start-x="788">
     <declarations>
-        <background id="i002" image="backgroundColorSnow.png"/>
+        <background id="i002" image="backgroundColorGrass.png"/>
         <platform id="i005" left-image="platformIndustrial_059.png" mid-image="platformIndustrial_060.png" right-image="platformIndustrial_061.png"/>
         <door id="i011" image="door.png"/>
     </declarations>
