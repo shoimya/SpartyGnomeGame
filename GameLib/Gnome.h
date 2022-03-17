@@ -52,6 +52,8 @@ public:
     void MovingUp();
 
     void ResetX() {mV.SetX(0);}
+
+    Vector GetVelocity() {return mV;}
 };
 
 #endif //SPARTYGNOME_GNOME_H
