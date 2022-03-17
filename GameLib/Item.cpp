@@ -69,3 +69,19 @@ void Item::SetPicture(const wstring& file)
 }
 
 
+
+bool Item::HitTest(int x, int y)
+{
+    double wid = GetPicture()->GetWidth();
+    double hit = GetPicture()->GetHeight();
+
+    double testX = x - GetX() + wid / 2;
+    double testY = y - GetY() + hit / 2;
+
+    if (testX < 0 || testY < 0 || testX >= wid || testY >= hit)
+    {
+        return false;
+    }
+
+    return !GetPicture()->GetImage()->IsTransparent((int)testX, (int)testY);
+}

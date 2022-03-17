@@ -69,6 +69,8 @@ public:
       * @return Get the image position
       */
      std::wstring GetImagePos(){return mImagePos;}
+
+     std::shared_ptr<wxImage> GetImage(){return mImage;}
 };
 
 #endif //SPARTYGNOME_PICTURE_H

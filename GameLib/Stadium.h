@@ -31,13 +31,20 @@ private:
 
     std::shared_ptr<Gnome> mGnome;
 
-    std::shared_ptr<Level> mLevel = nullptr;
+    std::shared_ptr<Level> mLevel;
 
     std::vector<std::shared_ptr<Item>> mItems;
 
     std::map<std::wstring,std::shared_ptr<Picture>> mMapPictures;
 
-    int mLevelNum = 0;
+//    int mLevelNum = 0;
+
+    int mValue= 0;
+
+    int mGameMode;
+
+    double mTime = 0;
+
 
 public:
     enum GameMode {begin = 0, end = 1, progress = 2, loss = 3, win = 4};
@@ -74,9 +81,43 @@ public:
 
     std::shared_ptr<Gnome> GetGnome() {return mGnome;}
 
-    void SetLevelNum(int num){mLevelNum = num;}
+    void SetLevelNum(int num)
+    {
+        if (num > 3) num = 3;
+        mLevel->SetLevel(num);
+    }
 
-    int GetLevelNum(){return mLevelNum;}
+    int GetLevelNum() {return mLevel->GetLevel();}
+
+    std::shared_ptr<Item> HitTest(int x, int y);
+
+    void SetValue(int value) {mValue = value;}
+
+    int GetValue() const {return mValue;}
+
+    void SetGameMode(int num){ mGameMode = num;}
+
+    int GetGameMode() const {return mGameMode;}
+
+    class ScoreBoard
+    {
+    public:
+        ScoreBoard(Stadium* stadium) : mStadium(stadium) {}
+
+        int GetScore(){return mScore;}
+
+        void SetScore(int score) {mScore = score;}
+
+    private:
+        Stadium* mStadium;
+
+        int mScore = 0;
+    };
+
+private:
+    ScoreBoard mScoreBoard = ScoreBoard(this);
+
+    void Delete(std::shared_ptr<Item> item);
 };
 
 #endif //SPARTYGNOME_STADIUM_H

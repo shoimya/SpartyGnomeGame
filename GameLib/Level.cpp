@@ -8,7 +8,6 @@
 
 using namespace std;
 const wstring filename0 = L"level0.xml";
-
 const wstring filename1 = L"level1.xml";
 const wstring filename2 = L"level2.xml";
 const wstring filename3 = L"level3.xml";
@@ -20,20 +19,24 @@ Level::Level(Stadium* stadium)
 
 std::wstring Level::Level0()
 {
+    SetLevel(level0);
     return filename0;
 }
 
 std::wstring Level::Level1()
 {
+    SetLevel(level1);
     return filename1;
 }
 std::wstring Level::Level2()
 {
+    SetLevel(level2);
     return filename2;
 }
 
 std::wstring Level::Level3()
 {
+    SetLevel(level3);
     return filename3;
 }
 

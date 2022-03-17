@@ -13,21 +13,19 @@
 
 class Money : public Item {
 private:
-    Picture* mPicture;
 
-    double mWidth = 0.0;
-    double mHeight = 0.0;
+    int mValue = 0;
+
 public:
-    Money(Stadium* stadium, std::shared_ptr<Picture> picture);
+    Money(Stadium* stadium, std::shared_ptr<Picture> picture, int value);
 
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
     void XmlLoad(wxXmlNode *node) override;
-    void Accept(Visitor* visitor) override {}
+    void Accept(Visitor* visitor) override {visitor->VisitMoney(this);}
+
+    void SetValue(int value){mValue = value;}
+    int GetValue(){return mValue;}
     ~Money();
-
-    void SetHeight(double hei) {mHeight = hei;}
-
-    void SetWidth(double wid) {mWidth = wid;}
 
 };
 

@@ -30,6 +30,8 @@ private:
     /// Picture of this item
     std::shared_ptr<Picture> mPicture;
 
+    /// Collision Status
+
 protected:
     Item(Stadium *stadium, std::shared_ptr<Picture> picture);
 
@@ -105,7 +107,10 @@ public:
     virtual wxXmlNode *XmlSave(wxXmlNode *node);
     virtual void XmlLoad(wxXmlNode *node);
 
-    void SetPicture(const std::wstring &file);
+    virtual void SetPicture(const std::wstring &file);
+
+    virtual bool HitTest(int x, int y);
+
 };
 
 #endif //SPARTYGNOME_ITEM_H

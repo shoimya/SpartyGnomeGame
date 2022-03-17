@@ -12,6 +12,7 @@ class ItemPlatform;
 class Gnome;
 class Background;
 class Door;
+class Money;
 
 class Visitor {
 private:
@@ -41,6 +42,14 @@ public:
      * @param door Door we are visiting
      */
     virtual void VisitDoor(Door* door){}
+
+    /**
+    * Visit platform object
+    * @param platform Platform we are visiting
+    */
+    virtual void VisitMoney(Money* money){}
+
+
 };
 
 #endif //SPARTYGNOME_VISITOR_H

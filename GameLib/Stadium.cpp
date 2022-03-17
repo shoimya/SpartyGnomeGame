@@ -16,6 +16,7 @@
 #include "Stanley.h"
 #include "Grass.h"
 #include "VisitorDoor.h"
+#include "VisitorMoney.h"
 
 using namespace std;
 const std::wstring ImagesDirectory = L"data/images";
@@ -34,7 +35,8 @@ Stadium::Stadium()
 //    mGnome->SetLocation(x,y);
     auto initialPicture = make_shared<Picture>(this);
     mMapPictures = {{L"i000",initialPicture}};
-
+    mGameMode = begin;
+    mLevel = make_shared<Level>(this);
 
 }
 
@@ -83,10 +85,16 @@ void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, 
  */
 void Stadium::Update(double elapsed)
 {
+    /*
+    if(mGameMode == end)
+    {
+    }
+    */
     for (auto item : mItems)
     {
         item->Update(elapsed);
     }
+    mTime += elapsed;
 //    mGnome->Update(elapsed);
 }
 
@@ -99,6 +107,8 @@ std::shared_ptr<Item> Stadium::CollisionTest(Item *item)
 {
 
     VisitorDoor visitorDoor;
+    VisitorMoney visitorMoney;
+    vector<shared_ptr<Item>> toRemove;
     for(auto i : mItems)
     {
         if(i->CollisionTest(item))
@@ -147,9 +157,6 @@ void Stadium::Load(const wxString& filename)
     mGnome = make_shared<Gnome>(this,mMapPictures[L"i000"]);
     mGnome->SetLocation(vec);
     mItems.push_back(mGnome);
-
-
-
 
 //    bool mImageLoad = false;
 
@@ -288,22 +295,17 @@ void Stadium::XmlItem(wxXmlNode* node)
     {
         // money100
         auto picture = mMapPictures[L"i008"];
-        double pos = 0;//now for height
-        node->GetAttribute(L"height").ToDouble(&pos);
-        auto item = make_shared<Money>(this,picture);
+        auto item = make_shared<Money>(this,picture,100);
         item->XmlLoad(node);
         AddItem(item);
     }
     else if (id == L"i009")
     {
         // money 1000
-        auto picture = mMapPictures[L"i008"];
-        double pos = 0;//now for height
-        node->GetAttribute(L"height").ToDouble(&pos);
-        auto item = make_shared<Money>(this,picture);
+        auto picture = mMapPictures[L"i009"];
+        auto item = make_shared<Money>(this,picture,1000);
         item->XmlLoad(node);
         AddItem(item);
-
     }
     else if (id == L"i010")
     {
@@ -401,8 +403,6 @@ void Stadium::XmlPicture(wxXmlNode* node)
         picture->SetImagePos(L"left");
         picture1->SetImagePos(L"mid");
         picture2->SetImagePos(L"right");
-
-
     }
 //    else if (id == L"i005")
 //    {
@@ -454,13 +454,11 @@ void Stadium::XmlPicture(wxXmlNode* node)
         // stanley
 //        item = make_shared<Stanley>(this,&picture);
 
-
     }
      */
     else if (id == L"i011")
     {
         // door
-
         auto imageName = node->GetAttribute(L"image").ToStdWstring();
         picture->SetImage(imageName);
         mMapPictures[id] = picture;
@@ -491,17 +489,21 @@ void Stadium::Load(int level)
     wstring path;
     switch (level){
         case 0:
-            path = L"data/levels/level0.xml";
+            path = mLevel->Level0();
             break;
+
         case 1:
-            path = L"data/levels/level1.xml";
+            path = mLevel->Level1();
             break;
+
         case 2:
-            path = L"data/levels/level2.xml";
+            path = mLevel->Level2();
             break;
+
         case 3:
-            path = L"data/levels/level3.xml";
+            path = mLevel->Level3();
             break;
+
     default:
         break;
     }
@@ -511,4 +513,22 @@ void Stadium::Load(int level)
     }
     SetLevelNum(level);
     Load(path);
+}
+
+std::shared_ptr<Item> Stadium::HitTest(int x, int y)
+{
+    for (auto i = mItems.rbegin(); i!=mItems.rend(); i++) {
+        if ((*i)->HitTest(x, y)) {
+            return *i;
+        }
+    }
+    return nullptr;
+}
+
+void Stadium::Delete(shared_ptr<Item> item)
+{
+    if(const auto loc = find(mItems.begin(),mItems.end(),item); loc != mItems.end())
+    {
+        mItems.erase(loc);
+    }
 }
