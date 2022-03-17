@@ -19,7 +19,8 @@ private:
     double mHeight = 0.0;
 public:
     Money(Stadium* stadium, std::shared_ptr<Picture> picture);
-
+    bool CollisionTest(Item *item) override;
+    
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
     void XmlLoad(wxXmlNode *node) override;
     void Accept(Visitor* visitor) override {}
