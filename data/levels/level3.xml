@@ -25,13 +25,12 @@
         <background id="i001" x="6656" y="512"/>
         <background id="i001" x="7680" y="512"/>
 <!--        this is main platform-->
-        <platform id="i004" x="768" y="944" width="960" height="32"/>
-<!--        this is villian platform-->
+        <platform id="i004" x="775" y="944" width="1010" height="32"/>
         <platform id="i005" x="1120" y="432" width="256" height="32"/>
 <!--        adding new villian-->
-        <villain id="i013" x="1167" y="853"/>
-        <villain id="i012" x="1367" y="853"/>
-        <villain id="i013" x="1567" y="853"/>
+        <villain id="i012" x="1100" y="853"/>
+
+        <villain id="i013" x="1700" y="853"/>
 <!--        for new villians-->
         <platform id="i005" x="1376" y="432" width="256" height="32"/>
         <platform id="i005" x="1632" y="432" width="256" height="32"/>
