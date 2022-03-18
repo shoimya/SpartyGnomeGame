@@ -16,7 +16,6 @@
 #include "Stanley.h"
 #include "Grass.h"
 #include "VisitorDoor.h"
-#include "VisitorMoney.h"
 #include "Villain.h"
 
 using namespace std;
@@ -104,20 +103,40 @@ void Stadium::Update(double elapsed)
  * @param item
  * @return
  */
-std::shared_ptr<Item> Stadium::CollisionTest(Item *item)
+Item* Stadium::CollisionTest(Item *item)
 {
 
     VisitorDoor visitorDoor;
-    VisitorMoney visitorMoney;
-    vector<shared_ptr<Item>> toRemove;
+    vector<Item*> toRemove;
+
     for(auto i : mItems)
     {
+        if(i == mGnome)
+        {
+            continue;
+        }
         if(i->CollisionTest(item))
         {
             i->Accept(&visitorDoor);
-            return i;
+            if(i->GetStatus())
+            {
+                toRemove.push_back(i);
+            }
+            if(i->GetPhysical())
+            {
+                return i;
+            }
         }
     }
+
+    if(!toRemove.empty())
+    {
+        for(auto i: toRemove)
+        {
+            Delete(i);
+        }
+    }
+
     return nullptr;
 }
 
@@ -155,7 +174,7 @@ void Stadium::Load(const wxString& filename)
         mMapPictures[L"i000"]->SetImage(L"gnome.png");
         // create mGnome
     }
-    mGnome = make_shared<Gnome>(this,mMapPictures[L"i000"]);
+    mGnome = new Gnome (this,mMapPictures[L"i000"]);
     mGnome->SetLocation(vec);
     mItems.push_back(mGnome);
 
@@ -200,7 +219,7 @@ void Stadium::XmlItem(wxXmlNode* node)
     {
         auto picture = mMapPictures[id];
         // backgroundForest
-        auto item = make_shared<Background>(this, picture);
+        auto item = new Background (this, picture);
         item->XmlLoad(node);
         AddItem(item);
     }
@@ -209,8 +228,8 @@ void Stadium::XmlItem(wxXmlNode* node)
         auto picture1 = mMapPictures[L"i0031"];
         auto picture2 = mMapPictures[L"i0032"];
         auto picture3 = mMapPictures[L"i0033"];
-        auto item = make_shared<Grass>(this,picture1);
-        auto item2 =  make_shared<Grass>(this,picture3);
+        auto item = new Grass(this,picture1);
+        auto item2 =  new Grass(this,picture3);
         double pos = 0;
         node->GetAttribute(L"width").ToDouble(&pos);
         pos = pos / 32 - 2;
@@ -222,7 +241,7 @@ void Stadium::XmlItem(wxXmlNode* node)
 
         double i = -pos+0.5;
         while (i < pos+0.5) {
-            auto item1 = make_shared<Grass>(this, picture2);
+            auto item1 = new Grass(this, picture2);
             item1->XmlLoad(node, i);
             AddItem(item1);
             i++;
@@ -246,8 +265,8 @@ void Stadium::XmlItem(wxXmlNode* node)
             picture2 = mMapPictures[L"i0042"];
             picture3 = mMapPictures[L"i0043"];
         }
-        auto item = make_shared<ItemPlatform>(this,picture1);
-        auto item2 =  make_shared<ItemPlatform>(this,picture3);
+        auto item = new ItemPlatform(this,picture1);
+        auto item2 =  new ItemPlatform(this,picture3);
         double pos = 0;
         node->GetAttribute(L"width").ToDouble(&pos);
         pos = pos / 32 - 2;
@@ -260,7 +279,7 @@ void Stadium::XmlItem(wxXmlNode* node)
 
         double i = -pos+0.5;
         while (i < pos+0.5) {
-                auto item1 = make_shared<ItemPlatform>(this, picture2);
+                auto item1 = new ItemPlatform(this, picture2);
                 item1->XmlLoad(node, i);
                 AddItem(item1);
                 i++;
@@ -283,7 +302,7 @@ void Stadium::XmlItem(wxXmlNode* node)
         double i = -pos+0.5;
         while (i<=pos-0.5)
         {
-            auto item = make_shared<ItemPlatform>(this,picture);
+            auto item = new ItemPlatform(this,picture);
             item->XmlLoady(node,i);
             AddItem(item);
             i++;
@@ -294,7 +313,8 @@ void Stadium::XmlItem(wxXmlNode* node)
     {
         // money100
         auto picture = mMapPictures[L"i008"];
-        auto item = make_shared<Money>(this, picture,100);
+        auto item = new Money(this, picture,100);
+        item->SetPhysical(false);
         item->XmlLoad(node);
         AddItem(item);
     }
@@ -302,7 +322,8 @@ void Stadium::XmlItem(wxXmlNode* node)
     {
         // money 1000
         auto picture = mMapPictures[L"i009"];
-        auto item = make_shared<Money>(this, picture,1000);
+        auto item = new Money(this, picture,1000);
+        item->SetPhysical(false);
         item->XmlLoad(node);
         AddItem(item);
     }
@@ -318,7 +339,7 @@ void Stadium::XmlItem(wxXmlNode* node)
     {
         // door
         auto picture = mMapPictures[L"i011"];
-        auto item = make_shared<Door>(this,picture);
+        auto item = new Door(this,picture);
         item->XmlLoad(node);
         AddItem(item);
 
@@ -327,7 +348,7 @@ void Stadium::XmlItem(wxXmlNode* node)
     {
         // UofM
         auto picture = mMapPictures[L"i012"];
-        auto item = make_shared<Villain>(this,picture);
+        auto item = new Villain(this,picture);
         item->XmlLoad(node);
         AddItem(item);
 
@@ -337,7 +358,7 @@ void Stadium::XmlItem(wxXmlNode* node)
     {
         // wisc
         auto picture = mMapPictures[L"i013"];
-        auto item = make_shared<Villain>(this,picture);
+        auto item = new Villain(this,picture);
         item->XmlLoad(node);
         AddItem(item);
     }
@@ -490,7 +511,7 @@ void Stadium::XmlPicture(wxXmlNode* node)
     }
 }
 
-void Stadium::AddItem(const std::shared_ptr<Item>& item)
+void Stadium::AddItem(Item* item)
 {
     mItems.push_back(item);
 }
@@ -527,7 +548,7 @@ void Stadium::Load(int level)
     Load(path);
 }
 
-std::shared_ptr<Item> Stadium::HitTest(int x, int y)
+Item* Stadium::HitTest(int x, int y)
 {
     for (auto i = mItems.rbegin(); i!=mItems.rend(); i++) {
         if ((*i)->HitTest(x, y)) {
@@ -537,10 +558,12 @@ std::shared_ptr<Item> Stadium::HitTest(int x, int y)
     return nullptr;
 }
 
-void Stadium::Delete(shared_ptr<Item> item)
+void Stadium::Delete(Item* item)
 {
-    if(const auto loc = find(mItems.begin(),mItems.end(),item); loc != mItems.end())
+    auto loc = std::find(mItems.begin(),mItems.end(),item);
+    if(loc != mItems.end())
     {
         mItems.erase(loc);
     }
+
 }

@@ -11,6 +11,7 @@
 #include "Vector.h"
 
 class Stadium;
+class Item;
 
 class Level {
 private:
@@ -29,6 +30,7 @@ public:
 
     int GetLevel() const {return mLevelNum;}
     void SetLevel(int level){mLevelNum = level;}
+
     ~Level();
 
 

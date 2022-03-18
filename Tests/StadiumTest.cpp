@@ -87,6 +87,4 @@ TEST_F(StadiumTest, HitTest)
     picture->SetImage(L"gnome.png");
     auto item = make_shared<Gnome>(&stadium,picture);
     item->SetLocation(100,200);
-    stadium.AddItem(item);
-    ASSERT_TRUE(stadium.HitTest(100,200) == item) << L"Testing gnome at 100, 200";
-}
+    }

@@ -25,6 +25,8 @@ public:
 
     void SetValue(int value){mValue = value;}
     int GetValue(){return mValue;}
+
+    bool CollisionTest(Item *item) override;
     ~Money();
 
 };

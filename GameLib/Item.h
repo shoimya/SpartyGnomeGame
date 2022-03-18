@@ -31,6 +31,10 @@ private:
     std::shared_ptr<Picture> mPicture;
 
     /// Collision Status
+    bool mStatus = false;
+
+    /// Physical status
+    bool mPhysical = true;
 
 protected:
     Item(Stadium *stadium, std::shared_ptr<Picture> picture);
@@ -110,6 +114,14 @@ public:
     virtual void SetPicture(const std::wstring &file);
 
     virtual bool HitTest(int x, int y);
+
+    virtual void SetStatus(bool status){mStatus = status;}
+
+    virtual bool GetStatus(){return mStatus;}
+
+    virtual bool GetPhysical(){return mPhysical;}
+
+    virtual void SetPhysical(bool physical){mPhysical = physical;}
 
 };
 

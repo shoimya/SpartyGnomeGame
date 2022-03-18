@@ -11,7 +11,7 @@
 // #include <wx/graphics.h>
 using namespace std;
 
-const double Frame = 10;
+const double Frame = 30;
 /**
  * Initialize the stadium view class.
  * @param parent The parent window for this class
