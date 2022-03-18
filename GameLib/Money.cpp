@@ -43,24 +43,23 @@ void Money::XmlLoad(wxXmlNode* node)
 bool Money::CollisionTest(Item* item)
 {
     // Border for the item
-    auto itemLeft = item->GetX() - 32 / 2;
-    auto itemRight = item->GetX() + 32 / 2;
-    auto itemTop = item->GetY() - 32 / 2;
-    auto itemBottom = item->GetY() + 32 / 2;
+    auto itemLeft = item->GetX() - (double)item->GetWidth() / 2;
+    auto itemRight = item->GetX() + (double)item->GetWidth() / 2;
+    auto itemTop = item->GetY() - (double)item->GetHeight() / 2;
+    auto itemBottom = item->GetY() + (double)item->GetHeight() / 2;
 
     // For us
-    //
-    auto Left = GetX() - 32 / 2;
-    auto Right = GetX() + 32 / 2;
-    auto Top = GetY() - 32 / 2;
-    auto Bottom = GetY() + 32 / 2;
+    auto ourLeft = GetX() - (double)GetWidth() / 2;
+    auto ourRight = GetX() + (double)GetWidth() / 2;
+    auto ourTop = GetY() - (double)GetHeight() / 2;
+    auto ourBottom = GetY() + (double)GetHeight() / 2;
 
     // Test for all of the non-collision cases,
     // cases where there is a gap between the two items
-    if ( Right < itemLeft ||  // Completely to the left
-         Left > itemRight ||  // Completely to the right
-         Top > itemBottom ||  // Completely below
-         Bottom < itemTop)
+    if (ourRight < itemLeft ||  // Completely to the left
+            ourLeft > itemRight ||  // Completely to the right
+            ourTop > itemBottom ||  // Completely below
+            ourBottom < itemTop)    // Completely above
     {
         return false;
     }
