@@ -13,6 +13,7 @@
         <villain id="i012" image="UofM.png"/>
         <villain id="i013" image="wisc.png"/>
         <door id="i011" image="door.png"/>
+        <t-chest id="i014" image="treasureChest.png"/>
     </declarations>
     <items>
 <!--        setting the background-->
@@ -71,8 +72,11 @@
         <platform id="i005" x="3840" y="560" width="260" height="32"/>
         <villain id="i012" x="4070" y="853"/>
         <money id="i009" x="3392" y="848"/>
-        <money id="i008" x="3392" y="624"/>
         <money id="i009" x="3520" y="848"/>
+
+<!--        <t-chest id="i014" x="3640" y="848"/>-->
+
+        <money id="i008" x="3392" y="624"/>
         <money id="i008" x="3520" y="624"/>
         <money id="i008" x="3232" y="368"/>
         <money id="i008" x="3328" y="304"/>
@@ -80,15 +84,14 @@
         <money id="i009" x="3584" y="304"/>
         <money id="i009" x="3712" y="368"/>
 
-<!--        <tuition-up id="i010" x="4023" y="821"/>-->
+
         <platform id="i004" x="4416" y="784" width="192" height="32"/>
 
         <platform id="i005" x="4528" y="432" width="224" height="32"/>
         <wall id="i006" x="4432" y="352" width="32" height="128"/>
-        <money id="i008" x="4480" y="528"/>
-        <money id="i008" x="4480" y="176"/>
-        <money id="i008" x="4576" y="528"/>
-        <money id="i008" x="4576" y="176"/>
+        <money id="i009" x="4480" y="528"/>
+        <money id="i009" x="4576" y="528"/>
+        <tuition-up id="i010" x="4545" y="176"/>
         <wall id="i006" x="4624" y="352" width="32" height="128"/>
 
         <platform id="i004" x="4672" y="688" width="192" height="32"/>
