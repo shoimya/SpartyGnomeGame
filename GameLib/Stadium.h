@@ -107,6 +107,14 @@ public:
 
     int GetGameMode() const { return mGameMode; }
 
+    void AddScore(int value);
+
+    int GetScore();
+
+    double GetTime(){return mTime;}
+
+    void TuitionUp();
+
     class ScoreBoard {
     public:
         ScoreBoard(Stadium* stadium)

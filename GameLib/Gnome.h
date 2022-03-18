@@ -21,6 +21,8 @@ private:
 
     int mWalkMode = 1;
 
+    Vector mInitPos;
+
 public:
     Gnome(Stadium *stadium, std::shared_ptr<Picture> picture);
 
@@ -52,6 +54,17 @@ public:
     void MovingUp();
 
     void ResetX() {mV.SetX(0);}
+
+    void Reset();
+
+    void SetInitPosition(Vector vec)
+    {
+        SetLocation(vec);
+        mInitPos = vec;
+    }
+
+
+    Vector GetInitPos(){return mInitPos;}
 
     Vector GetVelocity() {return mV;}
 };

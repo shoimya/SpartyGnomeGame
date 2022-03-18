@@ -61,23 +61,24 @@ void Gnome::Update(double elapsed)
 
     if (collided != nullptr)
     {
-        if (newV.Y() > 0)
-        {
-            // We are falling, stop at the collision point
-            newP.SetY(collided->GetY() - collided->GetHeight() / 2 - GetHeight() / 2 - Epsilon);
-        }
-        else
-        {
-            // We are rising, stop at the collision point
-            newP.SetY(collided->GetY() + collided->GetHeight() / 2 + GetHeight() / 2 + Epsilon);
-        }
+        if(collided->GetPhysical() && GetPhysical()) {
 
-        // If we collide, we cancel any velocity
-        // in the Y direction
-        newV.SetY(0);
+            if (newV.Y()>0) {
+                // We are falling, stop at the collision point
+                newP.SetY(collided->GetY()-collided->GetHeight()/2-GetHeight()/2-Epsilon);
+            }
+            else {
+                // We are rising, stop at the collision point
+                newP.SetY(collided->GetY()+collided->GetHeight()/2+GetHeight()/2+Epsilon);
+            }
+
+            // If we collide, we cancel any velocity
+            // in the Y direction
+            newV.SetY(0);
+        }
 
     }
-    // 
+    //
     // Try updating the X location
     //
     SetLocation(newP.X(), p.Y());
@@ -85,21 +86,22 @@ void Gnome::Update(double elapsed)
     collided = GetStadium()->CollisionTest(this);
     if (collided != nullptr)
     {
-        if (newV.X() > 0)
-        {
-            // We are moving to the right, stop at the collision point
-            newP.SetX(collided->GetX() - collided->GetWidth() / 2 - GetWidth() / 2 - Epsilon);
-        }
-        else
-        {
-            // We are moving to the left, stop at the collision point
-            newP.SetX(collided->GetX() + collided->GetWidth() / 2 + GetWidth() / 2 + Epsilon);
-        }
+        if(GetPhysical() && collided->GetPhysical()) {
+
+            if (newV.X()>0) {
+                // We are moving to the right, stop at the collision point
+                newP.SetX(collided->GetX()-collided->GetWidth()/2-GetWidth()/2-Epsilon);
+            }
+            else {
+                // We are moving to the left, stop at the collision point
+                newP.SetX(collided->GetX()+collided->GetWidth()/2+GetWidth()/2+Epsilon);
+            }
 
 
-        // If we collide, we cancel any velocity
-        // in the X direction
-        newV.SetX(0);
+            // If we collide, we cancel any velocity
+            // in the X direction
+            newV.SetX(0);
+        }
     }
 
     // Update the velocity and position
@@ -179,4 +181,12 @@ void Gnome::MovingRight()
 void Gnome::MovingLeft()
 {
     SetxVelocity(-HorizontalSpeed);
+}
+
+void Gnome::Reset()
+{
+
+    SetPhysical(true);
+    SetLocation(GetInitPos());
+
 }

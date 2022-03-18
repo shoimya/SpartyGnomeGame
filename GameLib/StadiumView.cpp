@@ -12,6 +12,8 @@
 using namespace std;
 
 const double Frame = 30;
+/// Maximum amount of time to allow for elapsed
+const double MaxElapsed = 0.050;
 /**
  * Initialize the stadium view class.
  * @param parent The parent window for this class
@@ -99,7 +101,21 @@ void StadiumView::OnPaint(wxPaintEvent& event)
     auto elapsed = (double)(newTime - mTime) * 0.001;
     mTime = newTime;
 
-    mStadium.Update(elapsed);
+    //
+    // Prevent tunnelling
+    //
+    while(elapsed > MaxElapsed)
+    {
+        mStadium.Update(MaxElapsed);
+        elapsed -= MaxElapsed;
+    }
+    if(elapsed>0)
+    {
+        mStadium.Update(elapsed);
+    }
+
+
+    // Consume any remaining time
 
     auto size = GetClientSize();
 
@@ -108,15 +124,18 @@ void StadiumView::OnPaint(wxPaintEvent& event)
     graphics->PushState();
     mStadium.OnDraw(graphics,size.GetWidth(),size.GetHeight());
 
-    graphics->SetPen(*wxBLACK_PEN);
 
-    wxFont gameFont(wxSize(100, 100),
-            wxFONTFAMILY_SWISS,
-            wxFONTSTYLE_NORMAL,
-            wxFONTWEIGHT_NORMAL);
-    graphics->SetFont(gameFont,wxColor(0,0,0));
 
-    graphics->DrawText("0:00",0,0);
+
+    int GameMode = mStadium.GetGameMode();
+    switch (GameMode) {
+        case 0:
+            graphics->DrawText(L"Level begin",512,512);
+            break;
+
+        case 1:
+            break;
+    };
 
 
 //    mGame.OnDraw(graphics, size.GetWidth(), size.GetHeight());

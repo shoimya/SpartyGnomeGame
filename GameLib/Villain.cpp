@@ -78,7 +78,7 @@ bool Villain::CollisionTest(Item* item)
     if (ourRight < itemLeft ||  // Completely to the left
             ourLeft > itemRight ||  // Completely to the right
             ourTop > itemBottom ||  // Completely below
-            ourBottom < itemTop)    // Completely above
+            ourBottom < itemTop || !item->GetPhysical())    // Completely above
     {
         return false;
     }

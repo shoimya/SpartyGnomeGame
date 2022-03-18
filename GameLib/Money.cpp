@@ -5,6 +5,7 @@
 
 #include "pch.h"
 #include "Money.h"
+#include "Stadium.h"
 using namespace std;
 
 const wstring filename1 = L"money100.png";
@@ -65,6 +66,7 @@ bool Money::CollisionTest(Item* item)
     }
 
     SetStatus(true);
+    GetStadium()->AddScore(GetValue());
     return true;
 }
 

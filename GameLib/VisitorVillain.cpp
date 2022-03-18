@@ -20,8 +20,7 @@ VisitorVillain::~VisitorVillain()
 
 void VisitorVillain::VisitVillain(Villain* villain)
 {
-    /// MAKE GNOME FALL OFF MAP
-    /// CALL "YOU LOSE!" FUNCTION FOR 2 SECONDS
+    villain->GetStadium()->GetGnome()->SetPhysical(false);
     villain->GetStadium()->Reset();
 }
 

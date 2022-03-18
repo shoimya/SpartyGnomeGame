@@ -17,6 +17,7 @@
 #include "Grass.h"
 #include "VisitorDoor.h"
 #include "Villain.h"
+#include "VisitorMoney.h"
 #include "VisitorVillain.h"
 
 using namespace std;
@@ -76,6 +77,29 @@ void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, 
             }
         }
     }
+    graphics->SetPen(*wxBLACK_PEN);
+
+    wxFont gameFont(wxSize(100, 100),
+            wxFONTFAMILY_SWISS,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_NORMAL);
+    graphics->SetFont(gameFont,wxColor(0,0,0));
+
+    double time =  GetTime();
+    int min = (int)time / 60;
+    int sec = (int)time - min*60;
+    std::string strMin = to_string(min);
+    std::string strSec= to_string(sec);
+
+    double pos = mGnome->GetPos().X() - mGnome->GetInitPos().X();
+    graphics->DrawText(strMin,200+pos,0);
+    graphics->DrawText(":",250+pos,0);
+    graphics->DrawText(strSec,300+pos,0);
+
+    int score =  GetScore();
+    std::string strScore = to_string(score);
+    graphics->DrawText(strScore,1200+pos,0);
+
     mGnome->Draw(graphics);
     graphics->PopState();
 }
@@ -95,6 +119,7 @@ void Stadium::Update(double elapsed)
     {
         item->Update(elapsed);
     }
+
     mTime += elapsed;
 //    mGnome->Update(elapsed);
 }
@@ -109,6 +134,14 @@ Item* Stadium::CollisionTest(Item *item)
     VisitorDoor visitorDoor;
     VisitorVillain visitorVillain;
     vector<Item*> toRemove;
+    if(-1 < mTime && mTime < 0)
+    {
+        Load(GetLevelNum());
+    }
+    else if(mTime > 2)
+    {
+        mGameMode = progress;
+    }
 
     for(auto i : mItems)
     {
@@ -177,8 +210,9 @@ void Stadium::Load(const wxString& filename)
         // create mGnome
     }
     mGnome = new Gnome (this,mMapPictures[L"i000"]);
-    mGnome->SetLocation(vec);
+    mGnome->SetInitPosition(vec);
     mItems.push_back(mGnome);
+
 
 //    bool mImageLoad = false;
 
@@ -334,6 +368,7 @@ void Stadium::XmlItem(wxXmlNode* node)
         // stanley
         auto picture = mMapPictures[L"i010"];
         auto item = new Stanley(this,picture);
+        item->SetPhysical(false);
         item->XmlLoad(node);
         AddItem(item);
     }
@@ -478,12 +513,14 @@ void Stadium::XmlPicture(wxXmlNode* node)
         mMapPictures[id] = picture;
 
     }
+
     else if (id == L"i010")
     {
         // stanley
         auto imageName = node->GetAttribute(L"image").ToStdWstring();
         picture->SetImage(imageName);
         mMapPictures[id] = picture;
+
     }
     else if (id == L"i011")
     {
@@ -491,14 +528,17 @@ void Stadium::XmlPicture(wxXmlNode* node)
         auto imageName = node->GetAttribute(L"image").ToStdWstring();
         picture->SetImage(imageName);
         mMapPictures[id] = picture;
+
     }
 
     else if (id == L"i012")
     {
         // UofM
+
       auto imageName = node->GetAttribute(L"image").ToStdWstring();
         picture->SetImage(imageName);
         mMapPictures[id] = picture;
+
     }
     else if (id == L"i013")
     {
@@ -543,6 +583,10 @@ void Stadium::Load(int level)
         level = 3;
     }
     SetLevelNum(level);
+    mTime = 0;
+    mScoreBoard.SetScore(0);
+    mGnome->Reset();
+    mGameMode = begin;
     Load(path);
 }
 
@@ -568,6 +612,27 @@ void Stadium::Delete(Item* item)
 
 void Stadium::Reset()
 {
-    Clear();
-    Load(GetLevelNum());
+    mTime = -2;
+    mGameMode = loss;
+    mScoreBoard.SetScore(0);
+}
+
+void Stadium::AddScore(int value)
+{
+    auto score = mScoreBoard.GetScore();
+    mScoreBoard.SetScore(score + value);
+}
+
+int Stadium::GetScore()
+{
+    return mScoreBoard.GetScore();
+}
+
+void Stadium::TuitionUp()
+{
+    VisitorMoney visitorMoney;
+    for(auto i : mItems)
+    {
+        i->Accept(&visitorMoney);
+    }
 }

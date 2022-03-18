@@ -5,23 +5,14 @@
 
 #include "pch.h"
 #include "Stanley.h"
+#include "Stadium.h"
 
 using namespace std;
-
-const wstring filename1 = L"stanley.png";
 
 Stanley::Stanley(Stadium* stadium, std::shared_ptr<Picture> picture)
         :Item(stadium, picture)
 {
 
-}
-
-void Stanley::XmlLoad(wxXmlNode* node)
-{
-    long x, y = 0;
-    node->GetAttribute(L"x", L"0").ToLong(&x);
-    node->GetAttribute(L"y", L"0").ToLong(&y);
-    SetLocation(x,y);
 }
 
 void Stanley::Draw(std::shared_ptr<wxGraphicsContext> graphics)
@@ -64,6 +55,9 @@ bool Stanley::CollisionTest(Item* item)
         return false;
     }
 
+
+    SetStatus(true);
+    GetStadium()->TuitionUp();
     return true;
 }
 
