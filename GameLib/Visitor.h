@@ -13,6 +13,7 @@ class Gnome;
 class Background;
 class Door;
 class Money;
+class Villain;
 
 class Visitor {
 private:
@@ -44,10 +45,16 @@ public:
     virtual void VisitDoor(Door* door){}
 
     /**
+    * Visit money object
+    * @param money Money we are visiting
+    */
+    virtual void VisitMoney(Money* money){}
+
+    /**
     * Visit platform object
     * @param platform Platform we are visiting
     */
-    virtual void VisitMoney(Money* money){}
+    virtual void VisitVillain(Villain* villain){}
 
 
 };

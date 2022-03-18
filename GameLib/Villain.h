@@ -25,7 +25,7 @@ private:
 public:
     Villain(Stadium* stadium, std::shared_ptr<Picture> picture);
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
-    void Accept(Visitor* visitor) override {}
+    void Accept(Visitor* visitor) override;
     ~Villain();
 
     void XmlLoad(wxXmlNode *node) override;
@@ -33,6 +33,8 @@ public:
     void Update(double elapsed) override;
 
     void SetInitialLocation(double x, double y) { mPosInit.Set(x,y); }
+
+    bool CollisionTest(Item* item) override;
 };
 
 #endif //SPARTYGNOME_VILLAIN_H

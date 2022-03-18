@@ -17,6 +17,7 @@
 #include "Grass.h"
 #include "VisitorDoor.h"
 #include "Villain.h"
+#include "VisitorVillain.h"
 
 using namespace std;
 const std::wstring ImagesDirectory = L"data/images";
@@ -105,8 +106,8 @@ void Stadium::Update(double elapsed)
  */
 Item* Stadium::CollisionTest(Item *item)
 {
-
     VisitorDoor visitorDoor;
+    VisitorVillain visitorVillain;
     vector<Item*> toRemove;
 
     for(auto i : mItems)
@@ -118,6 +119,7 @@ Item* Stadium::CollisionTest(Item *item)
         if(i->CollisionTest(item))
         {
             i->Accept(&visitorDoor);
+            i->Accept(&visitorVillain);
             if(i->GetStatus())
             {
                 toRemove.push_back(i);
@@ -566,4 +568,10 @@ void Stadium::Delete(Item* item)
         mItems.erase(loc);
     }
 
+}
+
+void Stadium::Reset()
+{
+    Clear();
+    Load(GetLevelNum());
 }

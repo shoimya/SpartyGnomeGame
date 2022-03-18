@@ -108,6 +108,17 @@ void StadiumView::OnPaint(wxPaintEvent& event)
     graphics->PushState();
     mStadium.OnDraw(graphics,size.GetWidth(),size.GetHeight());
 
+    graphics->SetPen(*wxBLACK_PEN);
+
+    wxFont gameFont(wxSize(100, 100),
+            wxFONTFAMILY_SWISS,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_NORMAL);
+    graphics->SetFont(gameFont,wxColor(0,0,0));
+
+    graphics->DrawText("0:00",0,0);
+
+
 //    mGame.OnDraw(graphics, size.GetWidth(), size.GetHeight());
 //    auto size = GetClientSize();
 //    auto graphics = std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create(dc));
