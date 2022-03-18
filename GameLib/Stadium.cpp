@@ -332,10 +332,10 @@ void Stadium::XmlItem(wxXmlNode* node)
     else if (id == L"i010")
     {
         // stanley
-//        item = make_shared<Stanley>(this,&picture);
-
-//        item = make_shared<Stanley>(this,&picture);
-
+        auto picture = mMapPictures[L"i010"];
+        auto item = new Stanley(this,picture);
+        item->XmlLoad(node);
+        AddItem(item);
     }
     else if (id == L"i011")
     {
@@ -478,31 +478,27 @@ void Stadium::XmlPicture(wxXmlNode* node)
         mMapPictures[id] = picture;
 
     }
-    /*
     else if (id == L"i010")
     {
         // stanley
-//        item = make_shared<Stanley>(this,&picture);
-
+        auto imageName = node->GetAttribute(L"image").ToStdWstring();
+        picture->SetImage(imageName);
+        mMapPictures[id] = picture;
     }
-     */
     else if (id == L"i011")
     {
         // door
         auto imageName = node->GetAttribute(L"image").ToStdWstring();
         picture->SetImage(imageName);
         mMapPictures[id] = picture;
-
     }
 
     else if (id == L"i012")
     {
         // UofM
-
       auto imageName = node->GetAttribute(L"image").ToStdWstring();
         picture->SetImage(imageName);
         mMapPictures[id] = picture;
-
     }
     else if (id == L"i013")
     {
