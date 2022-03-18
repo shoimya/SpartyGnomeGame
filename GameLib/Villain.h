@@ -35,6 +35,8 @@ public:
     void SetInitialLocation(double x, double y) { mPosInit.Set(x,y); }
 
     bool CollisionTest(Item* item) override;
+
+    double GetVelocity(){return mSpeedY;}
 };
 
 #endif //SPARTYGNOME_VILLAIN_H

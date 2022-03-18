@@ -50,9 +50,6 @@ void Villain::XmlLoad(wxXmlNode* node)
  */
 void Villain::Update(double elapsed)
 {
-//    auto collided = GetStadium() -> CollisionTest(this);
-//    if(collided != GetStadium()->GetGnome())
-//    {
     auto next = GetY()+(mSpeedY*elapsed);
     if (next<=mPosInit.Y() && next>=mPosInit.Y()-300) {
         SetLocation(mPosInit.X(), next);
@@ -60,12 +57,10 @@ void Villain::Update(double elapsed)
     else {
         mSpeedY = -mSpeedY;
     }
-//    }
 }
 
 bool Villain::CollisionTest(Item* item)
 {
-  ///
     // Border for the item
     auto itemLeft = item->GetX() - (double)item->GetWidth() / 2;
     auto itemRight = item->GetX() + (double)item->GetWidth() / 2;
@@ -89,8 +84,6 @@ bool Villain::CollisionTest(Item* item)
     }
 
     return true;
-  
-  
 
 }
 

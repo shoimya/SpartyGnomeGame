@@ -1,0 +1,55 @@
+/**
+ * @file VillainTest.cpp
+ * @author Connor Fischetti ()
+ */
+#include <pch.h>
+#include "gtest/gtest.h"
+#include <Stadium.h>
+#include <Gnome.h>
+#include <Picture.h>
+#include <Villain.h>
+#include <string>
+#include <streambuf>
+#include <wx/filename.h>
+
+using namespace std;
+
+class VillainTest : public Villain{
+protected:
+
+};
+
+TEST(VillainTest, Update)
+{
+    Stadium stadium = Stadium();
+    wstring file = L"UofM.png";
+    shared_ptr<Picture> picture = make_shared<Picture>(&stadium);
+    picture->SetImage(file);
+
+    Villain villain = Villain(&stadium, picture);
+
+    /// villain moving up at -240 pixels/second
+    ASSERT_EQ(villain.GetVelocity(),-240);
+    double Y = villain.GetY();
+    for (int i=1; i<13; i++)
+    {
+        villain.Update(0.1);
+        ASSERT_EQ(villain.GetVelocity(),-240);
+        ASSERT_EQ(villain.GetY(), Y + (villain.GetVelocity() * 0.1));
+        Y += villain.GetVelocity() * 0.1;
+    }
+
+//    Villain villain2 = Villain(&stadium, picture);
+//    villain2.Update(1.6);
+//
+//    /// villain moving down at 240 pixels/second
+//    ASSERT_EQ(villain2.GetVelocity(),240);
+//    Y = villain2.GetY();
+//    for (int i=1; i<9; i++)
+//    {
+//        villain2.Update(0.1);
+//        ASSERT_EQ(villain2.GetVelocity(),240);
+//        ASSERT_EQ(villain2.GetY(), Y + (villain2.GetVelocity() * 0.1));
+//        Y += villain2.GetVelocity() * 0.1;
+//    }
+}

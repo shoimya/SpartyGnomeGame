@@ -3,7 +3,10 @@ project(Tests)
 set(TEST_FILES
         gtest_main.cpp
         ItemTest.cpp
-        StadiumTest.cpp)
+        GnomeTest.cpp
+        GnomeTest.h
+        StadiumTest.cpp
+        VillainTest.cpp)
 
 # Get Google Tests
 include(FetchContent)

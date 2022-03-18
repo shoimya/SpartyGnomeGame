@@ -10,6 +10,8 @@
 
 #include "Item.h"
 #include "Visitor.h"
+#include "VisitorStanley.h"
+
 class Stanley : public Item{
 private:
     Picture *picture;
@@ -17,10 +19,13 @@ private:
 public:
     Stanley(Stadium* stadium, std::shared_ptr<Picture> picture);
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
-    void Accept(Visitor* visitor) override {}
     ~Stanley();
 
+    bool CollisionTest(Item* item);
 
+    void XmlLoad(wxXmlNode* node);
+
+    void Accept(Visitor* visitor) override {visitor->VisitStanley(this);}
 };
 
 #endif //SPARTYGNOME_STANLEY_H
