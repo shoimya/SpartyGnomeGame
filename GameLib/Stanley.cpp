@@ -1,6 +1,6 @@
 /**
  * @file Stanley.cpp
- * @author Haoxiang Zhang
+ * @author Connor
  */
 
 #include "pch.h"

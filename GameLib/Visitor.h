@@ -14,6 +14,7 @@ class Background;
 class Door;
 class Money;
 class Villain;
+class Stanley;
 
 class Visitor {
 private:
@@ -56,7 +57,11 @@ public:
     */
     virtual void VisitVillain(Villain* villain){}
 
-
+    /**
+    * Visit stanley object
+    * @param platform Stanley we are visiting
+    */
+    virtual void VisitStanley(Stanley* stanley){}
 };
 
 #endif //SPARTYGNOME_VISITOR_H

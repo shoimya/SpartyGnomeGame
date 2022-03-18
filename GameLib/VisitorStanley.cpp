@@ -5,9 +5,6 @@
 
 #include "pch.h"
 #include "VisitorStanley.h"
-#include "Stadium.h"
-#include "Stanley.h"
-#include "VisitorVillain.h"
 
 VisitorStanley::VisitorStanley()
 {
@@ -19,7 +16,7 @@ VisitorStanley::~VisitorStanley()
 
 }
 
-void VisitorStanley::VisitStanley(Villain* villain)
+void VisitorStanley::VisitStanley(Stanley* stanley)
 {
     /// CALL TUITION INCREASE FUNCTION
 }
