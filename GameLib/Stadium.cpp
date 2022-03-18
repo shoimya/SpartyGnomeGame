@@ -97,7 +97,7 @@ void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, 
     graphics->DrawText(strSec,300+pos,0);
 
     int score =  GetScore();
-    std::string strScore = to_string(score);
+    std::string strScore ="$" + to_string(score);
     graphics->DrawText(strScore,1200+pos,0);
 
     mGnome->Draw(graphics);
@@ -115,6 +115,7 @@ void Stadium::Update(double elapsed)
     {
     }
     */
+    mGnome->Update(elapsed);
     for (auto item : mItems)
     {
         item->Update(elapsed);
@@ -136,6 +137,8 @@ Item* Stadium::CollisionTest(Item *item)
     vector<Item*> toRemove;
     if(-1 < mTime && mTime < 0)
     {
+        mGameMode = begin;
+        mGnome->Reset();
         Load(GetLevelNum());
     }
     else if(mTime > 2)
@@ -145,10 +148,6 @@ Item* Stadium::CollisionTest(Item *item)
 
     for(auto i : mItems)
     {
-        if(i == mGnome)
-        {
-            continue;
-        }
         if(i->CollisionTest(item))
         {
             i->Accept(&visitorDoor);
@@ -211,10 +210,6 @@ void Stadium::Load(const wxString& filename)
     }
     mGnome = new Gnome (this,mMapPictures[L"i000"]);
     mGnome->SetInitPosition(vec);
-    mItems.push_back(mGnome);
-
-
-//    bool mImageLoad = false;
 
     auto child = root->GetChildren();
     for( ; child; child=child->GetNext())
@@ -259,37 +254,8 @@ void Stadium::XmlItem(wxXmlNode* node)
         item->XmlLoad(node);
         AddItem(item);
     }
-    else if (id == L"i003")
-    {
-        auto picture1 = mMapPictures[L"i0031"];
-        auto picture2 = mMapPictures[L"i0032"];
-        auto picture3 = mMapPictures[L"i0033"];
-        auto item = new Grass(this,picture1);
-        auto item2 =  new Grass(this,picture3);
-        double pos = 0;
-        node->GetAttribute(L"width").ToDouble(&pos);
-        pos = pos / 32 - 2;
-        pos = pos / 2;
-        // [0] [1] [2] [3] [4] [5]
-        // 1.5
-        item->XmlLoad(node, -pos-0.5);
-        AddItem(item);
-
-        double i = -pos+0.5;
-        while (i < pos+0.5) {
-            auto item1 = new Grass(this, picture2);
-            item1->XmlLoad(node, i);
-            AddItem(item1);
-            i++;
-        }
-        item2->XmlLoad(node, pos+0.5);
-        AddItem(item2);
-
-
-    }
-
 //        item = make_shared<Snow>(this,&picture);
-    else if (id == L"i005" || id == L"i004")
+    else if (id == L"i005" || id == L"i004" || id == L"i003")
     {
         // platform
         auto picture1 = mMapPictures[L"i0051"];
@@ -301,15 +267,19 @@ void Stadium::XmlItem(wxXmlNode* node)
             picture2 = mMapPictures[L"i0042"];
             picture3 = mMapPictures[L"i0043"];
         }
+        else if (id == L"i003")
+        {
+            picture1 = mMapPictures[L"i0031"];
+            picture2 = mMapPictures[L"i0032"];
+            picture3 = mMapPictures[L"i0033"];
+
+        }
         auto item = new ItemPlatform(this,picture1);
         auto item2 =  new ItemPlatform(this,picture3);
         double pos = 0;
         node->GetAttribute(L"width").ToDouble(&pos);
         pos = pos / 32 - 2;
         pos = pos / 2;
-
-            // [0] [1] [2] [3] [4] [5]
-            // 1.5
         item->XmlLoad(node, -pos-0.5);
         AddItem(item);
 
@@ -469,24 +439,6 @@ void Stadium::XmlPicture(wxXmlNode* node)
         picture1->SetImagePos(L"mid");
         picture2->SetImagePos(L"right");
     }
-//    else if (id == L"i005")
-//    {
-/*        Picture p1(this);
-        Picture p2(this);
-        Picture p3(this);
-        leftImage = node->GetAttribute(L"left-image").ToStdWstring();
-        midImage = node->GetAttribute(L"mid-image").ToStdWstring();
-        rightImage = node->GetAttribute(L"right-image").ToStdWstring();
-        p1.SetImage(leftImage);
-        p2.SetImage(midImage);
-        p3.SetImage(rightImage);
-        */
-//        mMapPictures[3] = &p1;
-//        mMapPictures[4] = &p2;
-//        mMapPictures[5] = &p3;
-        // platform
-//    }
-   
     else if (id == L"i006" || id == L"i007")
     {
         // wall1
@@ -571,22 +523,16 @@ void Stadium::Load(int level)
             path = mLevel->Level2();
             break;
 
-        case 3:
+        default:
             path = mLevel->Level3();
             break;
-
-    default:
-        break;
     }
     if(level>3)
     {
         level = 3;
     }
     SetLevelNum(level);
-    mTime = 0;
     mScoreBoard.SetScore(0);
-    mGnome->Reset();
-    mGameMode = begin;
     Load(path);
 }
 

@@ -55,7 +55,6 @@ bool Stanley::CollisionTest(Item* item)
         return false;
     }
 
-
     SetStatus(true);
     GetStadium()->TuitionUp();
     return true;

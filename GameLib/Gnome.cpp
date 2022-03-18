@@ -44,7 +44,13 @@ Gnome::~Gnome()
 
 void Gnome::Update(double elapsed)
 {
-    Item::Update(elapsed);
+    if(GetStadium()->GetGameMode() == 3)
+    {
+        if(GetStadium()->GetTime() < 0)
+        {
+
+        }
+    }
 
     // current position
     Vector p = GetPos();
@@ -61,17 +67,18 @@ void Gnome::Update(double elapsed)
 
     if (collided != nullptr)
     {
-        if(collided->GetPhysical() && GetPhysical()) {
-
-            if (newV.Y()>0) {
+        if(collided->GetPhysical() && GetPhysical())
+        {
+            if (newV.Y()>0)
+            {
                 // We are falling, stop at the collision point
                 newP.SetY(collided->GetY()-collided->GetHeight()/2-GetHeight()/2-Epsilon);
             }
-            else {
+            else
+            {
                 // We are rising, stop at the collision point
                 newP.SetY(collided->GetY()+collided->GetHeight()/2+GetHeight()/2+Epsilon);
             }
-
             // If we collide, we cancel any velocity
             // in the Y direction
             newV.SetY(0);
@@ -86,8 +93,8 @@ void Gnome::Update(double elapsed)
     collided = GetStadium()->CollisionTest(this);
     if (collided != nullptr)
     {
-        if(GetPhysical() && collided->GetPhysical()) {
-
+        if(GetPhysical() && collided->GetPhysical())
+        {
             if (newV.X()>0) {
                 // We are moving to the right, stop at the collision point
                 newP.SetX(collided->GetX()-collided->GetWidth()/2-GetWidth()/2-Epsilon);
@@ -96,13 +103,12 @@ void Gnome::Update(double elapsed)
                 // We are moving to the left, stop at the collision point
                 newP.SetX(collided->GetX()+collided->GetWidth()/2+GetWidth()/2+Epsilon);
             }
-
-
             // If we collide, we cancel any velocity
             // in the X direction
             newV.SetX(0);
         }
     }
+
 
     // Update the velocity and position
     mV = newV;
@@ -185,8 +191,5 @@ void Gnome::MovingLeft()
 
 void Gnome::Reset()
 {
-
-    SetPhysical(true);
     SetLocation(GetInitPos());
-
 }
