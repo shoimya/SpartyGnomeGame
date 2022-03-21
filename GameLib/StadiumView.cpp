@@ -156,7 +156,6 @@ void StadiumView::OnPaint(wxPaintEvent& event)
 
 
 
-
 //    mGame.OnDraw(graphics, size.GetWidth(), size.GetHeight());
 //    auto size = GetClientSize();
 //    auto graphics = std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create(dc));

@@ -128,7 +128,6 @@ void Stadium::Update(double elapsed)
         {
             mGameMode = loss;
             Stop();
-            Load(GetLevelNum());
         }
     }
     else if(mTime < 0 && mTime > -1) {
@@ -546,11 +545,13 @@ void Stadium::TuitionUp()
     }
 }
 
+/// TODO: Make Stop() Load Stadium after showing loss screen for 2 seconds
 void Stadium::Stop()
 {
     mTime = -2;
     mGameMode = loss;
     mScoreBoard.SetScore(0);
+//    Load(GetLevelNum());
 }
 
 void Stadium::LevelComplete()
