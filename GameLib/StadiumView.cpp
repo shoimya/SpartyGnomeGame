@@ -104,6 +104,14 @@ void StadiumView::OnPaint(wxPaintEvent& event)
     //
     // Prevent tunnelling
     //
+
+    // Consume any remaining time
+
+    auto size = GetClientSize();
+
+    auto graphics = std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create(dc));
+
+
     while(elapsed > MaxElapsed)
     {
         mStadium.Update(MaxElapsed);
@@ -114,28 +122,38 @@ void StadiumView::OnPaint(wxPaintEvent& event)
         mStadium.Update(elapsed);
     }
 
-
-    // Consume any remaining time
-
-    auto size = GetClientSize();
-
-    auto graphics = std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create(dc));
-
     graphics->PushState();
+
     mStadium.OnDraw(graphics,size.GetWidth(),size.GetHeight());
 
+    auto GameMode = mStadium.GetGameMode();
+    switch (*GameMode)
+    {
+    case 0:
+    {
+        int levelNum = mStadium.GetLevelNum();
+        std::string strNum = to_string(levelNum);
+        graphics->DrawText("Level" + strNum + " begin",550,512);
+        break;
+    }
+    case 1:
+    {
+        graphics->DrawText("Level Complete", 550, 512);
+        break;
+    }
+    case 3:
+    {
+        graphics->DrawText("you loss", 550, 512);
+        break;
+    }
+    default:
+    {
+        break;
+    }
 
-
-
-    int GameMode = mStadium.GetGameMode();
-    switch (GameMode) {
-        case 0:
-            graphics->DrawText(L"Level begin",512,512);
-            break;
-
-        case 1:
-            break;
     };
+
+
 
 
 //    mGame.OnDraw(graphics, size.GetWidth(), size.GetHeight());
@@ -144,6 +162,7 @@ void StadiumView::OnPaint(wxPaintEvent& event)
 //    mStadium.OnDraw(graphics, size.GetWidth(), size.GetHeight());
 
     graphics->PopState();
+
 
 }
 
@@ -203,18 +222,27 @@ void StadiumView::AddLevelMenuOption(wxFrame* mainFrame, wxMenu* menu, int id,st
 
 void StadiumView::Level0(wxCommandEvent& event)
 {
+    mStadium.SetGameMode(0);
+    mStadium.SetTime(-1);
     mStadium.Load(0);
 }
 void StadiumView::Level1(wxCommandEvent& event)
 {
+    mStadium.SetGameMode(0);
+
+    mStadium.SetTime(-1);
     mStadium.Load(1);
 }
 void StadiumView::Level2(wxCommandEvent& event)
 {
+    mStadium.SetGameMode(0);
+    mStadium.SetTime(-1);
     mStadium.Load(2);
 }
 void StadiumView::Level3(wxCommandEvent& event)
 {
+    mStadium.SetGameMode(0);
+    mStadium.SetTime(-1);
     mStadium.Load(3);
 }
 

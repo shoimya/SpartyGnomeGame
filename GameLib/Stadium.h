@@ -49,7 +49,7 @@ private:
 
 public:
     enum GameMode {
-        begin = 0, end = 1, progress = 2, loss = 3, win = 4
+        begin = 0, win = 1, progress = 2, loss = 3,
     };
 
     /**
@@ -105,15 +105,21 @@ public:
 
     void SetGameMode(int num) { mGameMode = num; }
 
-    int GetGameMode() const { return mGameMode; }
+    int* GetGameMode() { return &mGameMode; }
 
     void AddScore(int value);
 
     int GetScore();
 
-    double GetTime(){return mTime;}
+    double GetTime() {return mTime;}
+
+    void SetTime(double time) {mTime = time;}
 
     void TuitionUp();
+
+    void Stop();
+
+    void LevelComplete();
 
     class ScoreBoard {
     public:

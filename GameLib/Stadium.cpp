@@ -18,7 +18,6 @@
 #include "VisitorDoor.h"
 #include "Villain.h"
 #include "VisitorMoney.h"
-#include "VisitorVillain.h"
 
 using namespace std;
 const std::wstring ImagesDirectory = L"data/images";
@@ -39,6 +38,7 @@ Stadium::Stadium()
     mMapPictures = {{L"i000",initialPicture}};
     mGameMode = begin;
     mLevel = make_shared<Level>(this);
+    mTime = -1;
 
 }
 
@@ -77,6 +77,8 @@ void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, 
             }
         }
     }
+
+    mGnome->Draw(graphics);
     graphics->SetPen(*wxBLACK_PEN);
 
     wxFont gameFont(wxSize(100, 100),
@@ -90,6 +92,15 @@ void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, 
     int sec = (int)time - min*60;
     std::string strMin = to_string(min);
     std::string strSec= to_string(sec);
+    if(time < 0)
+    {
+        strSec = "0";
+    }
+    if(sec < 10)
+    {
+        strSec = "0" + strSec;
+    }
+
 
     double pos = mGnome->GetPos().X() - mGnome->GetInitPos().X();
     graphics->DrawText(strMin,200+pos,0);
@@ -100,7 +111,6 @@ void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, 
     std::string strScore ="$" + to_string(score);
     graphics->DrawText(strScore,1200+pos,0);
 
-    mGnome->Draw(graphics);
     graphics->PopState();
 }
 
@@ -110,12 +120,33 @@ void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, 
  */
 void Stadium::Update(double elapsed)
 {
-    /*
-    if(mGameMode == end)
+    if(mTime >= 0)
     {
+      mGameMode = progress ;
+      mGnome->SetStop(false);
     }
-    */
-    mGnome->Update(elapsed);
+    else if(mTime < 0 && mTime > -1) {
+        if(mGameMode == loss)
+        {
+            mGnome->InitPosition();
+        }
+        else if (mGameMode == win)
+        {
+            int levelNum = GetLevelNum();
+            levelNum++;
+            SetLevelNum(levelNum);
+            Load(levelNum);
+        }
+        mGameMode = begin;
+    }
+    else{
+        mGnome->SetStop(true);
+    }
+
+    if(mGameMode == progress )
+    {
+        mGnome->Update(elapsed);
+    }
     for (auto item : mItems)
     {
         item->Update(elapsed);
@@ -133,25 +164,14 @@ void Stadium::Update(double elapsed)
 Item* Stadium::CollisionTest(Item *item)
 {
     VisitorDoor visitorDoor;
-    VisitorVillain visitorVillain;
+//    VisitorVillain visitorVillain;
     vector<Item*> toRemove;
-    if(-1 < mTime && mTime < 0)
-    {
-        mGameMode = begin;
-        mGnome->Reset();
-        Load(GetLevelNum());
-    }
-    else if(mTime > 2)
-    {
-        mGameMode = progress;
-    }
 
     for(auto i : mItems)
     {
         if(i->CollisionTest(item))
         {
             i->Accept(&visitorDoor);
-            i->Accept(&visitorVillain);
             if(i->GetStatus())
             {
                 toRemove.push_back(i);
@@ -208,8 +228,10 @@ void Stadium::Load(const wxString& filename)
         mMapPictures[L"i000"]->SetImage(L"gnome.png");
         // create mGnome
     }
+    // Set init position
     mGnome = new Gnome (this,mMapPictures[L"i000"]);
     mGnome->SetInitPosition(vec);
+    mGnome->InitPosition();
 
     auto child = root->GetChildren();
     for( ; child; child=child->GetNext())
@@ -232,6 +254,7 @@ void Stadium::Load(const wxString& filename)
            }
        }
     }
+    mGameMode = progress;
 
 }
 
@@ -369,13 +392,6 @@ void Stadium::XmlItem(wxXmlNode* node)
         item->XmlLoad(node);
         AddItem(item);
     }
-
-/*    if(item != nullptr)
-    {
-        item->XmlLoad(node);
-        AddItem(item);
-    }
-*/
 
 }
 
@@ -531,6 +547,7 @@ void Stadium::Load(int level)
     {
         level = 3;
     }
+    Clear();
     SetLevelNum(level);
     mScoreBoard.SetScore(0);
     Load(path);
@@ -556,13 +573,6 @@ void Stadium::Delete(Item* item)
 
 }
 
-void Stadium::Reset()
-{
-    mTime = -2;
-    mGameMode = loss;
-    mScoreBoard.SetScore(0);
-}
-
 void Stadium::AddScore(int value)
 {
     auto score = mScoreBoard.GetScore();
@@ -582,3 +592,18 @@ void Stadium::TuitionUp()
         i->Accept(&visitorMoney);
     }
 }
+
+void Stadium::Stop()
+{
+    mTime = -2;
+    mGameMode = loss;
+    mScoreBoard.SetScore(0);
+}
+
+void Stadium::LevelComplete()
+{
+    mTime = -2;
+    mGameMode = win;
+    mScoreBoard.SetScore(0);
+}
+

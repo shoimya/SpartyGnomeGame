@@ -13,7 +13,7 @@
 
 class Villain : public Item{
 private:
-    Picture *picture;
+//    Picture *picture;
 
     /// Fish speed in the Y direction
     /// in pixels per second
@@ -25,7 +25,7 @@ private:
 public:
     Villain(Stadium* stadium, std::shared_ptr<Picture> picture);
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
-    void Accept(Visitor* visitor) override;
+    void Accept(Visitor* visitor) override {};
     ~Villain();
 
     void XmlLoad(wxXmlNode *node) override;

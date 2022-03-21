@@ -44,120 +44,111 @@ Gnome::~Gnome()
 
 void Gnome::Update(double elapsed)
 {
-    if(GetStadium()->GetGameMode() == 3)
+    if(mStop)
     {
-        if(GetStadium()->GetTime() < 0)
-        {
+        SetLocation(GetX(),GetY());
+        SetPicture(mPrevious);
+    }
+    else
+    {
+
+        // current position
+        Vector p = GetPos();
+
+        // Compute a new velocity with gravity added in.
+        Vector newV(mV.X(), mV.Y()+Gravity*elapsed);
+
+        // Update position
+        Vector newP = p+newV*elapsed;
+
+        SetLocation(p.X(), newP.Y());
+
+        auto collided = GetStadium()->CollisionTest(this);
+
+        if (collided!=nullptr) {
+            if (collided->GetPhysical() && GetPhysical()) {
+                if (newV.Y()>0) {
+                    // We are falling, stop at the collision point
+                    newP.SetY(collided->GetY()-collided->GetHeight()/2-GetHeight()/2-Epsilon);
+                }
+                else {
+                    // We are rising, stop at the collision point
+                    newP.SetY(collided->GetY()+collided->GetHeight()/2+GetHeight()/2+Epsilon);
+                }
+                // If we collide, we cancel any velocity
+                // in the Y direction
+                newV.SetY(0);
+            }
 
         }
-    }
+        //
+        // Try updating the X location
+        //
+        SetLocation(newP.X(), p.Y());
 
-    // current position
-    Vector p = GetPos();
-
-    // Compute a new velocity with gravity added in.
-    Vector newV(mV.X(),mV.Y() + Gravity * elapsed);
-
-    // Update position
-    Vector newP = p + newV * elapsed;
-
-    SetLocation(p.X(), newP.Y());
-
-    auto collided = GetStadium() -> CollisionTest(this);
-
-    if (collided != nullptr)
-    {
-        if(collided->GetPhysical() && GetPhysical())
-        {
-            if (newV.Y()>0)
-            {
-                // We are falling, stop at the collision point
-                newP.SetY(collided->GetY()-collided->GetHeight()/2-GetHeight()/2-Epsilon);
+        collided = GetStadium()->CollisionTest(this);
+        if (collided!=nullptr) {
+            if (GetPhysical() && collided->GetPhysical()) {
+                if (newV.X()>0) {
+                    // We are moving to the right, stop at the collision point
+                    newP.SetX(collided->GetX()-collided->GetWidth()/2-GetWidth()/2-Epsilon);
+                }
+                else {
+                    // We are moving to the left, stop at the collision point
+                    newP.SetX(collided->GetX()+collided->GetWidth()/2+GetWidth()/2+Epsilon);
+                }
+                // If we collide, we cancel any velocity
+                // in the X direction
+                newV.SetX(0);
             }
-            else
-            {
-                // We are rising, stop at the collision point
-                newP.SetY(collided->GetY()+collided->GetHeight()/2+GetHeight()/2+Epsilon);
-            }
-            // If we collide, we cancel any velocity
-            // in the Y direction
-            newV.SetY(0);
         }
 
-    }
-    //
-    // Try updating the X location
-    //
-    SetLocation(newP.X(), p.Y());
 
-    collided = GetStadium()->CollisionTest(this);
-    if (collided != nullptr)
-    {
-        if(GetPhysical() && collided->GetPhysical())
-        {
-            if (newV.X()>0) {
-                // We are moving to the right, stop at the collision point
-                newP.SetX(collided->GetX()-collided->GetWidth()/2-GetWidth()/2-Epsilon);
+
+        // Update the velocity and position
+        mV = newV;
+        SetLocation(newP.X(), newP.Y());
+
+        if (mV.X()<0 && mV.Y()==0) {
+            if (mWalkMode==1) {
+                SetPicture(L"gnome-walk-left-1.png");
+                mPrevious = L"gnome-walk-left-1.png";
+                mWalkMode = 2;
             }
             else {
-                // We are moving to the left, stop at the collision point
-                newP.SetX(collided->GetX()+collided->GetWidth()/2+GetWidth()/2+Epsilon);
+                SetPicture(L"gnome-walk-left-2.png");
+                mPrevious = L"gnome-walk-left-2.png";
+                mWalkMode = 1;
             }
-            // If we collide, we cancel any velocity
-            // in the X direction
-            newV.SetX(0);
         }
-    }
-
-
-    // Update the velocity and position
-    mV = newV;
-    SetLocation(newP.X(), newP.Y());
-
-
-    if (mV.X() < 0 && mV.Y() == 0)
-    {
-        if (mWalkMode == 1)
-        {
-            SetPicture(L"gnome-walk-left-1.png");
-            mWalkMode = 2;
+        else if (mV.X()>0 && mV.Y()==0) {
+            if (mWalkMode==1) {
+                SetPicture(L"gnome-walk-right-1.png");
+                mPrevious = L"gnome-walk-right-1.png";
+                mWalkMode = 2;
+            }
+            else {
+                SetPicture(L"gnome-walk-right-2.png");
+                mPrevious = L"gnome-walk-right-2.png";
+                mWalkMode = 1;
+            }
         }
-        else
-        {
-            SetPicture(L"gnome-walk-left-2.png");
+        else if (mV.X()!=0 && mV.Y()!=0) {
+            if (mV.X()<0) {
+                SetPicture(L"gnome-walk-left-1.png");
+                mPrevious = L"gnome-walk-left-1.png";
+                mWalkMode = 1;
+            }
+            else {
+                SetPicture(L"gnome-walk-right-1.png");
+                mPrevious = L"gnome-walk-right-1.png";
+                mWalkMode = 1;
+            }
+        }
+        else if (mV.X()==0) {
+            SetPicture(L"gnome.png");
             mWalkMode = 1;
         }
-    }
-    else if (mV.X() > 0 && mV.Y() == 0)
-    {
-        if (mWalkMode == 1)
-        {
-            SetPicture(L"gnome-walk-right-1.png");
-            mWalkMode = 2;
-        }
-        else
-        {
-            SetPicture(L"gnome-walk-right-2.png");
-            mWalkMode = 1;
-        }
-    }
-    else if (mV.X() != 0 && mV.Y() != 0)
-    {
-        if (mV.X() < 0)
-        {
-            SetPicture(L"gnome-walk-left-1.png");
-            mWalkMode = 1;
-        }
-        else
-        {
-            SetPicture(L"gnome-walk-right-1.png");
-            mWalkMode = 1;
-        }
-    }
-    else if (mV.X() == 0)
-    {
-        SetPicture(L"gnome.png");
-        mWalkMode = 1;
     }
 }
 
@@ -189,7 +180,7 @@ void Gnome::MovingLeft()
     SetxVelocity(-HorizontalSpeed);
 }
 
-void Gnome::Reset()
+void Gnome::SetStop(bool stop)
 {
-    SetLocation(GetInitPos());
+    mStop = stop;
 }

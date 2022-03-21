@@ -83,11 +83,11 @@ bool Villain::CollisionTest(Item* item)
         return false;
     }
 
+    GetStadium()->Stop();
+        // Stop
+        // @param DieTime Double
+        // @param Dying Bool true if dying
     return true;
 
 }
 
-void Villain::Accept(Visitor* visitor)
-{
-    visitor->VisitVillain(this);
-}

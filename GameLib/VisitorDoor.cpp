@@ -21,10 +21,7 @@ VisitorDoor::~VisitorDoor()
 void VisitorDoor::VisitDoor(Door* door)
 {
     auto stadium =  door->GetStadium();
-    int level = stadium->GetLevelNum();
-    level++;
-    stadium->SetLevelNum(level);
-    stadium->Load(level);
+    stadium->LevelComplete();
 }
 
 

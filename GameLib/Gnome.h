@@ -17,11 +17,17 @@ private:
 
     Vector mV;
 
-    Picture *picture;
+//    Picture *picture;
 
     int mWalkMode = 1;
 
     Vector mInitPos;
+
+    bool mStop;
+
+    bool mStep;
+
+    std::wstring mPrevious = L"";
 
 public:
     Gnome(Stadium *stadium, std::shared_ptr<Picture> picture);
@@ -55,18 +61,18 @@ public:
 
     void ResetX() {mV.SetX(0);}
 
-    void Reset();
-
     void SetInitPosition(Vector vec)
     {
-        SetLocation(vec);
         mInitPos = vec;
     }
 
+    void InitPosition(){ SetLocation(mInitPos);}
 
     Vector GetInitPos(){return mInitPos;}
 
     Vector GetVelocity() {return mV;}
+
+    void SetStop(bool stop);
 };
 
 #endif //SPARTYGNOME_GNOME_H
