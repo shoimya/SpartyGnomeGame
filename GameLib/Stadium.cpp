@@ -18,7 +18,7 @@
 #include "Platform.h"
 #include "Snow.h"
 #include "Grass.h"
-#include "TreasureBox"
+#include "TreasureBox.h"
 using namespace std;
 const std::wstring ImagesDirectory = L"data/images";
 const std::wstring LevelDirectory = L"data/levels";
@@ -104,12 +104,12 @@ void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, 
 
     double pos = mGnome->GetPos().X() - mGnome->GetInitPos().X();
     graphics->DrawText(strMin,200+pos,0);
-    graphics->DrawText(":",250+pos,0);
+    graphics->DrawText(":",265+pos,0);
     graphics->DrawText(strSec,300+pos,0);
 
     int score =  GetScore();
     std::string strScore ="$" + to_string(score);
-    graphics->DrawText(strScore,1200+pos,0);
+    graphics->DrawText(strScore,1210+pos,0);
 
     graphics->PopState();
 }
@@ -122,8 +122,13 @@ void Stadium::Update(double elapsed)
 {
     if(mTime >= 0)
     {
-      mGameMode = progress ;
-      mGnome->SetStop(false);
+        mGameMode = progress;
+        mGnome->SetStop(false);
+        if(mGnome->GetY() > 1200)
+        {
+            mGameMode = loss;
+            Stop();
+        }
     }
     else if(mTime < 0 && mTime > -1) {
         if(mGameMode == loss)

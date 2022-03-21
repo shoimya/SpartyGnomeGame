@@ -133,17 +133,18 @@ void StadiumView::OnPaint(wxPaintEvent& event)
     {
         int levelNum = mStadium.GetLevelNum();
         std::string strNum = to_string(levelNum);
-        graphics->DrawText("Level" + strNum + " begin",550,512);
+        graphics->DrawText("Level" + strNum + " Begin",430,505);
         break;
     }
     case 1:
     {
-        graphics->DrawText("Level Complete", 550, 512);
+//        graphics->DrawText("Level Complete", 550, 512);
+        graphics->DrawText("Level Complete", 430, 505);
         break;
     }
     case 3:
     {
-        graphics->DrawText("you loss", 550, 512);
+        graphics->DrawText("YOU LOSE!", 430, 505);
         break;
     }
     default:

@@ -23,7 +23,7 @@ public:
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
     bool CollisionTest(Item* item) override;
     void XmlLoad(wxXmlNode *node) override;
-    void Accept(Visitor* visitor) override {visitor->VisitTreasureBox(this);}
+    void Accept(Visitor* visitor) override{ visitor->VisitTreasureBox(this);}
 
 };
 

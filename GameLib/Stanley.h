@@ -1,6 +1,6 @@
 /**
  * @file Stanley.h
- * @author Haoxiang Zhang
+ * @author Connor Fischetti & Haoxiang Zhang
  *
  *
  */
