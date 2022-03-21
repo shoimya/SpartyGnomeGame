@@ -378,6 +378,15 @@ void Stadium::XmlItem(wxXmlNode* node)
         item->XmlLoad(node);
         AddItem(item);
     }
+    // treasureBox
+    else if(id == L"i014")
+    {
+        auto picture = mMapPictures[id];
+        auto item = new TreasureBox(this, picture,10000);
+        item->SetPhysical(false);
+        item->XmlLoad(node);
+        AddItem(item);
+    }
 
 
 }
