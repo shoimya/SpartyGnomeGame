@@ -18,7 +18,7 @@
 #include "Platform.h"
 #include "Snow.h"
 #include "Grass.h"
-
+#include "TreasureBox"
 using namespace std;
 const std::wstring ImagesDirectory = L"data/images";
 const std::wstring LevelDirectory = L"data/levels";
