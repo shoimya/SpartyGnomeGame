@@ -8,16 +8,16 @@
 #include "Stadium.h"
 #include <wx/graphics.h>
 #include "Background.h"
-#include "Platform.h"
 #include "Door.h"
 #include "Money.h"
-#include "Wall.h"
-#include "Snow.h"
 #include "Stanley.h"
-#include "Grass.h"
 #include "VisitorDoor.h"
 #include "Villain.h"
 #include "VisitorMoney.h"
+#include "Wall.h"
+#include "Platform.h"
+#include "Snow.h"
+#include "Grass.h"
 
 using namespace std;
 const std::wstring ImagesDirectory = L"data/images";
@@ -338,20 +338,15 @@ void Stadium::XmlItem(wxXmlNode* node)
         }
     }
         // wall2
-    else if (id == L"i008")
+    else if (id == L"i008" || id == L"i009")
     {
         // money100
-        auto picture = mMapPictures[L"i008"];
+        auto picture = mMapPictures[id];
         auto item = new Money(this, picture,100);
-        item->SetPhysical(false);
-        item->XmlLoad(node);
-        AddItem(item);
-    }
-    else if (id == L"i009")
-    {
-        // money 1000
-        auto picture = mMapPictures[L"i009"];
-        auto item = new Money(this, picture,1000);
+        if(id == L"i009")
+        {
+            item->SetValue(1000);
+        }
         item->SetPhysical(false);
         item->XmlLoad(node);
         AddItem(item);
@@ -370,28 +365,20 @@ void Stadium::XmlItem(wxXmlNode* node)
         // door
         auto picture = mMapPictures[L"i011"];
         auto item = new Door(this,picture);
+        item->SetPhysical(false);
         item->XmlLoad(node);
         AddItem(item);
 
     }
-    else if (id == L"i012")
+    else if (id == L"i012" || id ==L"i013")
     {
-        // UofM
-        auto picture = mMapPictures[L"i012"];
-        auto item = new Villain(this,picture);
-        item->XmlLoad(node);
-        AddItem(item);
-
-
-    }
-    else if (id == L"i013")
-    {
-        // wisc
-        auto picture = mMapPictures[L"i013"];
+        // UofM & Wisc
+        auto picture = mMapPictures[id];
         auto item = new Villain(this,picture);
         item->XmlLoad(node);
         AddItem(item);
     }
+
 
 }
 
@@ -455,66 +442,17 @@ void Stadium::XmlPicture(wxXmlNode* node)
         picture1->SetImagePos(L"mid");
         picture2->SetImagePos(L"right");
     }
-    else if (id == L"i006" || id == L"i007")
+    else
     {
         // wall1
-        auto imageName = node->GetAttribute(L"image").ToStdWstring();
-        picture->SetImage(imageName);
-        mMapPictures[id] = picture;
-
-    }
-        // wall2
-         
-    else if (id == L"i008")
-    {
-        // money100
-        auto imageName = node->GetAttribute(L"image").ToStdWstring();
-        picture->SetImage(imageName);
-        mMapPictures[id] = picture;
-
-    }
-    else if (id == L"i009")
-    {
-        // money 1000
-        auto imageName = node->GetAttribute(L"image").ToStdWstring();
-        picture->SetImage(imageName);
-        mMapPictures[id] = picture;
-
+        auto imageName = node->GetAttribute(L"image",L"").ToStdWstring();
+        if(!imageName.empty())
+        {
+            picture->SetImage(imageName);
+            mMapPictures[id] = picture;
+        }
     }
 
-    else if (id == L"i010")
-    {
-        // stanley
-        auto imageName = node->GetAttribute(L"image").ToStdWstring();
-        picture->SetImage(imageName);
-        mMapPictures[id] = picture;
-
-    }
-    else if (id == L"i011")
-    {
-        // door
-        auto imageName = node->GetAttribute(L"image").ToStdWstring();
-        picture->SetImage(imageName);
-        mMapPictures[id] = picture;
-
-    }
-
-    else if (id == L"i012")
-    {
-        // UofM
-
-      auto imageName = node->GetAttribute(L"image").ToStdWstring();
-        picture->SetImage(imageName);
-        mMapPictures[id] = picture;
-
-    }
-    else if (id == L"i013")
-    {
-        // wisc
-        auto imageName = node->GetAttribute(L"image").ToStdWstring();
-        picture->SetImage(imageName);
-        mMapPictures[id] = picture;
-    }
 }
 
 void Stadium::AddItem(Item* item)
