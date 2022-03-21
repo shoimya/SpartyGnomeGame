@@ -84,6 +84,7 @@ bool Villain::CollisionTest(Item* item)
     }
 
     GetStadium()->Stop();
+    GetStadium()->Load(GetStadium()->GetLevelNum());
         // Stop
         // @param DieTime Double
         // @param Dying Bool true if dying

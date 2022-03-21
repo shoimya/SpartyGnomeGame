@@ -128,6 +128,7 @@ void Stadium::Update(double elapsed)
         {
             mGameMode = loss;
             Stop();
+            Load(GetLevelNum());
         }
     }
     else if(mTime < 0 && mTime > -1) {
