@@ -62,6 +62,12 @@ public:
     * @param platform Stanley we are visiting
     */
     virtual void VisitStanley(Stanley* stanley){}
+    
+    /**
+    * Visit TreasureBox object
+    * @param platform TreasureBox we are visiting
+    */
+    virtual  void VisitTreasureBox(TreasureBox* treasure_box){}
 };
 
 #endif //SPARTYGNOME_VISITOR_H
