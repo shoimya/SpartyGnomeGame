@@ -1,19 +1,12 @@
 /**
  * @file TreasureBox.cpp
- * @author Sarah Swann
+ * @author Sarah Swann SHOIMYA CHOWDHURY
  */
 
 #include "pch.h"
 #include "TreasureBox.h"
+#include "Stadium.h"
 using namespace std;
-
-const wstring filename1 = L"treasureChest.png";
-
-TreasureBox::TreasureBox(Stadium* stadium, std::shared_ptr<Picture> picture)
-        :Item(stadium, picture)
-{
-
-}
 
 TreasureBox::~TreasureBox()
 {
@@ -31,4 +24,45 @@ void TreasureBox::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     }
 }
 
+bool TreasureBox::CollisionTest(Item* item)
+{
+    // Border for the item
+    auto itemLeft = item->GetX() - (double)item->GetWidth() / 2;
+    auto itemRight = item->GetX() + (double)item->GetWidth() / 2;
+    auto itemTop = item->GetY() - (double)item->GetHeight() / 2;
+    auto itemBottom = item->GetY() + (double)item->GetHeight() / 2;
 
+    // For us
+    auto ourLeft = GetX() - (double)GetWidth() / 2;
+    auto ourRight = GetX() + (double)GetWidth() / 2;
+    auto ourTop = GetY() - (double)GetHeight() / 2;
+    auto ourBottom = GetY() + (double)GetHeight() / 2;
+
+    // Test for all of the non-collision cases,
+    // cases where there is a gap between the two items
+    if (ourRight < itemLeft ||  // Completely to the left
+            ourLeft > itemRight ||  // Completely to the right
+            ourTop > itemBottom ||  // Completely below
+            ourBottom < itemTop)    // Completely above
+    {
+        return false;
+    }
+
+    SetStatus(true);
+    GetStadium()->AddScore(GetValue());
+    return true;
+}
+
+void TreasureBox::XmlLoad(wxXmlNode* node)
+{
+    long x, y = 0;
+    node->GetAttribute(L"x", L"0").ToLong(&x);
+    node->GetAttribute(L"y", L"0").ToLong(&y);
+    SetLocation(x,y);
+}
+
+TreasureBox::TreasureBox(Stadium* stadium, std::shared_ptr<Picture> picture, int value)
+        :Item(stadium, picture)
+{
+    SetValue(value);
+}
