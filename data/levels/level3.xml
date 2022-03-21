@@ -13,7 +13,7 @@
         <villain id="i012" image="UofM.png"/>
         <villain id="i013" image="wisc.png"/>
         <door id="i011" image="door.png"/>
-        <t-chest id="i014" image="treasureChest.png"/>
+        <t-chest id="i014" image="chest5.png"/>
     </declarations>
     <items>
 <!--        setting the background-->
@@ -74,7 +74,7 @@
         <money id="i009" x="3392" y="848"/>
         <money id="i009" x="3520" y="848"/>
 
-<!--        <t-chest id="i014" x="3640" y="848"/>-->
+        <t-chest id="i014" x="3380" y="845"/>
 
         <money id="i008" x="3392" y="624"/>
         <money id="i008" x="3520" y="624"/>
