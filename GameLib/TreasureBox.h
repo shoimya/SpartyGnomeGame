@@ -1,6 +1,6 @@
 /**
  * @file TreasureBox.h
- * @author Sarah Swann
+ * @author Sarah Swann SHOIMYA CHOWDHURY
  *
  *
  */
@@ -13,13 +13,18 @@
 
 class TreasureBox : public Item {
 private:
-
+    int mValue = 0;
 public:
-
-    TreasureBox(Stadium* stadium, std::shared_ptr<Picture> picture);
+    TreasureBox(Stadium* stadium, std::shared_ptr<Picture> picture, int value);
     ~TreasureBox();
 
-    void Draw(std::shared_ptr<wxGraphicsContext> graphics);
+    void SetValue(int value){mValue = value;}
+    int GetValue(){return mValue;}
+    void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
+    bool CollisionTest(Item* item) override;
+    void XmlLoad(wxXmlNode *node) override;
+    void Accept(Visitor* visitor) override {visitor->VisitTreasureBox(this);}
+
 };
 
 #endif //SPARTYGNOME_TREASUREBOX_H
