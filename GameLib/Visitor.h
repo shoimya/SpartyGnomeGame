@@ -15,7 +15,7 @@ class Door;
 class Money;
 class Villain;
 class Stanley;
-
+class TreasureBox;
 class Visitor {
 private:
 
