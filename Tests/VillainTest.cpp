@@ -38,20 +38,6 @@ TEST(VillainTest, Update)
         ASSERT_EQ(villain.GetY(), Y + (villain.GetVelocity() * 0.1));
         Y += villain.GetVelocity() * 0.1;
     }
-
-//    Villain villain2 = Villain(&stadium, picture);
-//    villain2.Update(1.6);
-//
-//    /// villain moving down at 240 pixels/second
-//    ASSERT_EQ(villain2.GetVelocity(),240);
-//    Y = villain2.GetY();
-//    for (int i=1; i<9; i++)
-//    {
-//        villain2.Update(0.1);
-//        ASSERT_EQ(villain2.GetVelocity(),240);
-//        ASSERT_EQ(villain2.GetY(), Y + (villain2.GetVelocity() * 0.1));
-//        Y += villain2.GetVelocity() * 0.1;
-//    }
 }
 
 TEST(VillainTest, CollisionTest)

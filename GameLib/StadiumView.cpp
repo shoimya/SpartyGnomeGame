@@ -132,6 +132,10 @@ void StadiumView::OnPaint(wxPaintEvent& event)
     case 0:
     {
         int levelNum = mStadium.GetLevelNum();
+
+        /// workaround for reloading levels upon loss/win
+        mStadium.Load(levelNum);
+
         std::string strNum = to_string(levelNum);
         graphics->DrawText("Level" + strNum + " Begin",430,505);
         break;

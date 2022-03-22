@@ -6,7 +6,7 @@ set(TEST_FILES
         GnomeTest.cpp
         GnomeTest.h
         StadiumTest.cpp
-        VillainTest.cpp)
+        VillainTest.cpp StanleyTest.cpp)
 
 # Get Google Tests
 include(FetchContent)
