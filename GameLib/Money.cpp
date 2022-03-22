@@ -77,7 +77,7 @@ bool Money::CollisionTest(Item* item)
         return false;
     }
 
-    SetStatus(true);
+    //SetStatus(true);
     GetStadium()->AddScore(GetValue());
     mHit = true;
 
@@ -88,7 +88,16 @@ void Money::Update(double elapsed)
 {
     if (mHit)
     {
+
         mStopWatch.Start();
+        auto mCurrentTime = elapsed - mStopWatch.Time();
+        SetLocation(GetX(),
+                GetY() - mMoneySpeed * elapsed);
+
+        // Delete money after 5 sec
+        if (mCurrentTime >= 5){
+            SetStatus(true);
+        }
 
     }
 

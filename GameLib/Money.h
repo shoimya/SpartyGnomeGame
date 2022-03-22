@@ -20,6 +20,8 @@ private:
 
     double mDuration = 0; /// Frame duration in milliseconds
 
+    double mMoneySpeed = 300; /// Money speed in pixels per second
+
     wxTimer mFlyTime; /// Timer for floating money
 
     wxStopWatch mStopWatch; /// Stopwatch used to measure elapsed time
