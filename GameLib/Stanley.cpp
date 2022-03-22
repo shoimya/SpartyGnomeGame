@@ -1,6 +1,6 @@
 /**
  * @file Stanley.cpp
- * @author Connor
+ * @author Connor Sarah Swann
  */
 
 #include "pch.h"
@@ -23,6 +23,16 @@ void Stanley::Draw(std::shared_ptr<wxGraphicsContext> graphics)
         graphics->DrawBitmap(GetPicture()->AsBitmap(graphics),
                 (int) GetX()-wid/2 , (int) GetY()-hit/2 ,
                 wid+1, hit );
+    }
+
+    if(mHit == true)
+    {
+        wxFont font(wxSize(40, 50),
+                wxFONTFAMILY_SWISS,
+                wxFONTSTYLE_NORMAL,
+                wxFONTWEIGHT_BOLD);
+        graphics->SetFont(font, wxColour(0, 150, 0)); // green
+        graphics->DrawText("Tuition Increase!" ,GetX(),GetY());  // Text to draw
     }
 }
 
@@ -55,9 +65,27 @@ bool Stanley::CollisionTest(Item* item)
         return false;
     }
 
-    SetStatus(true);
+    //SetStatus(true);
     GetStadium()->TuitionUp();
+    mHit = true;
     return true;
 }
 
+void Stanley::Update(double elapsed)
+{
+    if (mHit)
+    {
 
+        mStopWatch.Start();
+        auto mCurrentTime = elapsed - mStopWatch.Time();
+        SetLocation(GetX(),
+                GetY() + mMoneySpeed * elapsed);
+
+        // Delete money after 5 sec
+        if (mCurrentTime >= 5){
+            SetStatus(true);
+        }
+
+    }
+
+}
