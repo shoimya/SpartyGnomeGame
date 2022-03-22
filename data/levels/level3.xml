@@ -28,9 +28,9 @@
 <!--        this is main platform-->
         <platform id="i004" x="775" y="944" width="1010" height="32"/>
         <platform id="i005" x="1120" y="432" width="256" height="32"/>
-<!--        adding new villian-->
+        <platform id="i005" x="580" y="660" width="240" height="32"/>
+            <!--        adding new villian-->
         <villain id="i012" x="1100" y="853"/>
-
         <villain id="i013" x="1700" y="853"/>
 <!--        for new villians-->
         <platform id="i005" x="1376" y="432" width="256" height="32"/>
@@ -67,51 +67,63 @@
         <platform id="i004" x="3616" y="944" width="1408" height="32"/>
         <platform id="i005" x="3072" y="560" width="256" height="32"/>
         <wall id="i007" x="2992" y="752" width="32" height="352"/>
-        <wall id="i007" x="3152" y="752" width="32" height="352"/>
         <platform id="i005" x="3340" y="560" width="750" height="32"/>
         <platform id="i005" x="3840" y="560" width="260" height="32"/>
         <villain id="i012" x="4070" y="853"/>
-        <money id="i009" x="3392" y="848"/>
-        <money id="i009" x="3520" y="848"/>
 
-        <t-chest id="i014" x="3380" y="845"/>
 
+        <money id="i008" x="3148" y="624"/>
+        <money id="i009" x="3276" y="624"/>
+        <t-chest id="i014" x="3152" y="845"/>
         <money id="i008" x="3392" y="624"/>
         <money id="i008" x="3520" y="624"/>
+        <money id="i009" x="3392" y="848"/>
+        <money id="i009" x="3520" y="848"/>
+        <money id="i008" x="3392" y="736"/>
+        <money id="i009" x="3520" y="736"/>
+
+        <money id="i009" x="3648" y="624"/>
+        <money id="i009" x="3776" y="624"/>
+        <money id="i008" x="3648" y="848"/>
+        <money id="i008" x="3776" y="848"/>
+        <money id="i009" x="3648" y="736"/>
+        <money id="i008" x="3776" y="736"/>
+
         <money id="i008" x="3232" y="368"/>
         <money id="i008" x="3328" y="304"/>
         <money id="i009" x="3456" y="272"/>
         <money id="i009" x="3584" y="304"/>
         <money id="i009" x="3712" y="368"/>
-
-
         <platform id="i004" x="4416" y="784" width="192" height="32"/>
-
         <platform id="i005" x="4528" y="432" width="224" height="32"/>
         <wall id="i006" x="4432" y="352" width="32" height="128"/>
         <money id="i009" x="4480" y="528"/>
         <money id="i009" x="4576" y="528"/>
         <tuition-up id="i010" x="4545" y="176"/>
         <wall id="i006" x="4624" y="352" width="32" height="128"/>
-
         <platform id="i004" x="4672" y="688" width="192" height="32"/>
         <platform id="i004" x="4928" y="592" width="256" height="32"/>
-<!--        <money id="i008" x="4896" y="432"/>-->
-<!--        <money id="i008" x="4992" y="432"/>-->
         <platform id="i004" x="5184" y="496" width="192" height="32"/>
 
             <!--            last platform-->
         <platform id="i004" x="6224" y="944" width="1760" height="32"/>
-<!--        <money id="i009" x="5408" y="592"/>-->
         <platform id="i004" x="5456" y="240" width="160" height="32"/>
-<!--        <money id="i008" x="5536" y="592"/>-->
-<!--        <wall id="i006" x="5616" y="816" width="32" height="224"/>-->
         <platform id="i004" x="5936" y="240" width="224" height="32"/>
-<!--        <money id="i009" x="5856" y="80"/>-->
-<!--        <money id="i009" x="6016" y="80"/>-->
-        <money id="i008" x="6304" y="848"/>
-        <money id="i009" x="6304" y="720"/>
-        <money id="i008" x="6304" y="592"/>
+            
+        <villain id="i012" x="5934" y="853"/>
+        <money id="i009" x="5936" y="560"/>
+        <money id="i009" x="5936" y="659"/>
+
+        <money id="i008" x="6198" y="848"/>
+        <tuition-up id="i010" x="6198" y="716"/>
+        <money id="i008" x="6198" y="592"/>
+
+        <money id="i009" x="5856" y="80"/>
+        <money id="i009" x="6016" y="80"/>
+
+        <money id="i008" x="6314" y="848"/>
+        <money id="i009" x="6314" y="720"/>
+        <money id="i008" x="6314" y="592"/>
         <villain id="i013" x="6462" y="853"/>
         <money id="i009" x="6592" y="848"/>
         <money id="i008" x="6592" y="720"/>
