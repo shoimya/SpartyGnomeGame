@@ -1,8 +1,9 @@
 /**
  * @file Money.cpp
- * @author Haoxiang Zhang
+ * @author Haoxiang Zhang Sarah Swann
  */
 
+#include <string>
 #include "pch.h"
 #include "Money.h"
 #include "Stadium.h"
@@ -25,6 +26,17 @@ void Money::Draw(std::shared_ptr<wxGraphicsContext> graphics)
         graphics->DrawBitmap(GetPicture()->AsBitmap(graphics),
                 (int) GetX()-wid/2 , (int) GetY()-hit/2 ,
                 wid+1, hit );
+
+        if(mHit == true) // add time till money leaves
+        {
+            wxFont font(wxSize(20, 30),
+                    wxFONTFAMILY_SWISS,
+                    wxFONTSTYLE_NORMAL,
+                    wxFONTWEIGHT_MEDIUM);
+
+            graphics->SetFont(font, wxColour(0, 128, 0)); // green
+            graphics->DrawText("$" + to_string(mValue) ,GetX(),GetY());  // Text to draw
+        }
     }
 }
 
@@ -65,8 +77,29 @@ bool Money::CollisionTest(Item* item)
         return false;
     }
 
-    SetStatus(true);
+    //SetStatus(true);
     GetStadium()->AddScore(GetValue());
+    mHit = true;
+
     return true;
+}
+
+void Money::Update(double elapsed)
+{
+    if (mHit)
+    {
+
+        mStopWatch.Start();
+        auto mCurrentTime = elapsed - mStopWatch.Time();
+        SetLocation(GetX(),
+                GetY() - mMoneySpeed * elapsed);
+
+        // Delete money after 5 sec
+        if (mCurrentTime >= 5){
+            SetStatus(true);
+        }
+
+    }
+
 }
 

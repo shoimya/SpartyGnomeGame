@@ -22,6 +22,16 @@ void TreasureBox::Draw(std::shared_ptr<wxGraphicsContext> graphics)
                 (int) GetX()-wid/2 , (int) GetY()-hit/2 ,
                 wid+1, hit );
     }
+
+    if(mHit == true)
+    {
+        wxFont font(wxSize(40, 50),
+                wxFONTFAMILY_DECORATIVE,
+                wxFONTSTYLE_ITALIC,
+                wxFONTWEIGHT_BOLD);
+        graphics->SetFont(font, wxColour(197,179,88)); // gold
+        graphics->DrawText("$" + to_string(mValue) ,GetX(),GetY());  // Text to draw
+    }
 }
 
 bool TreasureBox::CollisionTest(Item* item)
@@ -48,8 +58,9 @@ bool TreasureBox::CollisionTest(Item* item)
         return false;
     }
 
-    SetStatus(true);
+    //SetStatus(true);
     GetStadium()->AddScore(GetValue());
+    mHit = true;
     return true;
 }
 
@@ -65,4 +76,23 @@ TreasureBox::TreasureBox(Stadium* stadium, std::shared_ptr<Picture> picture, int
         :Item(stadium, picture)
 {
     SetValue(value);
+}
+
+void TreasureBox::Update(double elapsed)
+{
+    if (mHit)
+    {
+
+        mStopWatch.Start();
+        auto mCurrentTime = elapsed - mStopWatch.Time();
+        SetLocation(GetX(),
+                GetY() - mMoneySpeed * elapsed);
+
+        // Delete money after 5 sec
+        if (mCurrentTime >= 5){
+            SetStatus(true);
+        }
+
+    }
+
 }
