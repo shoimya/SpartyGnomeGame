@@ -551,7 +551,7 @@ void Stadium::Stop()
     mTime = -2;
     mGameMode = loss;
     mScoreBoard.SetScore(0);
-//    Load(GetLevelNum());
+//    Load(GetLevelNum());w
 }
 
 void Stadium::LevelComplete()
