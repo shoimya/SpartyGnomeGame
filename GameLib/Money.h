@@ -1,6 +1,6 @@
 /**
  * @file Money.h
- * @author Haoxiang Zhang SHOIMYA CHOWDHURY
+ * @author Haoxiang Zhang SHOIMYA CHOWDHURY Sarah Swann
  *
  *
  */

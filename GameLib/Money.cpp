@@ -1,6 +1,6 @@
 /**
  * @file Money.cpp
- * @author Haoxiang Zhang
+ * @author Haoxiang Zhang Sarah Swann
  */
 
 #include <string>
@@ -34,7 +34,7 @@ void Money::Draw(std::shared_ptr<wxGraphicsContext> graphics)
                     wxFONTSTYLE_NORMAL,
                     wxFONTWEIGHT_MEDIUM);
 
-            graphics->SetFont(font, wxColour(0, 128, 0));
+            graphics->SetFont(font, wxColour(0, 128, 0)); // green
             graphics->DrawText("$" + to_string(mValue) ,GetX(),GetY());  // Text to draw
         }
     }
