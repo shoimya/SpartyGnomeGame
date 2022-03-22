@@ -3,6 +3,7 @@
  * @author Haoxiang Zhang
  */
 
+#include <string>
 #include "pch.h"
 #include "Money.h"
 #include "Stadium.h"
@@ -25,6 +26,17 @@ void Money::Draw(std::shared_ptr<wxGraphicsContext> graphics)
         graphics->DrawBitmap(GetPicture()->AsBitmap(graphics),
                 (int) GetX()-wid/2 , (int) GetY()-hit/2 ,
                 wid+1, hit );
+
+        if(mHit == true) // add time till money leaves
+        {
+            wxFont font(wxSize(20, 30),
+                    wxFONTFAMILY_SWISS,
+                    wxFONTSTYLE_NORMAL,
+                    wxFONTWEIGHT_MEDIUM);
+
+            graphics->SetFont(font, wxColour(0, 128, 0));
+            graphics->DrawText("$" + to_string(mValue) ,GetX(),GetY());  // Text to draw
+        }
     }
 }
 
@@ -67,6 +79,18 @@ bool Money::CollisionTest(Item* item)
 
     SetStatus(true);
     GetStadium()->AddScore(GetValue());
+    mHit = true;
+
     return true;
+}
+
+void Money::Update(double elapsed)
+{
+    if (mHit)
+    {
+        mStopWatch.Start();
+
+    }
+
 }
 

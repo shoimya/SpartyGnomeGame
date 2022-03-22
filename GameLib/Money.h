@@ -16,6 +16,14 @@ private:
 
     int mValue = 0;
 
+    bool mHit = false; /// Money hit indicator
+
+    double mDuration = 0; /// Frame duration in milliseconds
+
+    wxTimer mFlyTime; /// Timer for floating money
+
+    wxStopWatch mStopWatch; /// Stopwatch used to measure elapsed time
+
 public:
     Money(Stadium* stadium, std::shared_ptr<Picture> picture, int value);
 
@@ -28,6 +36,10 @@ public:
 
     bool CollisionTest(Item *item) override;
     ~Money();
+
+    ///  Handle updates for animation
+    /// @param elapsed The time since the last update
+    void Update(double elapsed) override;
 
 };
 
