@@ -23,7 +23,7 @@ private:
 
     Vector mInitPos;
 
-    bool mStop;
+    bool mStop = false;
 
     bool mStep;
 
