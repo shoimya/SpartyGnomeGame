@@ -8,7 +8,9 @@
 #include "Stadium.h"
 using namespace std;
 
+/// filename for 1st money option
 const wstring filename1 = L"money100.png";
+/// filename for 2nd money option
 const wstring filename2 = L"money1000.png";
 
 Money::Money(Stadium* stadium, std::shared_ptr<Picture> picture, int value)
