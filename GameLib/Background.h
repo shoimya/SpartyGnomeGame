@@ -22,7 +22,15 @@ public:
     ///destructor
     ~Background();
     
+    /**
+     * Draw fucntion override
+     * @param Graphics: shared pointer
+     * */
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
+    /**
+     * The aceept function for visitor
+     * @param visitor The visitor
+     */
     void Accept(Visitor* visitor) override {visitor->VisitBackground(this);}
 
 };
