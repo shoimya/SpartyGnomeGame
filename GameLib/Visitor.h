@@ -17,6 +17,10 @@ class Villain;
 class Stanley;
 class TreasureBox;
 
+/**
+* this is the visitor base class
+*/
+
 class Visitor {
 private:
 

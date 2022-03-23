@@ -6,9 +6,9 @@
 #include <pch.h>
 #include "gtest/gtest.h"
 #include "GnomeTest.h"
-#include "Stadium.h"
-#include "Gnome.h"
-#include "Picture.h"
+#include <Stadium.h>
+#include <Gnome.h>
+#include <Picture.h>
 using namespace std;
 
 TEST(GnomeTest, Update)
