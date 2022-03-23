@@ -10,16 +10,22 @@
 
 #include "ItemPlatform.h"
 #include "Visitor.h"
-
+/**
+ * Base class for Grass type platform
+ *
+ * */
 class Grass : public ItemPlatform{
 private:
 
 public:
+    ///constructor
   Grass(Stadium *Stadium, std::shared_ptr<Picture> Picture);
 
 
-//  void XmlLoad(wxXmlNode *node, int xPos);
+    //  void XmlLoad(wxXmlNode *node, int xPos);
   void Accept(Visitor *visitor) override {}
+  
+    ///destructor
   ~Grass();
 
     
