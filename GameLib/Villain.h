@@ -24,7 +24,11 @@ private:
     Vector mPosInit;
 
 public:
-    /// constructor
+    /**
+     * Constructor
+     * @param stadium The stadium
+     * @param picture The picture
+     */
     Villain(Stadium* stadium, std::shared_ptr<Picture> picture);
     /**
      * The draw function

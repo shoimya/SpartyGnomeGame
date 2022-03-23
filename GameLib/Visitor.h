@@ -69,7 +69,7 @@ public:
     
     /**
     * Visit treasureBox object
-    * @param treasureBox TreasureBox  we are visiting
+    * @param treasureBox TreasureBox we are visiting
     */
     virtual void VisitTreasureBox(TreasureBox* treasure_box){}
 };

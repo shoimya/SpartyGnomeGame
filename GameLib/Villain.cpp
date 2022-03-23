@@ -46,11 +46,6 @@ void Villain::XmlLoad(wxXmlNode* node)
     this->SetInitialLocation(x,y);
 }
 
-/**
- * Handle updates in time/movement of our villain
- *
- * @param elapsed Time elapsed since the class call
- */
 void Villain::Update(double elapsed)
 {
     auto next = GetY()+(mSpeedY*elapsed);
