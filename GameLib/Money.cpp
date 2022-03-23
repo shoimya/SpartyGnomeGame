@@ -2,9 +2,8 @@
  * @file Money.cpp
  * @author Haoxiang Zhang Sarah Swann
  */
-
-#include <string>
 #include "pch.h"
+#include <string>
 #include "Money.h"
 #include "Stadium.h"
 using namespace std;
