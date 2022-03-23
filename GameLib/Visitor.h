@@ -69,9 +69,9 @@ public:
     
     /**
     * Visit treasureBox object
-    * @param treasureBox TreasureBox we are visiting
+    * @param treasureBox The treasure we are visiting
     */
-    virtual void VisitTreasureBox(TreasureBox* treasure_box){}
+    virtual void VisitTreasureBox(TreasureBox* treasureBox) {}
 };
 
 #endif //SPARTYGNOME_VISITOR_H

@@ -18,7 +18,11 @@ public:
     VisitorMoney();
     /// Money Visitor Destructor
     ~VisitorMoney();
-    /// Visit Money function
+
+    /**
+     * Visit money
+     * @param money The money to visit
+     */
     void VisitMoney(Money* money) override;
 
 };

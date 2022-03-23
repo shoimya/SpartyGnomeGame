@@ -17,8 +17,13 @@ class Wall : public ItemPlatform{
 private:
 
 public:
-    /// constructor
+    /**
+     * Constructor
+     * @param Stadium The stadium
+     * @param picture The picture
+     */
     Wall(Stadium *Stadium, std::shared_ptr<Picture> picture);
+
 /// Destructor
     ~Wall();
 
