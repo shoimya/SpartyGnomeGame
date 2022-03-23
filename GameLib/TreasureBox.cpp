@@ -25,7 +25,6 @@ void TreasureBox::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 
     if(mHit)
     {
-        SetStatus(true);
         wxFont font(wxSize(40, 50),
                 wxFONTFAMILY_DECORATIVE,
                 wxFONTSTYLE_ITALIC,
@@ -61,6 +60,7 @@ bool TreasureBox::CollisionTest(Item* item)
 
     GetStadium()->AddScore(GetValue());
     GetStadium()->TuitionUp();
+    SetStatus(true);
     SetValue(0);
     mHit = true;
     return true;
@@ -86,14 +86,8 @@ void TreasureBox::Update(double elapsed)
     {
 
         mStopWatch.Start();
-        auto mCurrentTime = elapsed - mStopWatch.Time();
         SetLocation(GetX(),
                 GetY() - mMoneySpeed * elapsed);
-
-        // Delete money after 5 sec
-        if (mCurrentTime >= 5){
-            SetStatus(true);
-        }
 
     }
 

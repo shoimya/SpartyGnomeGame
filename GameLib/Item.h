@@ -35,6 +35,9 @@ private:
     /// Physical status
     bool mPhysical = true;
 
+    /// Flied
+    bool mFlied = false;
+
 protected:
     /// Base-Class Item constructor
     Item(Stadium *stadium, std::shared_ptr<Picture> picture);
@@ -180,6 +183,15 @@ public:
      * @param physical The physical status
      */
     virtual void SetPhysical(bool physical){mPhysical = physical;}
+
+    /**
+     * Set lied
+     * @param the flying status
+     */
+    virtual void SetFlied(bool flied) {mFlied = false;}
+
+    virtual bool GetFlied(){ return mFlied ;}
+
 
 };
 

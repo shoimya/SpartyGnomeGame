@@ -21,7 +21,6 @@ void Money::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     if(mHit) // add time till money leaves
     {
-        SetStatus(true);
         wxFont font(wxSize(20, 30),
                 wxFONTFAMILY_SWISS,
                 wxFONTSTYLE_NORMAL,
@@ -77,6 +76,7 @@ bool Money::CollisionTest(Item* item)
     }
 
     GetStadium()->AddScore(GetValue());
+    SetStatus(true);
     SetValue(0);
     mHit = true;
     return true;
@@ -88,14 +88,9 @@ void Money::Update(double elapsed)
     {
 
         mStopWatch.Start();
-        auto mCurrentTime = elapsed - mStopWatch.Time();
         SetLocation(GetX(),
                 GetY() - mMoneySpeed * elapsed);
 
-        // Delete money after 5 sec
-        if (mCurrentTime >= 1){
-            SetStatus(true);
-        }
 
     }
 

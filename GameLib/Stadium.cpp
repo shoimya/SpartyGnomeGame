@@ -188,7 +188,10 @@ Item* Stadium::CollisionTest(Item *item)
     {
         for(auto i: toRemove)
         {
-            Delete(i);
+            if(i->GetY() > 1200 || i->GetY() <0)
+            {
+                Delete(i);
+            }
         }
     }
 
