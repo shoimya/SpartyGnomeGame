@@ -46,3 +46,4 @@ __MACOSX
 *.app
 
 
+/Doxyfile.doxy
