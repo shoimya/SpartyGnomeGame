@@ -9,6 +9,10 @@
 #define SPARTYGNOME_VISITORMONEY_H
 
 #include "Visitor.h"
+
+/**
+ * Money visitor class
+ */
 class VisitorMoney : public Visitor{
 private:
 
@@ -17,7 +21,10 @@ public:
     VisitorMoney();
     /// Money Visitor Destructor
     ~VisitorMoney();
-    /// Visit Money function
+    /**
+     * Visit Money function
+     * @param money that we are visiting
+     */
     void VisitMoney(Money* money) override;
 
 };

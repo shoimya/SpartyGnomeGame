@@ -21,18 +21,28 @@ private:
     /// Money value stored
     int mInitValue = 0;
 
-    bool mHit = false; /// Money hit indicator
+    /// Money hit indicator
+    bool mHit = false;
 
-    double mDuration = 0; /// Frame duration in milliseconds
+    /// Frame duration in milliseconds
+    double mDuration = 0;
 
-    double mMoneySpeed = 300; /// Money speed in pixels per second
+    /// Money speed in pixels per second
+    double mMoneySpeed = 300;
 
-    wxTimer mFlyTime; /// Timer for floating money
+    /// Timer for floating money
+    wxTimer mFlyTime;
 
-    wxStopWatch mStopWatch; /// Stopwatch used to measure elapsed time
+    /// Stopwatch used to measure elapsed time
+    wxStopWatch mStopWatch;
 
 public:
-    /// Money constructor
+    /**
+     * Money constructor
+     * @param stadium that money is a part of
+     * @param picture for money items
+     * @param value currency value of the money item
+     */
     Money(Stadium* stadium, std::shared_ptr<Picture> picture, int value);
 
     /**
@@ -41,10 +51,16 @@ public:
      */
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
 
-    /// Load Xml
+    /**
+     * Load xml content
+     * @param node for loading xml
+     */
     void XmlLoad(wxXmlNode *node) override;
 
-    /// Accept a visitor
+    /**
+     * Accept a visitor
+     * @param visitor we are accepting
+     */
     void Accept(Visitor* visitor) override {visitor->VisitMoney(this);}
     /**
      * Set money value
@@ -54,13 +70,14 @@ public:
 
     /**
      * Get money value
-     * @return money value
+     * @return int money value
      */
     int GetValue(){return mValue;}
 
     /**
      * Checks if money is hit
      * @param item item we hit
+     * @return bool if we hit money true/false
      */
     bool CollisionTest(Item *item) override;
     ~Money();
