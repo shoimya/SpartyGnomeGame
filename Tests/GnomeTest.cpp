@@ -4,12 +4,18 @@
  */
 
 #include <pch.h>
-#include "gtest/gtest.h"
-#include "GnomeTest.h"
 #include <Stadium.h>
+#include "gtest/gtest.h"
 #include <Gnome.h>
 #include <Picture.h>
 using namespace std;
+
+class GnomeTest {
+private:
+
+public:
+
+};
 
 TEST(GnomeTest, Update)
 {
