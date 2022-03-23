@@ -28,20 +28,43 @@ private:
     wxStopWatch mStopWatch; /// Stopwatch used to measure elapsed time
 
 public:
+    /// Money constructor
     Money(Stadium* stadium, std::shared_ptr<Picture> picture, int value);
 
+    /**
+     * Draw the money on a graphics context
+     * @param graphics Graphics context to draw on
+     */
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
-    void XmlLoad(wxXmlNode *node) override;
-    void Accept(Visitor* visitor) override {visitor->VisitMoney(this);}
 
+    /// Load Xml
+    void XmlLoad(wxXmlNode *node) override;
+
+    /// Accept a visitor
+    void Accept(Visitor* visitor) override {visitor->VisitMoney(this);}
+    /**
+     * Set money value
+     * @param value money value to be set
+     */
     void SetValue(int value){mValue = value;}
+
+    /**
+     * Get money value
+     * @return money value
+     */
     int GetValue(){return mValue;}
 
+    /**
+     * Checks if money is hit
+     * @param item item we hit
+     */
     bool CollisionTest(Item *item) override;
     ~Money();
 
-    ///  Handle updates for animation
-    /// @param elapsed The time since the last update
+    /**
+     * Update money behavior
+     * @param elapsed time since last update
+     */
     void Update(double elapsed) override;
 
 };
