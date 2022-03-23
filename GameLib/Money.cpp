@@ -76,7 +76,7 @@ bool Money::CollisionTest(Item* item)
         return false;
     }
 
-    SetStatus(true);
+    //SetStatus(true);
     GetStadium()->AddScore(GetValue());
     mHit = true;
 
