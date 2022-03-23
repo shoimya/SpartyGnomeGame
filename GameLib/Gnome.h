@@ -30,7 +30,11 @@ private:
     std::wstring mPrevious = L"";
 
 public:
-    /// Constructor
+    /**
+     * Constructor
+     * @param stadium The stadium to visit
+     * @param picture The picture to draw
+     */
     Gnome(Stadium *stadium, std::shared_ptr<Picture> picture);
 
     ~Gnome();

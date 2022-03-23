@@ -46,6 +46,7 @@ private:
 
 //    int mLevelNum = 0;
 
+     /// Value of game
     int mValue = 0;
 
     /// Game Mode
@@ -164,21 +165,37 @@ public:
 
     void LevelComplete();
 
-    void MoneyText();
-
     /// The scoreboard class
     class ScoreBoard {
     public:
+        /**
+         * Constructor
+         * @param stadium The stadium to visit
+         */
         ScoreBoard(Stadium* stadium)
                 :mStadium(stadium) { }
 
+        /**
+        * Get score
+        * @return score The score of game
+        */
         int GetScore() const { return mScore; }
 
+        /**
+         * Set the score of game
+         * @param score The score to set
+         */
         void SetScore(int score) { mScore = score; }
 
     private:
+        /**
+         * The stadium of
+         */
         Stadium* mStadium;
 
+        /**
+         * the score of game
+         */
         int mScore = 0;
     };
 

@@ -15,12 +15,14 @@
 #include "Villain.h"
 #include "VisitorMoney.h"
 #include "Wall.h"
-#include "Platform.h"
 #include "Snow.h"
-#include "Grass.h"
 #include "TreasureBox.h"
 using namespace std;
+
+/// The image path
 const std::wstring ImagesDirectory = L"data/images";
+
+///The level path
 const std::wstring LevelDirectory = L"data/levels";
 
 /**
@@ -614,17 +616,3 @@ void Stadium::LevelComplete()
     mGameMode = win;
     mScoreBoard.SetScore(0);
 }
-
-void Stadium::MoneyText()
-{
-    VisitorMoney visitorMoney;
-    for(auto i : mItems)
-    {
-        i->Accept(&visitorMoney);
-    }
-
-}
-
-
-
-

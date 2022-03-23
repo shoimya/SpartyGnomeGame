@@ -7,6 +7,8 @@
 #include "Door.h"
 
 using namespace std;
+
+/// Collision Distance
 const double CollisionDistance = 20;
 
 Door::Door(Stadium* stadium, shared_ptr<Picture> picture)

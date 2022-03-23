@@ -12,6 +12,7 @@
 #include "ItemPlatform.h"
 #include "Visitor.h"
 
+/// Wall class
 class Wall : public ItemPlatform{
 private:
 

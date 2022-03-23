@@ -8,7 +8,10 @@
 using namespace std;
 
 
+/// The wall 1 path
 const wstring filename1 = L"wall1.png";
+
+/// The wall 2 path
 const wstring filename2 = L"wall2.png";
 
 

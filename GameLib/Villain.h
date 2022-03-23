@@ -11,6 +11,7 @@
 #include "Item.h"
 #include "Visitor.h"
 
+/// Villain class
 class Villain : public Item{
 private:
 //    Picture *picture;

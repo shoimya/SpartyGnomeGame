@@ -9,6 +9,7 @@
 #define SPARTYGNOME_VISITORMONEY_H
 
 #include "Visitor.h"
+/// Visitor money
 class VisitorMoney : public Visitor{
 private:
 

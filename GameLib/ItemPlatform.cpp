@@ -8,14 +8,9 @@
 #include "ItemPlatform.h"
 
 using namespace std;
-const wstring filename = L"";
 
 
-/**
- * The collision test for item platform
- * @param item The item to test
- * @return true if is with collision
- */
+
 bool ItemPlatform::CollisionTest(Item* item)
 {
     // Border for the item

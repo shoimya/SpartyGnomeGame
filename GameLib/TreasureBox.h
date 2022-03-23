@@ -11,6 +11,7 @@
 #include "Item.h"
 #include "Visitor.h"
 
+/// The treasureBox class
 class TreasureBox : public Item {
 private:
 
@@ -20,17 +21,22 @@ private:
     /// Init value
     int mInitValue = 0;
 
-    bool mHit = false; /// Money hit indicator
+    bool mHit = false; ///< Money hit indicator
 
-    double mDuration = 0; /// Frame duration in milliseconds
+    double mDuration = 0; ///< Frame duration in milliseconds
 
-    double mMoneySpeed = 300; /// Money speed in pixels per second
+    double mMoneySpeed = 300; ///< Money speed in pixels per second
 
-    wxTimer mFlyTime; /// Timer for floating money
+    wxTimer mFlyTime; ///< Timer for floating money
 
-    wxStopWatch mStopWatch; /// Stopwatch used to measure elapsed time
+    wxStopWatch mStopWatch; ///< Stopwatch used to measure elapsed time
 public:
-    /// Constructor
+    /**
+     * Constructor
+     * @param stadium The stadium
+     * @param picture The picture
+     * @param value The value to set
+     */
     TreasureBox(Stadium* stadium, std::shared_ptr<Picture> picture, int value);
     /// Destructor
     ~TreasureBox();

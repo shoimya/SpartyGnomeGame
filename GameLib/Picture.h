@@ -16,21 +16,32 @@ class Stadium;
 /// Picture class
 class Picture {
 private:
+    /// Stadium
     Stadium *mStadium;
 
+    /// Empty feature
     bool mEmpty = true;
 
+    /// The image
     std::shared_ptr<wxImage> mImage = nullptr;
 
+    /// The path
     std::wstring mFile = L"";
 
+    /// The image position
     std::wstring mImagePos = L"";
 public:
+    /**
+     * Constructor
+     * @param stadium The stadium
+     */
     Picture(Stadium* stadium);
+    /// Destructor
     ~Picture();
 
     /**
      * Get graphics bitmap
+     * @param graphics The graphics to draw
      * @return wxGraphicsBitmap the bitmap of this Picture
      */
     wxGraphicsBitmap AsBitmap(std::shared_ptr<wxGraphicsContext>& graphics){ return graphics->CreateBitmapFromImage(*mImage);}
@@ -71,6 +82,10 @@ public:
       */
      std::wstring GetImagePos(){return mImagePos;}
 
+     /**
+      * Get the image
+      * @return The image
+      */
      std::shared_ptr<wxImage> GetImage(){return mImage;}
 };
 

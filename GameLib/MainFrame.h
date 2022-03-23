@@ -23,12 +23,8 @@ public:
     ///  Initialize MainFrame
     void Initialize();
 
-    /**  OnExit -> exit program
-    * @param event wxCommandEvent of clicking exit button */
     void OnExit(wxCommandEvent& event);
 
-    /**  OnAbout -> about program
-    * @param event wxCommandEvent of clicking about button */
     void OnAbout(wxCommandEvent& event);
 };
 

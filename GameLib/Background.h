@@ -13,21 +13,26 @@
 
 /// Background class to load object
 class Background : public Item{
-private:
-    Picture* mPicture;
+
 public:
-    /// constructor
+    /**
+     * The background constructor
+     * @param stadium The stadium
+     * @param picture The picture
+     */
     Background(Stadium* stadium, std::shared_ptr<Picture> picture);
+
     ///destructor
     ~Background();
     
     /**
-     * Draw fucntion override
-     * @param Graphics: shared pointer
+     * The draw function
+     * @param graphics To Draw
      * */
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
+
     /**
-     * The aceept function for visitor
+     * The accept function visitor
      * @param visitor The visitor
      */
     void Accept(Visitor* visitor) override {visitor->VisitBackground(this);}

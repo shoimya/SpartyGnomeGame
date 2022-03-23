@@ -11,6 +11,7 @@
 // #include <wx/graphics.h>
 using namespace std;
 
+/// THe frame of game
 const double Frame = 2;
 /// Maximum amount of time to allow for elapsed
 const double MaxElapsed = 0.050;

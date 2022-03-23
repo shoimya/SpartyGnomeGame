@@ -8,10 +8,6 @@
 
 using namespace std;
 
-const wstring filename1 = L"";
-const wstring filename2 = L"";
-const wstring filename3 = L"";
-
 Background::Background(Stadium* stadium, std::shared_ptr<Picture> picture)
         :Item(stadium, picture)
 {

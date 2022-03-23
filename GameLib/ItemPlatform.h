@@ -11,7 +11,6 @@
 #include "Item.h"
 #include "Visitor.h"
 
-
 /// Base class for Platform and wall
 class ItemPlatform : public Item{
 private:
@@ -24,12 +23,20 @@ private:
 
 
 public:
-    /// Consturctor
+    /**
+     * Constructor
+     * @param stadium The stadium
+     * @param picture The picture to draw
+     */
     ItemPlatform(Stadium* stadium, std::shared_ptr<Picture> picture);
     /// Destructor
     ~ItemPlatform();
 
-
+    /**
+     * Collision test
+     * @param item The item to do collision test
+     * @return true if its with collision
+     */
     bool CollisionTest(Item *item) override;
 
     /**
@@ -59,7 +66,7 @@ public:
 
     /**
      * Set the height of Image
-     * @param height The value we set
+     * @param hei The value we set
      */
     void SetHeight(double hei) {mHeight = hei;}
 

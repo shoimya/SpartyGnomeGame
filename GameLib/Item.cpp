@@ -12,6 +12,7 @@ using namespace std;
 /**
  * Constructor
  * @param stadium  The stadium this item is member of
+ * @param picture The picture to draw
  */
 Item::Item(Stadium *stadium, std::shared_ptr<Picture> picture) : mStadium(stadium), mPicture(picture)
 {

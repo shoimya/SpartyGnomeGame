@@ -54,6 +54,9 @@ public:
 
     void OnKeyUp(wxKeyEvent& event);
 
+    /**
+     * Stop function
+     */
     void Stop() {mTimer.Stop();}
 };
 

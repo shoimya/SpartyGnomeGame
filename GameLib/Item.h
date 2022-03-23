@@ -91,9 +91,11 @@ public:
     * @param y Y location */
     virtual void SetLocation(double x, double y) { mPos.Set(x,y); }
 
-    /**  Set the item location
-    * @param vector Vector */
-    virtual void SetLocation(const Vector &v) { mPos.Set(v); }
+    /**
+     * Set location for item
+     * @param vec The vector to set
+     */
+    virtual void SetLocation(const Vector vec) { mPos.Set(vec); }
 
     /**
      * The draw function
@@ -185,11 +187,15 @@ public:
     virtual void SetPhysical(bool physical){mPhysical = physical;}
 
     /**
-     * Set lied
-     * @param the flying status
+     * Set lied status
+     * @param flied The flied status to set
      */
     virtual void SetFlied(bool flied) {mFlied = false;}
 
+    /**
+     * Get fly status
+     * @return Flied status
+     */
     virtual bool GetFlied(){ return mFlied ;}
 
 

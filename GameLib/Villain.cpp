@@ -9,7 +9,10 @@
 
 using namespace std;
 
+/// The path of UofM
 const wstring filename1 = L"UofM.png";
+
+/// The path of wisc
 const wstring filename2 = L"wisc.png";
 
 Villain::Villain(Stadium* stadium, std::shared_ptr<Picture> picture)

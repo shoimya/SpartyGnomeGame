@@ -31,7 +31,10 @@ public:
      */
     enum LevelNum{level0 = 0, level1 = 1, level2 = 2, level3 = 3};
 
-    /// constructor
+    /**
+     * Constructor
+     * @param stadium The stadium we are visiting
+     */
     Level(Stadium* stadium);
     /**
      * Xml load function
