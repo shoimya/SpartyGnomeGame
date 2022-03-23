@@ -26,20 +26,20 @@ private:
 
 public:
     /**
-    * Visit platform object
-    * @param platform Platform we are visiting
+    * Visit item platform object
+    * @param itemplatform Platform we are visiting
     */
-    virtual void VisitItemPlatform(ItemPlatform* itemplatform) {}
+    virtual void VisitItemPlatform(ItemPlatform* itemplatform) {};
 
     /**
-     * Visit platform object
-     * @param platform Platform we are visiting
+     * Visit gnome object
+     * @param gnome Gnome we are visiting
      */
     virtual void VisitGnome(Gnome* gnome) {}
 
     /**
-     * Visit platform object
-     * @param platform Platform we are visiting
+     * Visit background object
+     * @param background we are visiting
      */
     virtual void VisitBackground(Background* background) {}
 
@@ -56,20 +56,20 @@ public:
     virtual void VisitMoney(Money* money){}
 
     /**
-    * Visit platform object
-    * @param platform Platform we are visiting
+    * Visit villain object
+    * @param villain Villain we are visiting
     */
     virtual void VisitVillain(Villain* villain){}
 
     /**
     * Visit stanley object
-    * @param platform Stanley we are visiting
+    * @param stanley Stanley we are visiting
     */
     virtual void VisitStanley(Stanley* stanley){}
     
     /**
     * Visit TreasureBox object
-    * @param platform TreasureBox we are visiting
+    * @param treasureBox TreasureBox  we are visiting
     */
     virtual void VisitTreasureBox(TreasureBox* treasure_box){}
 };

@@ -16,13 +16,19 @@
 class StadiumView: public wxWindow  {
 private:
 
+    /// The stadium
     Stadium mStadium;
 
+    /// Timer for game
     wxTimer mTimer;
+
+    /// The stopwatch for game
     wxStopWatch mStopWatch;
 
+    /// Paint function for game
     void OnPaint(wxPaintEvent& event);
 
+    /// The time
     long mTime = 0;
 
 public:
@@ -43,8 +49,6 @@ public:
     void Level3(wxCommandEvent& event);
 
     void AddMenus(wxFrame* mainFrame, wxMenuBar* menu, wxMenu* levelMenu);
-
-    void AddLevelMenuOption(wxFrame* mainFrame, wxMenu* menu, int id, std::wstring text, std::wstring help);
 
     void OnKeyDown(wxKeyEvent& event);
 

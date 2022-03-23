@@ -33,8 +33,11 @@ void Wall::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 
 }
 
-
-
+/**
+ * The xml load in y
+ * @param node The node we visit
+ * @param yPos The y position we visit
+ */
 void Wall::XmlLoady(wxXmlNode* node, double yPos)
 {
     long x, y = 0;

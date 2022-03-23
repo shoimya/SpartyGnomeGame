@@ -16,10 +16,17 @@ class Wall : public ItemPlatform{
 private:
 
 public:
+    /// constructor
     Wall(Stadium *Stadium, std::shared_ptr<Picture> picture);
+/// Destructor
     ~Wall();
-    
+
+    /**
+     * The draw function
+     * @param graphics The graphiphcs we are using
+     */
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
+
     void XmlLoady(wxXmlNode *node, double yPos);
 
 };

@@ -47,6 +47,10 @@ void StadiumView::Initialize(wxFrame* parent)
 }
 
 
+/**
+ * The key down event function
+ * @param event Key pressed event
+ */
 void StadiumView::OnKeyDown(wxKeyEvent& event)
 {
     auto gnome = mStadium.GetGnome();
@@ -66,7 +70,10 @@ void StadiumView::OnKeyDown(wxKeyEvent& event)
     }
 }
 
-
+/**
+ * The key up event function
+ * @param event Key up event
+ */
 void StadiumView::OnKeyUp(wxKeyEvent& event)
 {
     auto gnome = mStadium.GetGnome();
@@ -207,6 +214,12 @@ void StadiumView::OnFileOpen(wxCommandEvent& event)
     Refresh();
 }
 
+/**
+ * Add menus for game
+ * @param mainFrame The main frame menu
+ * @param menu The menu bar
+ * @param levelMenu The level menu
+ */
 void StadiumView::AddMenus(wxFrame *mainFrame,wxMenuBar *menu, wxMenu* levelMenu)
 {
     levelMenu->Append(IDM_ADDLEVEL0,L"Level0",L"load level0");
@@ -220,16 +233,20 @@ void StadiumView::AddMenus(wxFrame *mainFrame,wxMenuBar *menu, wxMenu* levelMenu
 
 }
 
-void StadiumView::AddLevelMenuOption(wxFrame* mainFrame, wxMenu* menu, int id,std::wstring text, std::wstring help)
-{
-}
-
+/**
+ * Load level 0 menu
+ * @param event The loading level 0 menu event
+ */
 void StadiumView::Level0(wxCommandEvent& event)
 {
     mStadium.SetGameMode(0);
     mStadium.SetTime(-1);
     mStadium.Load(0);
 }
+/**
+ * Load level 1 menu
+ * @param event The loading level 1 menu event
+ */
 void StadiumView::Level1(wxCommandEvent& event)
 {
     mStadium.SetGameMode(0);
@@ -237,12 +254,21 @@ void StadiumView::Level1(wxCommandEvent& event)
     mStadium.SetTime(-1);
     mStadium.Load(1);
 }
+/**
+ * Load level 2 menu
+ * @param event The loading level 2 menu event
+ */
 void StadiumView::Level2(wxCommandEvent& event)
 {
     mStadium.SetGameMode(0);
     mStadium.SetTime(-1);
     mStadium.Load(2);
 }
+
+/**
+ * Load level 3 menu
+ * @param event The loading level 3 menu event
+ */
 void StadiumView::Level3(wxCommandEvent& event)
 {
     mStadium.SetGameMode(0);

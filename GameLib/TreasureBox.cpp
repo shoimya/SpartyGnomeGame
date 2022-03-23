@@ -60,7 +60,7 @@ bool TreasureBox::CollisionTest(Item* item)
 
     //SetStatus(true);
     GetStadium()->AddScore(GetValue());
-    GetStadium()->TuitionUp();
+//    GetStadium()->TuitionUp();
     mHit = true;
     return true;
 }

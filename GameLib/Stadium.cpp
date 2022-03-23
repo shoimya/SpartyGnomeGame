@@ -211,6 +211,10 @@ void Stadium::Save(const wxString &filename)
 
 }
 
+/**
+ * The stadium load function
+ * @param filename  The file to load
+ */
 void Stadium::Load(const wxString& filename)
 {
 
@@ -263,11 +267,18 @@ void Stadium::Load(const wxString& filename)
 
 }
 
+/**
+ * Clear items
+ */
 void Stadium::Clear()
 {
     mItems.clear();
 }
 
+/**
+ * Xml load item
+ * @param node The node we are visiting
+ */
 void Stadium::XmlItem(wxXmlNode* node)
 {
 
@@ -343,18 +354,24 @@ void Stadium::XmlItem(wxXmlNode* node)
         }
     }
         // wall2
-    else if (id == L"i008" || id == L"i009")
+    else if (id == L"i008")
     {
         // money100
         auto picture = mMapPictures[id];
         auto item = new Money(this, picture,100);
-        if(id == L"i009")
-        {
-            item->SetValue(1000);
-        }
         item->SetPhysical(false);
         item->XmlLoad(node);
         AddItem(item);
+    }
+    else if (id == L"i009")
+    {
+
+        auto picture = mMapPictures[id];
+        auto item = new Money(this, picture,1000);
+        item->SetPhysical(false);
+        item->XmlLoad(node);
+        AddItem(item);
+
     }
     else if (id == L"i010")
     {
@@ -396,6 +413,10 @@ void Stadium::XmlItem(wxXmlNode* node)
 
 }
 
+/**
+ * Xml set up picture
+ * @param node The node we are visiting
+ */
 void Stadium::XmlPicture(wxXmlNode* node)
 {
     auto picture = make_shared<Picture>(this);
@@ -469,11 +490,19 @@ void Stadium::XmlPicture(wxXmlNode* node)
 
 }
 
+/**
+ * Add item to mItems
+ * @param item The item to add
+ */
 void Stadium::AddItem(Item* item)
 {
     mItems.push_back(item);
 }
 
+/**
+ * Load level function
+ * @param level The level to load
+ */
 void Stadium::Load(int level)
 {
 //    mTime = 0;
@@ -505,6 +534,12 @@ void Stadium::Load(int level)
     Load(path);
 }
 
+/**
+ * The hit test
+ * @param x The x value
+ * @param y The y value
+ * @return
+ */
 Item* Stadium::HitTest(int x, int y)
 {
     for (auto i = mItems.rbegin(); i!=mItems.rend(); i++) {
@@ -515,6 +550,10 @@ Item* Stadium::HitTest(int x, int y)
     return nullptr;
 }
 
+/**
+ * Delete item
+ * @param item The item to be deleted
+ */
 void Stadium::Delete(Item* item)
 {
     auto loc = std::find(mItems.begin(),mItems.end(),item);
@@ -525,17 +564,28 @@ void Stadium::Delete(Item* item)
 
 }
 
+/**
+ * Add score for scoreboard
+ * @param value The value to add
+ */
 void Stadium::AddScore(int value)
 {
     auto score = mScoreBoard.GetScore();
     mScoreBoard.SetScore(score + value);
 }
 
+/**
+ * Get score
+ * @return score The score we get
+ */
 int Stadium::GetScore()
 {
     return mScoreBoard.GetScore();
 }
 
+/**
+ * The tution up function
+ */
 void Stadium::TuitionUp()
 {
     VisitorMoney visitorMoney;
@@ -545,7 +595,9 @@ void Stadium::TuitionUp()
     }
 }
 
-/// TODO: Make Stop() Load Stadium after showing loss screen for 2 seconds
+/**
+ * Stop the game
+ */
 void Stadium::Stop()
 {
     mTime = -2;
@@ -554,6 +606,9 @@ void Stadium::Stop()
 //    Load(GetLevelNum());w
 }
 
+/**
+ * Level complete
+ */
 void Stadium::LevelComplete()
 {
     mTime = -2;

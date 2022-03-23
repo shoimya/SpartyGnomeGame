@@ -7,9 +7,14 @@
 #include "Level.h"
 
 using namespace std;
+
+/// level 0
 const wstring filename0 = L"data/levels/level0.xml";
+/// level 1
 const wstring filename1 = L"data/levels/level1.xml";
+/// level 2
 const wstring filename2 = L"data/levels/level2.xml";
+/// level 3
 const wstring filename3 = L"data/levels/level3.xml";
 
 Level::Level(Stadium* stadium)
