@@ -10,6 +10,7 @@
 
 #include "ItemPlatform.h"
 
+/// Platform class
 class Platform : public ItemPlatform{
 private:
 

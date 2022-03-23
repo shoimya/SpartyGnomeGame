@@ -71,10 +71,7 @@ void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, 
     {
         for (auto obj : mItems)
         {
-            if (!obj->GetPicture()->Empty())
-            {
                     obj->Draw(graphics);
-            }
         }
     }
 
@@ -110,7 +107,6 @@ void Stadium::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, 
     int score =  GetScore();
     std::string strScore ="$" + to_string(score);
     graphics->DrawText(strScore,1210+pos,0);
-
     graphics->PopState();
 }
 
@@ -615,4 +611,17 @@ void Stadium::LevelComplete()
     mGameMode = win;
     mScoreBoard.SetScore(0);
 }
+
+void Stadium::MoneyText()
+{
+    VisitorMoney visitorMoney;
+    for(auto i : mItems)
+    {
+        i->Accept(&visitorMoney);
+    }
+
+}
+
+
+
 

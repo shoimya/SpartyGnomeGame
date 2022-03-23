@@ -23,8 +23,9 @@ void TreasureBox::Draw(std::shared_ptr<wxGraphicsContext> graphics)
                 wid+1, hit );
     }
 
-    if(mHit == true)
+    if(mHit)
     {
+        SetStatus(true);
         wxFont font(wxSize(40, 50),
                 wxFONTFAMILY_DECORATIVE,
                 wxFONTSTYLE_ITALIC,
@@ -58,9 +59,9 @@ bool TreasureBox::CollisionTest(Item* item)
         return false;
     }
 
-    SetStatus(true);
     GetStadium()->AddScore(GetValue());
     GetStadium()->TuitionUp();
+    SetValue(0);
     mHit = true;
     return true;
 }

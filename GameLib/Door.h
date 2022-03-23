@@ -11,6 +11,7 @@
 #include "Item.h"
 #include "Visitor.h"
 
+/// Door item
 class Door : public Item {
 private:
     Picture* mPicture;

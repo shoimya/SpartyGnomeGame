@@ -10,9 +10,8 @@
 
 #include "Item.h"
 #include "Visitor.h"
-/*
-* Background class to load object 
-**/
+
+/// Background class to load object
 class Background : public Item{
 private:
     Picture* mPicture;

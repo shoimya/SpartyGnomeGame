@@ -10,6 +10,7 @@
 
 #include "Item.h"
 #include "Visitor.h"
+
 /// Gnome class
 class Gnome : public Item{
 private:

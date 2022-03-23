@@ -11,6 +11,7 @@
 #include "Item.h"
 #include "Visitor.h"
 
+/// Money class
 class Money : public Item {
 private:
 

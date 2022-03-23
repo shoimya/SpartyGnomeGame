@@ -164,6 +164,8 @@ public:
 
     void LevelComplete();
 
+    void MoneyText();
+
     /// The scoreboard class
     class ScoreBoard {
     public:

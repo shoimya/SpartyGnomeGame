@@ -17,6 +17,7 @@
 class Stadium;
 class Visitor;
 
+/// Item base class
 class Item {
 private:
     /// The stadium this item is contained in

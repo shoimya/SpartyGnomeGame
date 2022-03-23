@@ -13,6 +13,7 @@
 class Stadium;
 class Item;
 
+/// Level class for levels
 class Level {
 private:
     /// The level files

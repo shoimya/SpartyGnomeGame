@@ -10,10 +10,8 @@
 
 #include "ItemPlatform.h"
 #include "Visitor.h"
-/**
- * Base class for Grass type platform
- *
- * */
+
+/// Base class for Grass type platform
 class Grass : public ItemPlatform{
 private:
 

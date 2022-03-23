@@ -11,10 +11,8 @@
 #include "Item.h"
 #include "Visitor.h"
 
-/**
- * Base class for Platform and wall
- *
- * */
+
+/// Base class for Platform and wall
 class ItemPlatform : public Item{
 private:
 

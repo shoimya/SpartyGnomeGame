@@ -10,6 +10,8 @@
 
 #include "ItemPlatform.h"
 #include "Visitor.h"
+
+/// Snow class
 class Snow : public ItemPlatform{
 private:
 

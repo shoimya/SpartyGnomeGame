@@ -72,6 +72,8 @@ public:
     * @param treasureBox TreasureBox  we are visiting
     */
     virtual void VisitTreasureBox(TreasureBox* treasure_box){}
+
+    virtual void VisitMoneyText(Money* money){}
 };
 
 #endif //SPARTYGNOME_VISITOR_H

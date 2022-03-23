@@ -19,23 +19,23 @@ Money::Money(Stadium* stadium, std::shared_ptr<Picture> picture, int value)
 
 void Money::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
+    if(mHit) // add time till money leaves
+    {
+        SetStatus(true);
+        wxFont font(wxSize(20, 30),
+                wxFONTFAMILY_SWISS,
+                wxFONTSTYLE_NORMAL,
+                wxFONTWEIGHT_MEDIUM);
+
+        graphics->SetFont(font, wxColour(0, 128, 0)); // green
+        graphics->DrawText("$" + to_string(mValue) ,GetX(),GetY());  // Text to draw
+    }
     if(!GetPicture()->Empty()) {
         int wid = GetPicture()->GetWidth();
         int hit = GetPicture()->GetHeight();
         graphics->DrawBitmap(GetPicture()->AsBitmap(graphics),
                 (int) GetX()-wid/2 , (int) GetY()-hit/2 ,
                 wid+1, hit );
-
-        if(mHit == true) // add time till money leaves
-        {
-            wxFont font(wxSize(20, 30),
-                    wxFONTFAMILY_SWISS,
-                    wxFONTSTYLE_NORMAL,
-                    wxFONTWEIGHT_MEDIUM);
-
-            graphics->SetFont(font, wxColour(0, 128, 0)); // green
-            graphics->DrawText("$" + to_string(mValue) ,GetX(),GetY());  // Text to draw
-        }
     }
 }
 
@@ -76,10 +76,9 @@ bool Money::CollisionTest(Item* item)
         return false;
     }
 
-    SetStatus(true);
     GetStadium()->AddScore(GetValue());
+    SetValue(0);
     mHit = true;
-
     return true;
 }
 
@@ -94,7 +93,7 @@ void Money::Update(double elapsed)
                 GetY() - mMoneySpeed * elapsed);
 
         // Delete money after 5 sec
-        if (mCurrentTime >= 5){
+        if (mCurrentTime >= 1){
             SetStatus(true);
         }
 

@@ -13,6 +13,7 @@
 
 class Stadium;
 
+/// Picture class
 class Picture {
 private:
     Stadium *mStadium;
