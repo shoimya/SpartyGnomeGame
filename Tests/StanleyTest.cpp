@@ -11,7 +11,7 @@
 #include <streambuf>
 #include <wx/filename.h>
 #include <Stanley.h>
-#include "Money.h"
+#include <Money.h>
 #include <Gnome.h>
 
 using namespace std;
