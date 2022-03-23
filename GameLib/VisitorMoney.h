@@ -13,8 +13,11 @@ class VisitorMoney : public Visitor{
 private:
 
 public:
+    ///  Money Visitor Constructor
     VisitorMoney();
+    /// Money Visitor Destructor
     ~VisitorMoney();
+    /// Visit Money function
     void VisitMoney(Money* money) override;
 
 };

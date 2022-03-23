@@ -5,8 +5,6 @@
  *
  */
 
-
-
 #ifndef SPARTYGNOME_ITEM_H
 #define SPARTYGNOME_ITEM_H
 
@@ -37,6 +35,7 @@ private:
     bool mPhysical = true;
 
 protected:
+    /// Base-Class Item constructor
     Item(Stadium *stadium, std::shared_ptr<Picture> picture);
 
 public:
