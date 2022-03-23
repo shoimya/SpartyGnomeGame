@@ -15,7 +15,7 @@
 class Money : public Item {
 private:
 
-    int mValue = 0;
+    int mValue = 0; /// Value of money
 
     bool mHit = false; /// Money hit indicator
 
@@ -28,7 +28,12 @@ private:
     wxStopWatch mStopWatch; /// Stopwatch used to measure elapsed time
 
 public:
-    /// Money constructor
+    /**
+     * Money constructor
+     * @param stadium stadium money is a part of
+     * @param picture picture we a drawing
+     * @param value money value
+     */
     Money(Stadium* stadium, std::shared_ptr<Picture> picture, int value);
 
     /**
@@ -37,11 +42,18 @@ public:
      */
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
 
-    /// Load Xml
+    /**
+    * Load Xml
+    * @param node node to load xml content
+    */
     void XmlLoad(wxXmlNode *node) override;
 
-    /// Accept a visitor
+    /**
+    * Accept a visitor
+    * @param visitor visitor being accepted
+    */
     void Accept(Visitor* visitor) override {visitor->VisitMoney(this);}
+
     /**
      * Set money value
      * @param value money value to be set
