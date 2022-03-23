@@ -59,6 +59,10 @@ public:
     * @return Y location in pixels */
     virtual double GetY() const { return mPos.Y(); }
 
+    /**
+     * Get the position
+     * @return position Vector The position of item
+     */
     virtual Vector GetPos() const { return mPos;}
 
     /**
@@ -73,6 +77,10 @@ public:
      */
     virtual int GetHeight() const {return mPicture->GetHeight();}
 
+    /**
+     * Get the picture of item
+     * @return picture The picture of item
+     */
     virtual std::shared_ptr<Picture> GetPicture() {return mPicture;}
 
     /**  Set the item location
@@ -84,8 +92,17 @@ public:
     * @param vector Vector */
     virtual void SetLocation(const Vector &v) { mPos.Set(v); }
 
+    /**
+     * The draw function
+     * @param graphics The graphics we using
+     */
     virtual void Draw(std::shared_ptr<wxGraphicsContext> graphics) = 0;
 
+    /**
+     * The draw function with x offset
+     * @param graphics The graphics we using
+     * @param scrollx The xoffset value
+     */
     virtual void Draw(std::shared_ptr<wxGraphicsContext> graphics, int scrollx);
 
 //    virtual wxXmlNode *XmlSave(wxXmlNode *node){return nullptr;}
@@ -99,6 +116,11 @@ public:
     /// @return Stadium pointer
     virtual Stadium *GetStadium() { return mStadium; }
 
+    /**
+     * The collision test
+     * @param item The item to do collision test
+     * @return true if it is with collision otherwise false
+     */
     virtual bool CollisionTest(Item *item) {return false;}
 
     /**
@@ -108,19 +130,55 @@ public:
     virtual void Accept(Visitor* visitor) = 0;
 
 
+    /**
+     * Xml save function
+     * @param node The node we are visiting
+     * @return node The node value we retrun
+     */
     virtual wxXmlNode *XmlSave(wxXmlNode *node);
+
+    /**
+     * Xml load function
+     * @param node The node we are visiting
+     */
     virtual void XmlLoad(wxXmlNode *node);
 
+    /**
+     * Set the picture for item
+     * @param file The picture item fil path
+     */
     virtual void SetPicture(const std::wstring &file);
 
+    /**
+     * The hit test
+     * @param x The x value
+     * @param y The y value
+     * @return true if it hitted
+     */
     virtual bool HitTest(int x, int y);
 
+    /**
+     * Set ths status of destroyed
+     * @param status
+     */
     virtual void SetStatus(bool status){mStatus = status;}
 
+    /**
+     * Get the status of destroyed
+     * @return The status of destroyed
+     */
     virtual bool GetStatus(){return mStatus;}
 
+    /**
+     * Get the physical status
+     * @return physical The current physicla status
+     */
     virtual bool GetPhysical(){return mPhysical;}
 
+    /**
+     * Set item to physical
+     * @param physical The physical status
+     */
     virtual void SetPhysical(bool physical){mPhysical = physical;}
 
 };

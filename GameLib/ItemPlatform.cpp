@@ -11,6 +11,11 @@ using namespace std;
 const wstring filename = L"";
 
 
+/**
+ * The collision test for item platform
+ * @param item The item to test
+ * @return true if is with collision
+ */
 bool ItemPlatform::CollisionTest(Item* item)
 {
     // Border for the item
@@ -49,6 +54,10 @@ ItemPlatform::~ItemPlatform()
 
 }
 
+/**
+ * The draw function for item platform
+ * @param graphics  The graphics we are using
+ */
 void ItemPlatform::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     if(!GetPicture()->Empty()) {
@@ -61,6 +70,12 @@ void ItemPlatform::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 
 }
 
+/**
+ * The draw function with x and y offset
+ * @param graphics The graphics we using
+ * @param XOffSet  The x offset
+ * @param YOffSet  The y offset
+ */
 void ItemPlatform::Draw(std::shared_ptr<wxGraphicsContext> graphics, double XOffSet, double YOffSet)
 {
     int wid = GetPicture()->GetWidth();
@@ -71,6 +86,11 @@ void ItemPlatform::Draw(std::shared_ptr<wxGraphicsContext> graphics, double XOff
 
 }
 
+/**
+ * The xml load function
+ * @param node The node we visit
+ * @param xPos The x position we visit
+ */
 void ItemPlatform::XmlLoad(wxXmlNode* node, double xPos)
 {
     double x, y = 0;
@@ -84,7 +104,11 @@ void ItemPlatform::XmlLoad(wxXmlNode* node, double xPos)
 
     SetLocation(x + 32*xPos,y);
 }
-
+/**
+ * The xml load in y
+ * @param node The node we visit
+ * @param yPos The y position we visit
+ */
 void ItemPlatform::XmlLoady(wxXmlNode* node, double yPos)
 {
     double x, y = 0;

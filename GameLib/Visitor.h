@@ -16,6 +16,7 @@ class Money;
 class Villain;
 class Stanley;
 class TreasureBox;
+
 class Visitor {
 private:
 
@@ -25,7 +26,6 @@ public:
     * @param platform Platform we are visiting
     */
     virtual void VisitItemPlatform(ItemPlatform* itemplatform) {}
-
 
     /**
      * Visit platform object
@@ -67,7 +67,7 @@ public:
     * Visit TreasureBox object
     * @param platform TreasureBox we are visiting
     */
-    virtual  void VisitTreasureBox(TreasureBox* treasure_box){}
+    virtual void VisitTreasureBox(TreasureBox* treasure_box){}
 };
 
 #endif //SPARTYGNOME_VISITOR_H
