@@ -15,7 +15,11 @@
 class Money : public Item {
 private:
 
+    /// Money value
     int mValue = 0;
+
+    /// Money value stored
+    int mInitValue = 0;
 
     bool mHit = false; /// Money hit indicator
 

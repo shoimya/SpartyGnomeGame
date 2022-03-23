@@ -17,6 +17,9 @@ private:
     /// The value for treasurebox
     int mValue = 0;
 
+    /// Init value
+    int mInitValue = 0;
+
     bool mHit = false; /// Money hit indicator
 
     double mDuration = 0; /// Frame duration in milliseconds

@@ -22,7 +22,6 @@ void TreasureBox::Draw(std::shared_ptr<wxGraphicsContext> graphics)
                 (int) GetX()-wid/2 , (int) GetY()-hit/2 ,
                 wid+1, hit );
     }
-
     if(mHit)
     {
         wxFont font(wxSize(40, 50),
@@ -30,8 +29,10 @@ void TreasureBox::Draw(std::shared_ptr<wxGraphicsContext> graphics)
                 wxFONTSTYLE_ITALIC,
                 wxFONTWEIGHT_BOLD);
         graphics->SetFont(font, wxColour(197,179,88)); // gold
-        graphics->DrawText("$" + to_string(mValue) ,GetX(),GetY());  // Text to draw
+        graphics->DrawText("$" + to_string(mInitValue) ,GetX(),GetY());  // Text to draw
     }
+
+
 }
 
 bool TreasureBox::CollisionTest(Item* item)
@@ -78,6 +79,7 @@ TreasureBox::TreasureBox(Stadium* stadium, std::shared_ptr<Picture> picture, int
         :Item(stadium, picture)
 {
     SetValue(value);
+    mInitValue = value;
 }
 
 void TreasureBox::Update(double elapsed)
