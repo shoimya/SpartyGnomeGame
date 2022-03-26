@@ -1,11 +1,3 @@
 # CSE-335 Project1
+#This is a basic side swiping game made for a Object Oriented Software design class implemention C++ and wxWidgets
 
-
-### Construct item in `Stadium.cpp`
-
-- Example of implemnet platform 
-
-```cpp
-auto picture = mMapPictures[id];
-auto item = new ItemPlatform(this,picture);
-```
